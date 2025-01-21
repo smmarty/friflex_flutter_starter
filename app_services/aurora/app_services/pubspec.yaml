@@ -1,0 +1,37 @@
+name: app_services
+description: "Google сервисы для приложения"
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+  flutter: ^3.24.0
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Зависимости для сервиса защищенного хранилища
+  flutter_secure_storage: 8.0.0
+  flutter_secure_storage_aurora:
+    git:
+      url: https://gitlab.com/omprussia/flutter/flutter-community-plugins/flutter_secure_storage_aurora.git
+      ref: aurora-0.5.3
+
+  # для работы с путями в хранилища
+  path_provider: 2.1.4
+  path_provider_aurora:
+    git:
+      url: https://gitlab.com/omprussia/flutter/packages.git
+      ref: aurora-path_provider_aurora-0.6.0
+      path: packages/path_provider_aurora
+
+  # Обязательные интерфейсы
+  i_app_services:
+    path: ../../i_app_services
+
+dev_dependencies:
+  friflex_lint_rules:
+    hosted: https://pub.friflex.com
+    version: 4.0.1
