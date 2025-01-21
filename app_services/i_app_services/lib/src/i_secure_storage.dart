@@ -41,4 +41,6 @@ abstract interface class ISecureStorage {
   /// Принимает:
   /// - [key] - ключ
   Future<bool> exists(String key);
+
+  String get nameImpl;
 }

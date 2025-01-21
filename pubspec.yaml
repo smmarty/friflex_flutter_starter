@@ -32,13 +32,9 @@ dependencies:
 
   app_services:
     ### Базовая реализация ###
-    path: app_services/gms/app_services
- 
-
+   path: app_services/gms/app_services
     ### Аврора реализация ###
-    #path: app_services/aurora/app_services
-    ### Telegram реализация ###
-    #path: app_services/telegram/app_services
+    # path: app_services/aurora/app_services
 
 dev_dependencies:
   flutter_test:

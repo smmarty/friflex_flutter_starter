@@ -37,6 +37,18 @@
                 "reveal": "always"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "switch_to_gms",
+            "type": "shell",
+            "command": "./switch_service.sh gms",
+            "problemMatcher": [] 
+        },
+        {
+            "label": "switch_to_aurora",
+            "type": "shell",
+            "command": "./switch_service.sh aurora",
+            "problemMatcher": []
         }
     ]
 }

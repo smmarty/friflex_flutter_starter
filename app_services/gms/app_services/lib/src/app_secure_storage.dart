@@ -41,4 +41,7 @@ final class AppSecureStorage implements ISecureStorage {
   Future<void> write(String key, String value) async {
     await _box.write(key: key, value: value);
   }
+  
+  @override
+  String get nameImpl => AppSecureStorage.name;
 }

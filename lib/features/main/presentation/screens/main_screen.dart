@@ -15,6 +15,9 @@ class MainScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              'Реализация SecureStorage: ${context.di.secureStorage.nameImpl}',
+            ),
             const SizedBox(height: 16),
             Text(
               'Окружение: ${context.di.appConfig.env.name}',
