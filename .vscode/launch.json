@@ -2,47 +2,45 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "GMS_dev",
+            "name": "dev",
             "type": "dart",
             "request": "launch",
-            "program": "${workspaceFolder}/lib/targets/dev.dart",
-            "preLaunchTask": "switch_to_gms"
+            "program": "${workspaceFolder}/lib/targets/dev.dart"
         },
-        {
-            "name": "GMS_stage",
-            "type": "dart",
-            "request": "launch",
-            "program": "${workspaceFolder}/lib/targets/stage.dart",
-            "preLaunchTask": "switch_to_gms"
-        },
-        {
-            "name": "GMS_prod",
-            "type": "dart",
-            "request": "launch",
-            "program": "${workspaceFolder}/lib/targets/prod.dart",
-            "preLaunchTask": "switch_to_gms"
-        },
-        {
-            "name": "Aurora_dev",
-            "type": "dart",
-            "request": "launch",
-            "program": "${workspaceFolder}/lib/targets/dev.dart",
-            "preLaunchTask": "switch_to_aurora"
-        },
-        {
-            "name": "Aurora_stage",
-            "type": "dart",
-            "request": "launch",
-            "program": "${workspaceFolder}/lib/targets/stage.dart",
-            "preLaunchTask": "switch_to_aurora"
-        },
-        {
-            "name": "Aurora_prod",
-            "type": "dart",
-            "request": "launch",
-            "program": "${workspaceFolder}/lib/targets/prod.dart",
-            "preLaunchTask": "switch_to_aurora"
-        },
-
+        // {
+        //     "name": "GMS_stage",
+        //     "type": "dart",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/lib/targets/stage.dart",
+        //     "preLaunchTask": "switch_to_gms"
+        // },
+        // {
+        //     "name": "GMS_prod",
+        //     "type": "dart",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/lib/targets/prod.dart",
+        //     "preLaunchTask": "switch_to_gms"
+        // },
+        // {
+        //     "name": "Aurora_dev",
+        //     "type": "dart",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/lib/targets/dev.dart",
+        //     "preLaunchTask": "switch_to_aurora"
+        // },
+        // {
+        //     "name": "Aurora_stage",
+        //     "type": "dart",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/lib/targets/stage.dart",
+        //     "preLaunchTask": "switch_to_aurora"
+        // },
+        // {
+        //     "name": "Aurora_prod",
+        //     "type": "dart",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/lib/targets/prod.dart",
+        //     "preLaunchTask": "switch_to_aurora"
+        // },
     ]
 }

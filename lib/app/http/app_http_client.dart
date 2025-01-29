@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:friflex_starter/app/app_config/i_app_config.dart';
-import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/app/http/i_http_client.dart';
 import 'package:friflex_starter/features/debug/i_debug_service.dart';
 
@@ -26,14 +25,7 @@ final class AppHttpClient implements IHttpClient {
       ..headers = {
         'Content-Type': 'application/json',
       };
-
-    // Добавление интерцептора для логирования запросов
-    if (appConfig.env != AppEnv.prod) {
-      final interceptor = debugService.createHttpInterceptor();
-      if (interceptor is Interceptor) {
-        _httpClient.interceptors.add(interceptor);
-      }
-    }
+    debugService.log('HTTP client created');
   }
 
   /// Конфигурация приложения

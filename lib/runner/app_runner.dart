@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:friflex_starter/app/app.dart';
 import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/di/di_container.dart';
-import 'package:friflex_starter/features/debug/app_debug_service.dart';
+import 'package:friflex_starter/features/debug/debug_service.dart';
 import 'package:friflex_starter/features/debug/i_debug_service.dart';
 import 'package:friflex_starter/features/error/error_screen.dart';
 import 'package:friflex_starter/router/app_router.dart';
@@ -45,8 +45,8 @@ class AppRunner {
   Future<void> run() async {
     WidgetsFlutterBinding.ensureInitialized();
     // Инициализация сервиса отладки
-    _debugService = AppDebugService();
-    
+    _debugService = DebugService();
+
     _timerRunner = TimerRunner(_debugService);
 
     // Инициализация приложения
@@ -91,7 +91,7 @@ class AppRunner {
 
   /// Метод для инициализации зависимостей приложения
   Future<DiContainer> _initDependencies(IDebugService debugService) async {
-    debugService.log('Тип сборки: ${env.name}');
+    debugService.log(() => 'Тип сборки: ${env.name}');
     final diContainer = DiContainer(
       env: env,
       dService: debugService,
