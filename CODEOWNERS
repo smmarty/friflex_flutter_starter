@@ -1,5 +1,3 @@
-[.github] @ns @sna2021
-.github/*
+.github/* @ns @sna2021
+**/.gitlab-ci.yml @ns @sna2021
 
-[.gitlab] @ns @sna2021
-**/.gitlab-ci.yml
