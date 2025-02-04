@@ -60,8 +60,8 @@ final class DiRepositories {
     } on Object catch (error, stackTrace) {
       onError(
         'Ошибка инициализации репозитория $IAuthRepository',
-        error: error,
-        stackTrace: stackTrace,
+        error,
+        stackTrace,
       );
     }
 
@@ -79,8 +79,8 @@ final class DiRepositories {
     } on Object catch (error, stackTrace) {
       onError(
         'Ошибка инициализации репозитория $IMainRepository',
-        error: error,
-        stackTrace: stackTrace,
+        error,
+        stackTrace,
       );
     }
 
@@ -105,9 +105,8 @@ final class DiRepositories {
     final repo = switch (environment) {
       AppEnv.dev => mockFactory(),
       AppEnv.prod => mainFactory(),
-      AppEnv.stage => _mockReposToSwitch.contains(mockFactory().name)
-          ? mockFactory()
-          : mainFactory(),
+      AppEnv.stage =>
+        _mockReposToSwitch.contains(mockFactory().name) ? mockFactory() : mainFactory(),
     };
     onProgress(repo.name);
     return repo;

@@ -15,8 +15,7 @@ import 'package:i_app_services/i_app_services.dart';
 /// {@endtemplate}
 final class DiContainer {
   /// {@macro dependencies_container}
-  DiContainer({required this.env, required IDebugService dService})
-      : debugService = dService;
+  DiContainer({required this.env, required IDebugService dService}) : debugService = dService;
   final AppEnv env;
 
   /// Сервис для отладки, получаем из конструктора
@@ -84,8 +83,8 @@ final class DiContainer {
     } on Object catch (error, stackTrace) {
       onError(
         'Ошибка инициализации ${IPathProvider.name}',
-        error: error,
-        stackTrace: stackTrace,
+        error,
+        stackTrace,
       );
     }
 
@@ -95,8 +94,8 @@ final class DiContainer {
     } on Object catch (error, stackTrace) {
       onError(
         'Ошибка инициализации ${ISecureStorage.name}',
-        error: error,
-        stackTrace: stackTrace,
+        error,
+        stackTrace,
       );
     }
   }

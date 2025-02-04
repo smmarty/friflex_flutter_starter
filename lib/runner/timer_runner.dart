@@ -40,10 +40,10 @@ class TimerRunner {
 
   /// Метод для обработки прогресса инициализации зависимостей
   void logOnError(
-    String message, {
-    Object? error,
+    String message,
+    Object error, [
     StackTrace? stackTrace,
-  }) {
-    _debugService.error(message, error, stackTrace);
+  ]) {
+    _debugService.logError(() => message, error: error, stackTrace: stackTrace);
   }
 }

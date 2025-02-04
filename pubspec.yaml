@@ -20,11 +20,6 @@ dependencies:
   intl: 0.19.0
   flutter_localizations:
     sdk: flutter
-
-  # Зависимости для сервиса логирования
-  talker_flutter: 4.6.4
-  talker_dio_logger: 4.6.4
-  talker_bloc_logger: 4.6.4
   
   ### основной сервис с интерфейсами
   i_app_services:

@@ -2,51 +2,37 @@ import 'package:flutter/material.dart';
 
 /// Интерфейс для сервиса отладки
 abstract interface class IDebugService {
-  /// Наименование сервиса
   static const name = 'IDebugService';
 
-  /// Метод для создания обработчика для BLoC
-  Object createBlocObserver();
+  /// Метод для логирования сообщений
+  void log(
+    Object message, {
+    Object logLevel,
+    Map<String, dynamic>? args,
+  });
 
-  /// Метод для создания обработчика для роутера
-  NavigatorObserver createRouterObserver();
+  /// Метод для логирования предупреждений
+  void logWarning(
+    Object message, {
+    Object logLevel,
+    Map<String, dynamic>? args,
+  });
 
-  /// Метод для создания обработчика для http-клиентов
-  Object createHttpInterceptor();
-
-  /// Метод для логгирования предупреждений
-  ///
-  /// Принимает:
-  /// - [message] - сообщение для логгирования в формате [String]
-  void warning(String message);
-
-  /// Метод для логгирования ошибок
-  ///
-  /// Принимает:
-  /// - [message] - сообщение для логгирования в формате [String]
-  /// - [exception] - исключение
-  /// - [stackTrace] - стек вызова
-  void error(String message, [Object? exception, StackTrace? stackTrace]);
+  /// Метод для логирования ошибок
+  void logError(
+    Object message, {
+    Object error,
+    StackTrace? stackTrace,
+    Object logLevel,
+    Map<String, dynamic>? args,
+  });
 
   /// Метод для обработки ошибок
-  ///
-  /// Принимает:
-  /// - [error] - исключение
-  /// - [stackTrace] - стек вызова
-  /// - [message] - сообщение для логгирования в формате [String]
-  void handleError(Object error, [StackTrace? stackTrace, String? message]);
-
-  /// Метод для логгирования информативных сообщений
-  ///
-  /// Принимает:
-  /// - [message] - сообщение для логгирования в формате [String]
-  void info(String message);
-
-  /// Метод для логгирования сообщений
-  ///
-  /// Принимает:
-  /// - [message] - сообщение для логгирования в формате [String]
-  void log(String message);
+  void logDebug(
+    Object message, {
+    Object logLevel,
+    Map<String, dynamic>? args,
+  });
 
   /// Метод для открытия окна отладки
   ///

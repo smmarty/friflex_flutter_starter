@@ -11,11 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Зависимости для сервиса логирования
-  talker_flutter: 4.6.4
-  talker_dio_logger: 4.6.4
-  talker_bloc_logger: 4.6.4
-
   # Зависимости для сервиса защищенного хранилища
   flutter_secure_storage: 9.2.4
 

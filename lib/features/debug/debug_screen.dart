@@ -31,7 +31,7 @@ class DebugScreen extends StatelessWidget {
               onPressed: () async {
                 await context.di.debugService.openDebugScreen(context);
               },
-              child: const Text('Вызывать Talker'),
+              child: const Text('Вызывать Экран отладки'),
             ),
           ],
         ),

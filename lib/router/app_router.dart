@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   /// Конструктор для инициализации роутера
   const AppRouter();
- 
+
   /// Ключ для доступа к корневому навигатору приложения
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -22,9 +22,6 @@ class AppRouter {
       navigatorKey: rootNavigatorKey,
       debugLogDiagnostics: true,
       initialLocation: initialLocation,
-      observers: [
-        debugService.createRouterObserver(),
-      ],
       routes: [
         StatefulShellRoute.indexedStack(
           parentNavigatorKey: rootNavigatorKey,
