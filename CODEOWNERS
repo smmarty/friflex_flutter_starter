@@ -1,0 +1,5 @@
+[.github] @ns @sna2021
+.github/*
+
+[.gitlab] @ns @sna2021
+**/.gitlab-ci.yml
