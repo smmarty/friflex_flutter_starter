@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:friflex_starter/app/theme/theme_notifier.dart';
 import 'package:friflex_starter/di/di_container.dart';
+import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
 import 'package:provider/provider.dart';
 

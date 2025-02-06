@@ -14,7 +14,7 @@ class AppRouter {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
 
   /// Начальный роут приложения
-  static String get initialLocation => '/main';
+  static String get initialLocation => '/debug';
 
   /// Метод для создания экземпляра GoRouter
   static GoRouter createRouter(IDebugService debugService) {
