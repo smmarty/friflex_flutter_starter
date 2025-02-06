@@ -45,7 +45,7 @@ final class DiContainer {
       AppEnv.prod => AppConfigProd(),
       AppEnv.stage => AppConfigStage()
     };
-    
+
     // Инициализация HTTP клиента
     httpClientFactory = (debugService, appConfig) => AppHttpClient(
           debugService: debugService,
@@ -59,7 +59,7 @@ final class DiContainer {
         onError: onError,
         diContainer: this,
       );
-
+    // throw Exception('Тестовая - ошибка инициализации зависимостей');
     // Инициализация репозиториев
     repositories = DiRepositories()
       ..init(

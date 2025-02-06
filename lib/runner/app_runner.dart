@@ -38,13 +38,13 @@ class AppRunner {
   final AppEnv env;
 
   /// Контейнер зависимостей приложения
-  late final IDebugService _debugService;
+  late IDebugService _debugService;
 
   /// Роутер приложения
-  late final GoRouter router;
+  late GoRouter router;
 
   /// Таймер для отслеживания времени инициализации приложения
-  late final TimerRunner _timerRunner;
+  late TimerRunner _timerRunner;
 
   /// Метод для запуска приложения
   Future<void> run() async {
@@ -93,7 +93,7 @@ class AppRunner {
 
       /// Если произошла ошибка при инициализации приложения,
       /// то запускаем экран ошибки
-      runApp(ErrorScreen(error: e, stackTrace: stackTrace));
+      runApp(ErrorScreen(error: e, stackTrace: stackTrace, onRetry: run));
     }
   }
 

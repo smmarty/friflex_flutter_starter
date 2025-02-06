@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/app/app_providers.dart';
+import 'package:friflex_starter/app/depends_providers.dart';
 import 'package:friflex_starter/app/theme/app_theme.dart';
 import 'package:friflex_starter/app/theme/theme_notifier.dart';
 import 'package:friflex_starter/di/di_container.dart';
@@ -10,75 +11,95 @@ import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
 import 'package:go_router/go_router.dart';
 
-/// Класс для реализации объекта приложения
-class App extends StatelessWidget {
-  /// Создает экземпляр приложения
-  ///
-  /// Принимает:
-  /// - [router] - экземпляр роутера приложения
+/// Класс приложения
+class App extends StatefulWidget {
   const App({
     super.key,
-    // required this.diContainer,
     required this.router,
     required this.initDependencies,
   });
-
-  // /// Набор зависимостей приложения
-  // final DiContainer diContainer;
-
-  /// Экземпляр роутера приложения
+  /// Роутер приложения
   final GoRouter router;
+  /// Функция для инициализации зависимостей  
+  final Future<DiContainer> Function() initDependencies;
 
-  /// Функция инициализации зависимостей
-  final Function() initDependencies;
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  /// Мутабельная Future для инициализации зависимостей
+  late Future<DiContainer> _initFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _initFuture = widget.initDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: initDependencies(),
-      builder: (_, snapshot) {
-        if (snapshot.hasError) {
-          return ErrorScreen(
-            error: snapshot.error,
-            stackTrace: snapshot.stackTrace,
-          );
-        } else if (snapshot.hasData && snapshot.data is DiContainer) {
-          return AppProviders(
-            diContainer: snapshot.data as DiContainer,
-            child: LocalizationConsumer(
-              builder: () => ThemeConsumer(
-                builder: () => _App(router: router),
-              ),
-            ),
-          );
-        } else {
-          return const SplashScreen();
-        }
-      },
+    return AppProviders(
+      // Consumer для локализации добавляем выше чем DependsProviders
+      // чтобы при изменении локализации перестраивался весь виджет
+      // Но, это не обязательно, можно добавить в DependsProviders
+      child: LocalizationConsumer(
+        builder: () => FutureBuilder<DiContainer>(
+          future: _initFuture,
+          builder: (_, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+              case ConnectionState.active:
+                // Пока инициализация показываем Splash
+                return const SplashScreen();
+              case ConnectionState.done:
+                if (snapshot.hasError) {
+                  return ErrorScreen(
+                    error: snapshot.error,
+                    stackTrace: snapshot.stackTrace,
+                    onRetry: _retryInit,
+                  );
+                }
+
+                final diContainer = snapshot.data;
+                if (diContainer == null) {
+                  return ErrorScreen(
+                    error:
+                        'Ошибка инициализации зависимостей, diContainer = null',
+                    stackTrace: null,
+                    onRetry: _retryInit,
+                  );
+                }
+                return DependsProviders(
+                  diContainer: diContainer,
+                  child: ThemeConsumer(
+                    builder: () => _App(router: widget.router),
+                  ),
+                );
+            }
+          },
+        ),
+      ),
     );
+  }
+
+  void _retryInit() {
+    setState(() {
+      _initFuture = widget.initDependencies();
+    });
   }
 }
 
-/// Класс для реализации объекта приложения
-class _App extends StatefulWidget {
+class _App extends StatelessWidget {
   const _App({required this.router});
 
   final GoRouter router;
 
   @override
-  State<_App> createState() => _AppState();
-}
-
-class _AppState extends State<_App> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: widget.router,
+      routerConfig: router,
       darkTheme: AppTheme.dark,
       theme: AppTheme.light,
       themeMode: context.theme.themeMode,
