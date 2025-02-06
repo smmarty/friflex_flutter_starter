@@ -3,6 +3,7 @@ import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:friflex_starter/features/debug/i_debug_service.dart';
 import 'package:friflex_starter/features/main/presentation/main_routes.dart';
 import 'package:friflex_starter/features/root/root_screen.dart';
+import 'package:friflex_starter/features/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 /// Класс, реализующий роутер приложения и все поля классов
@@ -14,7 +15,7 @@ class AppRouter {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
 
   /// Начальный роут приложения
-  static String get initialLocation => '/debug';
+  static String get initialLocation => '/debug'; 
 
   /// Метод для создания экземпляра GoRouter
   static GoRouter createRouter(IDebugService debugService) {
@@ -31,6 +32,10 @@ class AppRouter {
             MainRoutes.buildShellBranch(),
             DebugRoutes.buildShellBranch(),
           ],
+        ),
+        GoRoute(
+          path: '/splash',
+          builder: (context, state) => const SplashScreen(),
         ),
       ],
     );

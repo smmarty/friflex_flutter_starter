@@ -16,7 +16,7 @@ class DebugScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'Реализация SecureStorage: ${context.di.secureStorage.nameImpl}',
+              'Реализация SecureStorage: ${context.di.services.secureStorage.nameImpl}',
             ),
             const SizedBox(height: 16),
             Text(

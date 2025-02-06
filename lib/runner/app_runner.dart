@@ -15,6 +15,11 @@ import 'package:go_router/go_router.dart';
 
 part 'errors_handlers.dart';
 
+/// Время ожидания инициализации зависимостей
+/// Если время превышено, то будет показан экран ошибки
+/// В дальнейшем нужно убрать в env
+const _initTimeout = Duration(seconds: 7);
+
 /// Класс, реализующий раннер для конфигурирования приложения при запуске
 ///
 /// Порядок инициализации:
@@ -43,28 +48,53 @@ class AppRunner {
 
   /// Метод для запуска приложения
   Future<void> run() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    // Инициализация сервиса отладки
-    _debugService = DebugService();
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      // Инициализация сервиса отладки
+      _debugService = DebugService();
 
-    _timerRunner = TimerRunner(_debugService);
+      _timerRunner = TimerRunner(_debugService);
 
-    // Инициализация приложения
-    await _initApp();
+      // Инициализация приложения
+      await _initApp();
 
-    // Инициализация метода обработки ошибок
-    _initErrorHandlers(_debugService);
+      // Инициализация метода обработки ошибок
+      _initErrorHandlers(_debugService);
 
-    // Инициализация репозиториев и сервисов
-    final diContainer = await _initDependencies(_debugService);
+      // Инициализация роутера
+      router = AppRouter.createRouter(_debugService);
 
-    // Инициализация роутера
-    router = AppRouter.createRouter(_debugService);
+      // throw Exception('Test error');
 
-    runApp(
-      App(diContainer: diContainer, router: router),
-    );
-    await _onAppLoaded();
+      runApp(
+        App(
+          router: router,
+          initDependencies: () {
+            return _initDependencies(
+              debugService: _debugService,
+              env: env,
+              timerRunner: _timerRunner,
+            ).timeout(
+              _initTimeout,
+              onTimeout: () {
+                return Future.error(
+                  TimeoutException(
+                    'Превышено время ожидания инициализации зависимостей',
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      );
+      await _onAppLoaded();
+    } on Object catch (e, stackTrace) {
+      await _onAppLoaded();
+
+      /// Если произошла ошибка при инициализации приложения,
+      /// то запускаем экран ошибки
+      runApp(ErrorScreen(error: e, stackTrace: stackTrace));
+    }
   }
 
   /// Метод инициализации приложения,
@@ -85,23 +115,36 @@ class AppRunner {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       WidgetsBinding.instance.allowFirstFrame();
     });
-
-    _timerRunner.stop();
   }
 
-  /// Метод для инициализации зависимостей приложения
-  Future<DiContainer> _initDependencies(IDebugService debugService) async {
+  // Метод для инициализации зависимостей приложения
+  Future<DiContainer> _initDependencies({
+    required IDebugService debugService,
+    required AppEnv env,
+    required TimerRunner timerRunner,
+  }) async {
+    // Имитация задержки инициализации
+    // TODO(yura): Удалить после проверки
+    await Future.delayed(const Duration(seconds: 3));
     debugService.log(() => 'Тип сборки: ${env.name}');
     final diContainer = DiContainer(
       env: env,
       dService: debugService,
     );
     await diContainer.init(
-      onProgress: _timerRunner.logOnProgress,
-      onComplete: _timerRunner.logOnComplete,
-      onError: _timerRunner.logOnError,
+      onProgress: (name) => timerRunner.logOnProgress(name),
+      onComplete: (name) {
+        timerRunner
+          ..logOnComplete(name)
+          ..stop();
+      },
+      onError: (message, error, [stackTrace]) => debugService.logError(
+        message,
+        error: error,
+        stackTrace: stackTrace,
+      ),
     );
-
+    //throw Exception('Test error');
     return diContainer;
   }
 }

@@ -4,7 +4,7 @@ part of 'app_runner.dart';
 void _initErrorHandlers(IDebugService debugService) {
   // Обработка ошибок в приложении
   FlutterError.onError = (details) {
-    _showErrorScreen();
+    _showErrorScreen(details.exception, details.stack);
     debugService.logError(
       () => 'FlutterError.onError: ${details.exceptionAsString()}',
       error: details.exception,
@@ -13,7 +13,7 @@ void _initErrorHandlers(IDebugService debugService) {
   };
   // Обработка асинхронных ошибок в приложении
   PlatformDispatcher.instance.onError = (error, stack) {
-    _showErrorScreen();
+    _showErrorScreen(error, stack);
     debugService.logError(
       () => 'PlatformDispatcher.instance.onError',
       error: error,
@@ -24,11 +24,11 @@ void _initErrorHandlers(IDebugService debugService) {
 }
 
 /// Метод для показа экрана ошибки
-void _showErrorScreen() {
+void _showErrorScreen(Object error, StackTrace? stackTrace) {
   WidgetsBinding.instance.addPostFrameCallback((_) {
     AppRouter.rootNavigatorKey.currentState?.push(
       MaterialPageRoute(
-        builder: (_) => const ErrorScreen(),
+        builder: (_) => ErrorScreen(error: error, stackTrace: stackTrace),
       ),
     );
   });
