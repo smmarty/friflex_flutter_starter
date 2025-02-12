@@ -38,20 +38,21 @@ final class DiRepositories {
   ///
   /// Принимает:
   /// - [onProgress] - обратный вызов при прогрессе
-  /// - [onComplete] - обратный вызов при успешной инициализации
   /// - [diContainer] - контейнер зависимостей
   void init({
     required OnProgress onProgress,
-    required OnComplete onComplete,
     required OnError onError,
     required DiContainer diContainer,
   }) {
     try {
       //Инициализация репозитория авторизации
-      authRepository = lazyInitRepo<IAuthRepository>(
+      authRepository = _lazyInitRepo<IAuthRepository>(
         mockFactory: AuthMockRepository.new,
         mainFactory: () => AuthRepository(
-          httpClient: diContainer.httpClient,
+          httpClient: diContainer.httpClientFactory(
+            diContainer.debugService,
+            diContainer.appConfig,
+          ),
         ),
         onProgress: onProgress,
         environment: diContainer.env,
@@ -67,10 +68,13 @@ final class DiRepositories {
 
     try {
       // Инициализация репозитория сервиса управления токеном доступа
-      mainRepository = lazyInitRepo<IMainRepository>(
+      mainRepository = _lazyInitRepo<IMainRepository>(
         mockFactory: MainMockRepository.new,
         mainFactory: () => MainRepository(
-          httpClient: diContainer.httpClient,
+          httpClient: diContainer.httpClientFactory(
+            diContainer.debugService,
+            diContainer.appConfig,
+          ),
         ),
         onProgress: onProgress,
         environment: diContainer.env,
@@ -84,7 +88,7 @@ final class DiRepositories {
       );
     }
 
-    onComplete(
+    onProgress(
       'Инициализация репозиториев завершена! Было подменено репозиториев - ${_mockReposToSwitch.length} (${_mockReposToSwitch.join(', ')})',
     );
   }
@@ -96,18 +100,22 @@ final class DiRepositories {
   /// - [mockFactory] - функция - фабрика для инициализации репозитория для управления моковыми запросами
   /// - [mainFactory] - функция - фабрика для инициализации основного репозиторий
   /// - [onProgress] - обратный вызов при прогрессе
-  T lazyInitRepo<T extends DiBaseRepo>({
+  T _lazyInitRepo<T extends DiBaseRepo>({
     required AppEnv environment,
     required T Function() mainFactory,
     required T Function() mockFactory,
     required OnProgress onProgress,
   }) {
+    final mockRepo = mockFactory();
+    final mainRepo = mainFactory();
+
     final repo = switch (environment) {
-      AppEnv.dev => mockFactory(),
-      AppEnv.prod => mainFactory(),
+      AppEnv.dev => mockRepo,
+      AppEnv.prod => mainRepo,
       AppEnv.stage =>
-        _mockReposToSwitch.contains(mockFactory().name) ? mockFactory() : mainFactory(),
+        _mockReposToSwitch.contains(mockRepo.name) ? mockRepo : mainRepo,
     };
+
     onProgress(repo.name);
     return repo;
   }

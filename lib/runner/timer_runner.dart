@@ -36,6 +36,7 @@ class TimerRunner {
     _debugService.log(
       '$message, прогресс: ${_stopwatch.elapsedMilliseconds} мс',
     );
+    
   }
 
   /// Метод для обработки прогресса инициализации зависимостей

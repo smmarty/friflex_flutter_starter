@@ -16,7 +16,7 @@ class DebugScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'Реализация SecureStorage: ${context.di.secureStorage.nameImpl}',
+              'Реализация SecureStorage: ${context.di.services.secureStorage.nameImpl}',
             ),
             const SizedBox(height: 16),
             Text(
@@ -82,14 +82,37 @@ class DebugScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text('Тестовая иконка из assets'),
+            const SizedBox(height: 16),
             Assets.icons.home.svg(),
+            ElevatedButton(
+              onPressed: () {
+                throw Exception(
+                  'Тестовая ошибка Exception для отладки FlutterError',
+                );
+              },
+              child: const Text('Вызывать ошибку FlutterError'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () async {
+                await _callError();
+              },
+              child: const Text('Вызывать ошибку PlatformDispatcher'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () async {
+                await context.di.debugService.openDebugScreen(context);
+              },
+              child: const Text('Вызывать Экран отладки'),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Future<void> callError() async {
+  Future<void> _callError() async {
     throw Exception('Тестовая ошибка Exception для отладки PlatformDispatcher');
   }
 }

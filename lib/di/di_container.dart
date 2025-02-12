@@ -1,13 +1,12 @@
-import 'package:app_services/app_services.dart';
 import 'package:friflex_starter/app/app_config/app_config.dart';
 import 'package:friflex_starter/app/app_config/i_app_config.dart';
 import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/app/http/app_http_client.dart';
 import 'package:friflex_starter/app/http/i_http_client.dart';
 import 'package:friflex_starter/di/di_repositories.dart';
+import 'package:friflex_starter/di/di_services.dart';
 import 'package:friflex_starter/di/di_typedefs.dart';
 import 'package:friflex_starter/features/debug/i_debug_service.dart';
-import 'package:i_app_services/i_app_services.dart';
 
 /// {@template dependencies_container}
 /// Контейнер для зависимостей
@@ -22,19 +21,17 @@ final class DiContainer {
   /// Сервис для отладки, получаем из конструктора
   late final IDebugService debugService;
 
-  /// Сервис для работы с путями
-  late final IPathProvider pathProvider;
-
   /// Конфигурация приложения
   late final IAppConfig appConfig;
 
-  /// Сервис для работы с локальным хранилищем
-  late final ISecureStorage secureStorage;
-
   /// Сервис для работы с HTTP запросами
-  late final IHttpClient httpClient;
+  late final IHttpClient Function(IDebugService, IAppConfig) httpClientFactory;
 
+  /// Репозитории приложения
   late final DiRepositories repositories;
+
+  /// Сервисы приложения
+  late final DiServices services;
 
   /// Метод для инициализации зависимостей
   Future<void> init({
@@ -42,62 +39,35 @@ final class DiContainer {
     required OnComplete onComplete,
     required OnError onError,
   }) async {
-    // Инициализация сервисов
-    await _initServices(
-      onComplete: onComplete,
-      onError: onError,
-      onProgress: onProgress,
-    );
-
-    // Инициализация репозиториев
-    repositories = DiRepositories();
-    repositories.init(
-      onProgress: onProgress,
-      onComplete: onComplete,
-      onError: onError,
-      diContainer: this,
-    );
-
-    onComplete('Инициализация зависимостей завершена!');
-  }
-
-  /// Метод для инициализации сервисов
-  Future<void> _initServices({
-    required OnComplete onComplete,
-    required OnError onError,
-    required OnProgress onProgress,
-  }) async {
+    // Инициализация конфигурации приложения
     appConfig = switch (env) {
       AppEnv.dev => AppConfigDev(),
       AppEnv.prod => AppConfigProd(),
       AppEnv.stage => AppConfigStage()
     };
 
-    httpClient = AppHttpClient(
-      debugService: debugService,
-      appConfig: appConfig,
-    );
+    // Инициализация HTTP клиента
+    httpClientFactory = (debugService, appConfig) => AppHttpClient(
+          debugService: debugService,
+          appConfig: appConfig,
+        );
 
-    try {
-      pathProvider = AppPathProvider();
-      onProgress(AppPathProvider.name);
-    } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации ${IPathProvider.name}',
-        error,
-        stackTrace,
+    // Инициализация сервисов
+    services = DiServices()
+      ..init(
+        onProgress: onProgress,
+        onError: onError,
+        diContainer: this,
       );
-    }
+    // throw Exception('Тестовая - ошибка инициализации зависимостей');
+    // Инициализация репозиториев
+    repositories = DiRepositories()
+      ..init(
+        onProgress: onProgress,
+        onError: onError,
+        diContainer: this,
+      );
 
-    try {
-      secureStorage = AppSecureStorage(secretKey: appConfig.secretKey);
-      onProgress(AppSecureStorage.name);
-    } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации ${ISecureStorage.name}',
-        error,
-        stackTrace,
-      );
-    }
+    onComplete('Инициализация зависимостей завершена!');
   }
 }
