@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/features/profile_scope/domain/bloc/profile_scope_bloc.dart';
 import 'package:friflex_starter/features/profile_scope/presentation/profile_scope.dart';
 
@@ -9,8 +10,9 @@ class ProfileScopeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ProfileScope(
-      child: _ProfileScopeView(),
+    return ProfileScope(
+      profileRepository: context.di.repositories.profileScopeRepository,
+      child: const _ProfileScopeView(),
     );
   }
 }
@@ -26,7 +28,8 @@ class _ProfileScopeView extends StatelessWidget {
       ),
       body: Center(
         child: BlocBuilder<ProfileScopeBloc, ProfileScopeState>(
-          bloc: context.read<ProfileScopeBloc>(),
+          bloc: ProfileScope.of(context).profileScopeBloc
+            ..add(const ProfileScopeFetchProfileEvent(id: '1')),
           builder: (context, state) {
             return switch (state) {
               ProfileScopeSuccessState() => Text('Data: ${state.props.first}'),

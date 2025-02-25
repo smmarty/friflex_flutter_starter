@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/features/profile_scope/domain/bloc/profile_scope_bloc.dart';
+import 'package:friflex_starter/features/profile_scope/domain/repository/i_profile_scope_repository.dart';
 
 // Область, где мы инициализируем ProfileScopeBloc
-class ProfileScope extends StatefulWidget {
-  const ProfileScope({super.key, required this.child});
+class ProfileScope extends InheritedWidget {
+  late final ProfileScopeBloc profileScopeBloc;
 
-  final Widget child;
+  final IProfileScopeRepository _profileRepository;
+
+  ProfileScope({
+    super.key,
+    required super.child,
+    required IProfileScopeRepository profileRepository,
+  }) : _profileRepository = profileRepository {
+    profileScopeBloc = ProfileScopeBloc(_profileRepository);
+  }
+
+  void dispose() {
+    profileScopeBloc.close();
+  }
 
   @override
-  State<ProfileScope> createState() => _ProfileScopeState();
-}
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) => false;
 
-class _ProfileScopeState extends State<ProfileScope> {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          ProfileScopeBloc(context.di.repositories.profileScopeRepository)
-            ..add(const ProfileScopeFetchProfileEvent(id: '1')),
-      child: widget.child,
-    );
+  static ProfileScope of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<ProfileScope>()!;
   }
 }
