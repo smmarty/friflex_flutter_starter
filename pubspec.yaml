@@ -32,6 +32,7 @@ dependencies:
   
     ### Аврора реализация ###
     path: app_services/aurora/app_services
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:

@@ -8,6 +8,12 @@ import 'package:friflex_starter/features/auth/domain/repository/i_auth_repositor
 import 'package:friflex_starter/features/main/data/repository/main_mock_repository.dart';
 import 'package:friflex_starter/features/main/data/repository/main_repository.dart';
 import 'package:friflex_starter/features/main/domain/repository/i_main_repository.dart';
+import 'package:friflex_starter/features/profile/data/repository/profile_mock_repository.dart';
+import 'package:friflex_starter/features/profile/data/repository/profile_repository.dart';
+import 'package:friflex_starter/features/profile/domain/repository/i_profile_repository.dart';
+import 'package:friflex_starter/features/profile_scope/data/repository/profile_scope_mock_repository.dart';
+import 'package:friflex_starter/features/profile_scope/data/repository/profile_scope_repository.dart';
+import 'package:friflex_starter/features/profile_scope/domain/repository/i_profile_scope_repository.dart';
 
 /// Список названий моковых репозиториев, которые должны быть подменены
 /// для использования в сборке stage окружения
@@ -33,6 +39,12 @@ final class DiRepositories {
 
   /// Интерфейс для работы с репозиторием главного сервиса
   late final IMainRepository mainRepository;
+
+  /// Интерфейс для работы с репозиторием профиля
+  late final IProfileRepository profileRepository;
+
+  /// Интерфейс для работы с репозиторием профиля scope
+  late final IProfileScopeRepository profileScopeRepository;
 
   /// Метод для инициализации репозиториев в приложении
   ///
@@ -60,7 +72,7 @@ final class DiRepositories {
       onProgress(authRepository.name);
     } on Object catch (error, stackTrace) {
       onError(
-        'Ошибка инициализации репозитория $IAuthRepository',
+        'Ошибка инициализации репозитория IAuthRepository',
         error,
         stackTrace,
       );
@@ -82,7 +94,51 @@ final class DiRepositories {
       onProgress(mainRepository.name);
     } on Object catch (error, stackTrace) {
       onError(
-        'Ошибка инициализации репозитория $IMainRepository',
+        'Ошибка инициализации репозитория IMainRepository',
+        error,
+        stackTrace,
+      );
+    }
+
+    try {
+      // Инициализация репозитория профиля
+      profileRepository = _lazyInitRepo<IProfileRepository>(
+        mockFactory: ProfileMockRepository.new,
+        mainFactory: () => ProfileRepository(
+          httpClient: diContainer.httpClientFactory(
+            diContainer.debugService,
+            diContainer.appConfig,
+          ),
+        ),
+        onProgress: onProgress,
+        environment: diContainer.env,
+      );
+      onProgress(profileRepository.name);
+    } on Object catch (error, stackTrace) {
+      onError(
+        'Ошибка инициализации репозитория IProfileRepository',
+        error,
+        stackTrace,
+      );
+    }
+
+    try {
+      // Инициализация репозитория профиля scope
+      profileScopeRepository = _lazyInitRepo<IProfileScopeRepository>(
+        mockFactory: ProfileScopeMockRepository.new,
+        mainFactory: () => ProfileScopeRepository(
+          httpClient: diContainer.httpClientFactory(
+            diContainer.debugService,
+            diContainer.appConfig,
+          ),
+        ),
+        onProgress: onProgress,
+        environment: diContainer.env,
+      );
+      onProgress(mainRepository.name);
+    } on Object catch (error, stackTrace) {
+      onError(
+        'Ошибка инициализации репозитория IProfileScopeRepository',
         error,
         stackTrace,
       );
