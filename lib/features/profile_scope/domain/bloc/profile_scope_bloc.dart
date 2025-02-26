@@ -6,13 +6,15 @@ part 'profile_scope_event.dart';
 part 'profile_scope_state.dart';
 
 class ProfileScopeBloc extends Bloc<ProfileScopeEvent, ProfileScopeState> {
-  ProfileScopeBloc(this._profileRepository) : super(ProfileScopeInitialState()) {
+  ProfileScopeBloc({required IProfileScopeRepository profileRepository})
+      : _profileRepository = profileRepository,
+        super(ProfileScopeInitialState()) {
     // Вам необходимо добавлять только
     // один обработчик событий в конструкторе
     on<ProfileScopeEvent>((event, emit) async {
-      if (event is ProfileScopeFetchProfileEvent) {
-        await _fetchProfile(event, emit);
-      }
+      return switch (event) {
+        ProfileScopeFetchProfileEvent() => await _fetchProfile(event, emit),
+      };
     });
   }
 

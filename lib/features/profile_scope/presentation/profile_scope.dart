@@ -1,29 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/features/profile_scope/domain/bloc/profile_scope_bloc.dart';
-import 'package:friflex_starter/features/profile_scope/domain/repository/i_profile_scope_repository.dart';
 
-// Область, где мы инициализируем ProfileScopeBloc
-class ProfileScope extends InheritedWidget {
-  late final ProfileScopeBloc profileScopeBloc;
-
-  final IProfileScopeRepository _profileRepository;
-
-  ProfileScope({
-    super.key,
+class ProfileInheritedScope extends InheritedWidget {
+  const ProfileInheritedScope({
+    required this.profileScopeBloc,
     required super.child,
-    required IProfileScopeRepository profileRepository,
-  }) : _profileRepository = profileRepository {
-    profileScopeBloc = ProfileScopeBloc(_profileRepository);
+    super.key,
+  });
+
+  final ProfileScopeBloc profileScopeBloc;
+
+  @override
+  bool updateShouldNotify(ProfileInheritedScope oldWidget) =>
+      profileScopeBloc != oldWidget.profileScopeBloc;
+}
+
+class ProfileScope extends StatefulWidget {
+  const ProfileScope({
+    required this.child,
+    super.key,
+  });
+
+  final Widget child;
+
+  static ProfileInheritedScope? maybeOf(
+    BuildContext context, {
+    bool listen = false,
+  }) {
+    return listen
+        ? context.dependOnInheritedWidgetOfExactType<ProfileInheritedScope>()
+        : context.getInheritedWidgetOfExactType<ProfileInheritedScope>();
   }
 
-  void dispose() {
-    profileScopeBloc.close();
+  static ProfileInheritedScope of(
+    BuildContext context, {
+    bool listen = false,
+  }) {
+    final result = maybeOf(context, listen: listen);
+
+    if (result == null) {
+      throw StateError(
+        'ProfileScope is not found above widget ${context.widget}',
+      );
+    }
+
+    return result;
   }
 
   @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) => false;
+  State<StatefulWidget> createState() => _ProfileScopeState();
+}
 
-  static ProfileScope of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<ProfileScope>()!;
+class _ProfileScopeState extends State<ProfileScope> {
+  late final ProfileScopeBloc _profileScopeBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _profileScopeBloc =
+        ProfileScopeBloc(profileRepository: context.di.repositories.profileScopeRepository);
+    _profileScopeBloc.add(const ProfileScopeFetchProfileEvent(id: '1'));
+  }
+
+  @override
+  void dispose() {
+    _profileScopeBloc.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ProfileInheritedScope(profileScopeBloc: _profileScopeBloc, child: widget.child);
   }
 }
