@@ -9,20 +9,29 @@ class ProfileScopeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileScope(
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Profile Scope')),
-        body: Center(
-          child: BlocBuilder<ProfileScopeBloc, ProfileScopeState>(
-            bloc: ProfileScope.of(context).profileScopeBloc,
-            builder: (context, state) {
-              return switch (state) {
-                ProfileScopeSuccessState() => Text('Data: ${state.props.first}'),
-                ProfileScopeErrorState() => Text('Error: ${state.message}'),
-                _ => const CircularProgressIndicator(),
-              };
-            },
-          ),
+    return const ProfileScope(
+      child: _ProfileScopeView(),
+    );
+  }
+}
+
+class _ProfileScopeView extends StatelessWidget {
+  const _ProfileScopeView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Profile Scope')),
+      body: Center(
+        child: BlocBuilder<ProfileScopeBloc, ProfileScopeState>(
+          bloc: ProfileScope.of(context).profileScopeBloc,
+          builder: (context, state) {
+            return switch (state) {
+              ProfileScopeSuccessState() => Text('Data: ${state.props.first}'),
+              ProfileScopeErrorState() => Text('Error: ${state.message}'),
+              _ => const CircularProgressIndicator(),
+            };
+          },
         ),
       ),
     );
