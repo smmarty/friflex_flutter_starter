@@ -30,16 +30,18 @@ dependencies:
   talker_bloc_logger: 4.7.2
   talker_logger: 4.7.2
 
+  equatable: 2.0.7
+
   ### основной сервис с интерфейсами
   i_app_services:
     path: ./app_services/i_app_services
 
+  ### реализация сервисов ###
+  ### В зависимости от платформы ###
   app_services:
-    ### Базовая реализация ###
-    path: app_services/base/app_services
-    ### Аврора реализация ###
-    #path: app_services/aurora/app_services
-  equatable: ^2.0.7
+    #path: app_services/base/app_services ### Базовая реализация ###
+    #path: app_services/aurora/app_services ### Аврора реализация ###
+    path: app_services/web/app_services ### Web реализация ###
 
 dev_dependencies:
   flutter_test:

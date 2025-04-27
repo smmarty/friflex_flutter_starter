@@ -17,9 +17,6 @@ dependencies:
   # Зависимости для сервиса незащищенного хранилища
   shared_preferences: 2.3.5
 
-  # для работы с путями в хранилища
-  path_provider: 2.1.5
-
   # Обязательные интерфейсы
   i_app_services:
     path: ../../i_app_services

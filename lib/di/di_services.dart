@@ -23,7 +23,7 @@ final class DiServices {
     required DiContainer diContainer,
   }) {
     try {
-      pathProvider = AppPathProvider();
+      pathProvider = const AppPathProvider();
       onProgress(AppPathProvider.name);
     } on Object catch (error, stackTrace) {
       onError(

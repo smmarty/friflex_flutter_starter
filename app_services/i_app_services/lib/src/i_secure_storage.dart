@@ -9,7 +9,9 @@ abstract interface class ISecureStorage {
   });
 
   /// Секретный ключ для шифрования данных
-  final String secretKey;
+  /// Нужен, если надо передать ключ в реализацию
+  /// например, в Aurora
+  final String? secretKey;
 
   /// Наименования интерфейса
   static const name = 'ISecureStorage';
@@ -34,13 +36,13 @@ abstract interface class ISecureStorage {
   Future<void> delete(String key);
 
   /// Метод для очистки защищенного хранилища
-  Future<void> clear();
+  Future<void> deleteAll();
 
   /// Метод для проверки наличия значения в защищенном хранилище
   ///
   /// Принимает:
   /// - [key] - ключ
-  Future<bool> exists(String key);
+  Future<bool> containsKey(String key);
 
   String get nameImpl;
 }

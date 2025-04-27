@@ -75,8 +75,11 @@ class DebugService implements IDebugService {
   }
 
   @override
-  void logWarning(Object message,
-      {Object? logLevel, Map<String, dynamic>? args}) {
+  void logWarning(
+    Object message, {
+    Object? logLevel,
+    Map<String, dynamic>? args,
+  }) {
     final logMessage =
         message is Function ? Function.apply(message, []) as Object : message;
     _talker.warning(logMessage);
@@ -84,7 +87,7 @@ class DebugService implements IDebugService {
 
   @override
   Future<void> openDebugScreen(BuildContext context,
-      {bool useRootNavigator = false}) async {
+      {bool useRootNavigator = false,}) async {
     await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => TalkerScreen(talker: _talker)),
     );
