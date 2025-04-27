@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friflex_starter/app/app.dart';
 import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/di/di_container.dart';
@@ -54,6 +55,9 @@ class AppRunner {
       _debugService = DebugService();
 
       _timerRunner = TimerRunner(_debugService);
+
+      // Инициализация Talker для логирования Bloc
+      Bloc.observer = _debugService.blocObserver;
 
       // Инициализация приложения
       await _initApp();

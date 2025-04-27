@@ -10,7 +10,8 @@ import 'package:friflex_starter/features/debug/i_debug_service.dart';
 
 /// {@template dependencies_container}
 /// Контейнер для зависимостей
-/// {@macro composition_process}
+/// [env] - окружение приложения
+/// [debugService] - сервис для отладки
 /// {@endtemplate}
 final class DiContainer {
   /// {@macro dependencies_container}

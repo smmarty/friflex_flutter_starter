@@ -1,0 +1,18 @@
+{
+	"DartDoc Template": {
+		"prefix": "temp",
+		"body": [
+			"/// {@template ${TM_FILENAME_BASE}}",
+			"///",
+			"/// {@endtemplate}"
+		],
+		"description": "DartDoc короткая запись template с именем файла"
+	},
+	"DartDoc Macro": {
+		"prefix": "mac",
+		"body": [
+			"/// {@macro ${TM_FILENAME_BASE}}"
+		],
+		"description": "DartDoc короткая запись macro с именем файла"
+	}
+}

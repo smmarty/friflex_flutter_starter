@@ -1,38 +1,47 @@
 name: friflex_starter
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.6.0
+  flutter: ">=3.24.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: 1.0.8
-  envied: 1.0.1
-  go_router: 14.6.3
-  flutter_bloc: 8.1.1
-  provider: 6.1.2
-  dio: 5.7.0
+  envied: 1.1.1
+  go_router: 15.1.1
+  flutter_bloc: 9.1.0
+  provider: 6.1.4
+  dio: 5.8.0+1
   intl: 0.19.0
-  flutter_svg: 2.0.17
+  flutter_svg: 2.1.0
   flutter_localizations:
     sdk: flutter
   lottie: 3.3.1
-  
+
+  # Пакеты для отладки
+  talker_flutter: 4.7.2
+  talker_dio_logger: 4.7.2
+  talker_bloc_logger: 4.7.2
+  talker_logger: 4.7.2
+
+  equatable: 2.0.7
+
   ### основной сервис с интерфейсами
   i_app_services:
     path: ./app_services/i_app_services
 
+  ### реализация сервисов ###
+  ### В зависимости от платформы ###
   app_services:
-    ### Базовая реализация ###
-  
-    ### Аврора реализация ###
-    path: app_services/aurora/app_services
-  equatable: ^2.0.7
+    #path: app_services/base/app_services ### Базовая реализация ###
+    #path: app_services/aurora/app_services ### Аврора реализация ###
+    path: app_services/web/app_services ### Web реализация ###
 
 dev_dependencies:
   flutter_test:
@@ -40,11 +49,10 @@ dev_dependencies:
   friflex_lint_rules:
     hosted: https://pub.friflex.com
     version: 4.0.1
-  envied_generator: 1.0.1
-  build_runner: 2.4.14 
-  flutter_gen_runner: 5.8.0
-  flutter_gen: 5.8.0
-
+  envied_generator: 1.1.1
+  build_runner: 2.4.15
+  flutter_gen_runner: 5.10.0
+  flutter_gen: 5.10.0
 
 flutter:
   uses-material-design: true
@@ -67,12 +75,11 @@ flutter:
           weight: 500
         - asset: assets/fonts/Montserrat-Regular.ttf
           weight: 400
-      
+
 flutter_gen:
-    options: 
-      output: lib/gen/
-      line_length: 100
-    integrations:
-      flutter_svg: true
-      lottie: true
-        
+  options:
+    output: lib/gen/
+    line_length: 100
+  integrations:
+    flutter_svg: true
+    lottie: true

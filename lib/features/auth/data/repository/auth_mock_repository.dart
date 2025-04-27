@@ -1,7 +1,7 @@
 import '../../domain/repository/i_auth_repository.dart';
 
 /// {@template AuthMockRepository}
-///
+/// Mock реализация репозитория авторизации
 /// {@endtemplate}
 final class AuthMockRepository implements IAuthRepository {
   @override

@@ -11,9 +11,6 @@ import 'package:friflex_starter/features/main/domain/repository/i_main_repositor
 import 'package:friflex_starter/features/profile/data/repository/profile_mock_repository.dart';
 import 'package:friflex_starter/features/profile/data/repository/profile_repository.dart';
 import 'package:friflex_starter/features/profile/domain/repository/i_profile_repository.dart';
-import 'package:friflex_starter/features/profile_scope/data/repository/profile_scope_mock_repository.dart';
-import 'package:friflex_starter/features/profile_scope/data/repository/profile_scope_repository.dart';
-import 'package:friflex_starter/features/profile_scope/domain/repository/i_profile_scope_repository.dart';
 
 /// Список названий моковых репозиториев, которые должны быть подменены
 /// для использования в сборке stage окружения
@@ -43,8 +40,6 @@ final class DiRepositories {
   /// Интерфейс для работы с репозиторием профиля
   late final IProfileRepository profileRepository;
 
-  /// Интерфейс для работы с репозиторием профиля scope
-  late final IProfileScopeRepository profileScopeRepository;
 
   /// Метод для инициализации репозиториев в приложении
   ///
@@ -121,29 +116,7 @@ final class DiRepositories {
         stackTrace,
       );
     }
-
-    try {
-      // Инициализация репозитория профиля scope
-      profileScopeRepository = _lazyInitRepo<IProfileScopeRepository>(
-        mockFactory: ProfileScopeMockRepository.new,
-        mainFactory: () => ProfileScopeRepository(
-          httpClient: diContainer.httpClientFactory(
-            diContainer.debugService,
-            diContainer.appConfig,
-          ),
-        ),
-        onProgress: onProgress,
-        environment: diContainer.env,
-      );
-      onProgress(mainRepository.name);
-    } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации репозитория IProfileScopeRepository',
-        error,
-        stackTrace,
-      );
-    }
-
+    
     onProgress(
       'Инициализация репозиториев завершена! Было подменено репозиториев - ${_mockReposToSwitch.length} (${_mockReposToSwitch.join(', ')})',
     );

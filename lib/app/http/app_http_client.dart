@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:friflex_starter/app/app_config/i_app_config.dart';
 import 'package:friflex_starter/app/http/i_http_client.dart';
+
 import 'package:friflex_starter/features/debug/i_debug_service.dart';
 
-/// Класс для реализации HTTP-клиента для управления запросами
+/// {@template app_http_client}
+///  Класс для реализации HTTP-клиента для управления запросами
+/// {@endtemplate}
 final class AppHttpClient implements IHttpClient {
   /// Создает HTTP клиент
   ///
@@ -26,6 +29,7 @@ final class AppHttpClient implements IHttpClient {
         'Content-Type': 'application/json',
       };
     debugService.log('HTTP client created');
+    _httpClient.interceptors.add(debugService.dioLogger);
   }
 
   /// Конфигурация приложения

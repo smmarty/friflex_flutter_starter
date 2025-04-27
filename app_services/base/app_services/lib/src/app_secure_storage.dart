@@ -1,30 +1,23 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_secure_storage_aurora/flutter_secure_storage_aurora.dart';
 import 'package:i_app_services/i_app_services.dart';
 
 /// {@template app_secure_storage}
 /// Класс для Aurora реализации сервис по работе с защищенным хранилищем
-/// [secretKey] - ключ для шифрования данных, обязательный параметр для Авроры
+/// [secretKey] - ключ для шифрования данных, если нужен
 /// {@endtemplate}
 final class AppSecureStorage implements ISecureStorage {
-  /// Создает сервис для работы с защищенным хранилищем
-  ///
-  /// Принимает:
-  /// - [secretKey] - ключ шифрования данных
-  AppSecureStorage({required this.secretKey}) {
-    FlutterSecureStorageAurora.setSecret(secretKey);
-  }
+  AppSecureStorage({this.secretKey});
 
   @override
-  final String secretKey;
+  final String? secretKey;
 
-  static const name = 'AuroraAppSecureStorage';
+  static const name = 'BaseAppSecureStorage';
 
   /// Экземпляр хранилища данных
   final _box = const FlutterSecureStorage();
 
   @override
-  Future<void> clear() async {
+  Future<void> deleteAll() async {
     await _box.deleteAll();
   }
 
@@ -34,7 +27,7 @@ final class AppSecureStorage implements ISecureStorage {
   }
 
   @override
-  Future<bool> exists(String key) {
+  Future<bool> containsKey(String key) {
     return _box.containsKey(key: key);
   }
 
