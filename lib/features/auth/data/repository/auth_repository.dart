@@ -3,7 +3,7 @@ import 'package:friflex_starter/app/http/i_http_client.dart';
 import '../../domain/repository/i_auth_repository.dart';
 
 /// {@template AuthRepository}
-///
+///  Реализация репозитория авторизации
 /// {@endtemplate}
 final class AuthRepository implements IAuthRepository {
   final IHttpClient httpClient;

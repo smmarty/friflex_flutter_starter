@@ -4,6 +4,15 @@ import 'package:flutter/material.dart';
 abstract interface class IDebugService {
   static const name = 'IDebugService';
 
+  /// Наблюдение за dio
+  dynamic get dioLogger;
+
+  /// Наблюдение за роутами
+  dynamic get routeObserver;
+
+  /// Наблюдение за BLoC
+  dynamic get blocObserver;
+
   /// Метод для логирования сообщений
   void log(
     Object message, {
@@ -39,7 +48,7 @@ abstract interface class IDebugService {
   /// Принимает:
   /// - [context] - для определения навигатора по нему
   /// - [useRootNavigator] - при true, открывает окно в корневом навигаторе
-  Future<T?> openDebugScreen<T>(
+  Future<void> openDebugScreen(
     BuildContext context, {
     bool useRootNavigator = false,
   });

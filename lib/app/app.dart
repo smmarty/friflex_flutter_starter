@@ -5,6 +5,7 @@ import 'package:friflex_starter/app/depends_providers.dart';
 import 'package:friflex_starter/app/theme/app_theme.dart';
 import 'package:friflex_starter/app/theme/theme_notifier.dart';
 import 'package:friflex_starter/di/di_container.dart';
+
 import 'package:friflex_starter/features/error/error_screen.dart';
 import 'package:friflex_starter/features/splash/splash_screen.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
