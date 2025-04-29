@@ -77,9 +77,7 @@ flutter:
           weight: 400
 
 flutter_gen:
-  options:
-    output: lib/gen/
-    line_length: 100
+
   integrations:
     flutter_svg: true
     lottie: true
