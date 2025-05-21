@@ -60,7 +60,6 @@ class InitializationController<L extends InitializableStepLabel,
         for (final entry in stepsToPerform.entries)
           entry.key: InitializationStepResult$NotInitialized(step: entry.value),
       };
-      final stepsInProgress = <L>{};
 
       Future<void> handleSteps(Set<S> stepsToHandle) {
         print(
@@ -74,7 +73,6 @@ class InitializationController<L extends InitializableStepLabel,
             final sw = Stopwatch()..start();
             results[step.label] =
                 InitializationStepResult$InProgress(step: step);
-            stepsInProgress.add(step.label);
 
             try {
               final rawResult = await step.initialize();
@@ -158,8 +156,6 @@ class InitializationController<L extends InitializableStepLabel,
               );
               print('STEP FAILED ${step.runtimeType}');
               rethrow;
-            } finally {
-              stepsInProgress.remove(step.label);
             }
           }),
         );
