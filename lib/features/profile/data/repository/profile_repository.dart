@@ -6,7 +6,6 @@ import 'package:friflex_starter/features/profile/domain/repository/i_profile_rep
 ///
 /// {@endtemplate}
 final class ProfileRepository implements IProfileRepository {
-
   ProfileRepository({required this.httpClient});
   final IHttpClient httpClient;
 

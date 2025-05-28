@@ -8,7 +8,6 @@ sealed class ProfileEvent extends Equatable {
 }
 
 final class ProfileFetchProfileEvent extends ProfileEvent {
-
   const ProfileFetchProfileEvent({required this.id});
   final String id;
 

@@ -6,7 +6,6 @@ import 'package:friflex_starter/features/auth/domain/repository/i_auth_repositor
 ///  Реализация репозитория авторизации
 /// {@endtemplate}
 final class AuthRepository implements IAuthRepository {
-
   AuthRepository({required this.httpClient});
   final IHttpClient httpClient;
 

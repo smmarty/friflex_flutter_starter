@@ -12,7 +12,6 @@ final class ProfileInitialState extends ProfileState {}
 final class ProfileWaitingState extends ProfileState {}
 
 final class ProfileErrorState extends ProfileState {
-
   const ProfileErrorState({
     required this.message,
     required this.error,
@@ -27,7 +26,6 @@ final class ProfileErrorState extends ProfileState {
 }
 
 final class ProfileSuccessState extends ProfileState {
-
   const ProfileSuccessState({required this.data});
   final Object data;
 

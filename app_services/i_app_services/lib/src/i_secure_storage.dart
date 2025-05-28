@@ -4,9 +4,7 @@ abstract interface class ISecureStorage {
   ///
   /// Требует:
   /// - [secretKey] - секретный ключ для шифрования данных
-  const ISecureStorage._({
-    required this.secretKey,
-  });
+  const ISecureStorage._({required this.secretKey});
 
   /// Секретный ключ для шифрования данных
   /// Нужен, если надо передать ключ в реализацию
