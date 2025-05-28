@@ -62,15 +62,17 @@ class DebugService implements IDebugService {
     Map<String, dynamic>? args,
     StackTrace? stackTrace,
   }) {
-    final logMessage =
-        message is Function ? Function.apply(message, []) as Object : message;
+    final logMessage = message is Function
+        ? Function.apply(message, []) as Object
+        : message;
     _talker.error(logMessage, error, stackTrace);
   }
 
   @override
   void log(Object message, {Object? logLevel, Map<String, dynamic>? args}) {
-    final logMessage =
-        message is Function ? Function.apply(message, []) as Object : message;
+    final logMessage = message is Function
+        ? Function.apply(message, []) as Object
+        : message;
     _talker.log(logMessage);
   }
 
@@ -80,14 +82,17 @@ class DebugService implements IDebugService {
     Object? logLevel,
     Map<String, dynamic>? args,
   }) {
-    final logMessage =
-        message is Function ? Function.apply(message, []) as Object : message;
+    final logMessage = message is Function
+        ? Function.apply(message, []) as Object
+        : message;
     _talker.warning(logMessage);
   }
 
   @override
-  Future<void> openDebugScreen(BuildContext context,
-      {bool useRootNavigator = false,}) async {
+  Future<void> openDebugScreen(
+    BuildContext context, {
+    bool useRootNavigator = false,
+  }) async {
     await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => TalkerScreen(talker: _talker)),
     );

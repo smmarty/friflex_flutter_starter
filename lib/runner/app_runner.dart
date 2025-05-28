@@ -105,9 +105,7 @@ class AppRunner {
   /// выполняется до запуска приложения
   Future<void> _initApp() async {
     // Запрет на поворот экрана
-    await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp],
-    );
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     // Заморозка первого кадра (сплеш)
     WidgetsBinding.instance.deferFirstFrame();
@@ -131,10 +129,7 @@ class AppRunner {
     // TODO(yura): Удалить после проверки
     await Future.delayed(const Duration(seconds: 3));
     debugService.log(() => 'Тип сборки: ${env.name}');
-    final diContainer = DiContainer(
-      env: env,
-      dService: debugService,
-    );
+    final diContainer = DiContainer(env: env, dService: debugService);
     await diContainer.init(
       onProgress: (name) => timerRunner.logOnProgress(name),
       onComplete: (name) {
@@ -142,11 +137,8 @@ class AppRunner {
           ..logOnComplete(name)
           ..stop();
       },
-      onError: (message, error, [stackTrace]) => debugService.logError(
-        message,
-        error: error,
-        stackTrace: stackTrace,
-      ),
+      onError: (message, error, [stackTrace]) =>
+          debugService.logError(message, error: error, stackTrace: stackTrace),
     );
     //throw Exception('Test error');
     return diContainer;

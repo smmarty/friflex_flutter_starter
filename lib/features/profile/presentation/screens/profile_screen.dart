@@ -15,8 +15,9 @@ class ProfileScreen extends StatelessWidget {
     // и вызываем событие ProfileFetchProfileEvent
     // Или любые другие события, которые вам нужны
     return BlocProvider(
-      create: (context) => ProfileBloc(profileRepository)
-        ..add(const ProfileFetchProfileEvent(id: '1')),
+      create: (context) =>
+          ProfileBloc(profileRepository)
+            ..add(const ProfileFetchProfileEvent(id: '1')),
       child: const _ProfileScreenView(),
     );
   }
@@ -29,9 +30,7 @@ class _ProfileScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
+      appBar: AppBar(title: const Text('Profile')),
       body: Center(
         child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {

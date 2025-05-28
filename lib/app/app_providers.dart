@@ -5,10 +5,7 @@ import 'package:provider/provider.dart';
 
 /// Класс для добавления провайдеров темы и локализации
 final class AppProviders extends StatelessWidget {
-  const AppProviders({
-    super.key,
-    required this.child,
-  });
+  const AppProviders({required this.child, super.key});
 
   final Widget child;
 

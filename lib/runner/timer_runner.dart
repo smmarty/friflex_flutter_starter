@@ -36,15 +36,10 @@ class TimerRunner {
     _debugService.log(
       '$message, прогресс: ${_stopwatch.elapsedMilliseconds} мс',
     );
-    
   }
 
   /// Метод для обработки прогресса инициализации зависимостей
-  void logOnError(
-    String message,
-    Object error, [
-    StackTrace? stackTrace,
-  ]) {
+  void logOnError(String message, Object error, [StackTrace? stackTrace]) {
     _debugService.logError(() => message, error: error, stackTrace: stackTrace);
   }
 }

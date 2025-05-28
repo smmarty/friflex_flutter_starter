@@ -26,9 +26,7 @@ class AppRouter {
     return GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: initialLocation,
-      observers: [
-        debugService.routeObserver,
-      ],
+      observers: [debugService.routeObserver],
       routes: [
         StatefulShellRoute.indexedStack(
           parentNavigatorKey: rootNavigatorKey,

@@ -4,8 +4,7 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ^3.6.0
-  flutter: ">=3.24.0"
+  sdk: ^3.8.0
 
 dependencies:
   flutter:
@@ -22,6 +21,4 @@ dependencies:
     path: ../../i_app_services
 
 dev_dependencies:
-  friflex_lint_rules:
-    hosted: https://pub.friflex.com
-    version: 4.0.1
+  flutter_lints: 6.0.0

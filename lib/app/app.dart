@@ -14,14 +14,12 @@ import 'package:go_router/go_router.dart';
 
 /// Класс приложения
 class App extends StatefulWidget {
-  const App({
-    super.key,
-    required this.router,
-    required this.initDependencies,
-  });
+  const App({required this.router, required this.initDependencies, super.key});
+
   /// Роутер приложения
   final GoRouter router;
-  /// Функция для инициализации зависимостей  
+
+  /// Функция для инициализации зависимостей
   final Future<DiContainer> Function() initDependencies;
 
   @override

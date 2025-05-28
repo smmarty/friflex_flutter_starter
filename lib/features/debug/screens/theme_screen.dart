@@ -29,9 +29,7 @@ class ThemeScreen extends StatelessWidget {
               child: const SizedBox(height: 100, width: 100),
             ),
             const SizedBox(height: 16),
-            Text(
-              'Текущая тема: ${context.theme.themeMode}',
-            ),
+            Text('Текущая тема: ${context.theme.themeMode}'),
           ],
         ),
       ),

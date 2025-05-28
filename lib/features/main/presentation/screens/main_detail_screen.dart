@@ -10,12 +10,8 @@ class MainDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main Detail Screen'),
-      ),
-      body: const Center(
-        child: Text('Вложенный экран'),
-      ),
+      appBar: AppBar(title: const Text('Main Detail Screen')),
+      body: const Center(child: Text('Вложенный экран')),
     );
   }
 }

@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class ErrorScreen extends StatelessWidget {
   /// {@macro ErrorScreen}
   const ErrorScreen({
-    super.key,
     required this.error,
     required this.stackTrace,
+    super.key,
     this.onRetry,
   });
 
@@ -31,14 +31,11 @@ class ErrorScreen extends StatelessWidget {
                   child: const Text('Перезагрузить приложение'),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  '''
+                Text('''
           Что-то пошло не так, попробуйте перезагрузить приложение
           error: $error
                 stackTrace: $stackTrace
-                  ''',
-                  textAlign: TextAlign.center,
-                ),
+                  ''', textAlign: TextAlign.center),
               ],
             ),
           ),

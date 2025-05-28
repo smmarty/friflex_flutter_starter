@@ -26,11 +26,7 @@ final class DiServices {
       pathProvider = const AppPathProvider();
       onProgress(AppPathProvider.name);
     } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации ${IPathProvider.name}',
-        error,
-        stackTrace,
-      );
+      onError('Ошибка инициализации ${IPathProvider.name}', error, stackTrace);
     }
     try {
       secureStorage = AppSecureStorage(
@@ -38,11 +34,7 @@ final class DiServices {
       );
       onProgress(AppSecureStorage.name);
     } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации ${ISecureStorage.name}',
-        error,
-        stackTrace,
-      );
+      onError('Ошибка инициализации ${ISecureStorage.name}', error, stackTrace);
     }
 
     onProgress('Инициализация сервисов завершена!');

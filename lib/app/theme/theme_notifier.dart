@@ -5,14 +5,14 @@ typedef ThemeBuilder = Widget Function();
 
 /// Виджет для подписки на изменение темы приложения
 class ThemeConsumer extends StatelessWidget {
-  const ThemeConsumer({super.key, required this.builder});
+  const ThemeConsumer({required this.builder, super.key});
 
   final ThemeBuilder builder;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeNotifier>(
-      builder: (_, __, ___) {
+      builder: (_, _, _) {
         return builder();
       },
     );
@@ -26,8 +26,9 @@ final class ThemeNotifier extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
 
   void changeTheme() {
-    _themeMode =
-        _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    _themeMode = _themeMode == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
     notifyListeners();
   }
 }

@@ -32,36 +32,36 @@ abstract final class DebugRoutes {
   /// Принимает:
   /// - [routes] - вложенные роуты
   static GoRoute buildRoutes({List<RouteBase> routes = const []}) => GoRoute(
-        path: debugScreenPath,
-        name: debugScreenName,
-        builder: (context, state) => const DebugScreen(),
-        routes: [
-          ...routes,
-          GoRoute(
-            path: tokensScreenPath,
-            name: tokensScreenName,
-            builder: (context, state) => const TokensScreen(),
-          ),
-          GoRoute(
-            path: uiKitScreenPath,
-            name: uiKitScreenName,
-            builder: (context, state) => const UiKitScreen(),
-          ),
-          GoRoute(
-            path: iconsScreenPath,
-            name: iconsScreenName,
-            builder: (context, state) => const IconsScreen(),
-          ),
-          GoRoute(
-            path: themeScreenPath,
-            name: themeScreenName,
-            builder: (context, state) => const ThemeScreen(),
-          ),
-          GoRoute(
-            path: langScreenPath,
-            name: langScreenName,
-            builder: (context, state) => const LangScreen(),
-          ),
-        ],
-      );
+    path: debugScreenPath,
+    name: debugScreenName,
+    builder: (context, state) => const DebugScreen(),
+    routes: [
+      ...routes,
+      GoRoute(
+        path: tokensScreenPath,
+        name: tokensScreenName,
+        builder: (context, state) => const TokensScreen(),
+      ),
+      GoRoute(
+        path: uiKitScreenPath,
+        name: uiKitScreenName,
+        builder: (context, state) => const UiKitScreen(),
+      ),
+      GoRoute(
+        path: iconsScreenPath,
+        name: iconsScreenName,
+        builder: (context, state) => const IconsScreen(),
+      ),
+      GoRoute(
+        path: themeScreenPath,
+        name: themeScreenName,
+        builder: (context, state) => const ThemeScreen(),
+      ),
+      GoRoute(
+        path: langScreenPath,
+        name: langScreenName,
+        builder: (context, state) => const LangScreen(),
+      ),
+    ],
+  );
 }

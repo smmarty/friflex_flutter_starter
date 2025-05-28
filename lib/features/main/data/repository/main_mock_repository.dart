@@ -1,4 +1,4 @@
-import '../../domain/repository/i_main_repository.dart';
+import 'package:friflex_starter/features/main/domain/repository/i_main_repository.dart';
 
 /// {@template MainMockRepository}
 ///

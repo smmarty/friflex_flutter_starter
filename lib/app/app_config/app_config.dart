@@ -2,7 +2,6 @@ import 'package:envied/envied.dart';
 import 'package:friflex_starter/app/app_config/i_app_config.dart';
 import 'package:friflex_starter/app/app_env.dart';
 
-
 part 'app_config.g.dart';
 
 /// Класс для реализации конфигурации с моковыми данными

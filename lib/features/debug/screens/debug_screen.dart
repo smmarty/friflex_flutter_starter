@@ -5,7 +5,7 @@ import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:go_router/go_router.dart';
 
 class DebugScreen extends StatelessWidget {
-  const DebugScreen({Key? key}) : super(key: key);
+  const DebugScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,7 @@ class DebugScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Text(
-              'Окружение: ${context.di.appConfig.env.name}',
-            ),
+            Text('Окружение: ${context.di.appConfig.env.name}'),
             const HBox(22),
             Text(
               'Реализация AppServices: ${context.di.services.secureStorage.nameImpl}',

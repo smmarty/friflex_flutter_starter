@@ -5,14 +5,14 @@ typedef LocalizationBuilder = Widget Function();
 
 /// Виджет для перестройки виджета в зависимости от  локализации
 class LocalizationConsumer extends StatelessWidget {
-  const LocalizationConsumer({super.key, required this.builder});
+  const LocalizationConsumer({required this.builder, super.key});
 
   final LocalizationBuilder builder;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<LocalizationNotifier>(
-      builder: (_, __, ___) {
+      builder: (_, _, _) {
         return builder();
       },
     );

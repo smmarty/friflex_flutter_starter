@@ -10,10 +10,7 @@ class RootScreen extends StatelessWidget {
   ///
   /// Принимает:
   /// - [navigationShell] - текущая ветка навигации
-  const RootScreen({
-    super.key,
-    required this.navigationShell,
-  });
+  const RootScreen({required this.navigationShell, super.key});
 
   /// Текущая ветка навигации
   final StatefulNavigationShell navigationShell;

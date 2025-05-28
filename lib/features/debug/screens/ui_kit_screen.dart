@@ -11,16 +11,12 @@ class UiKitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('UI Kit Screen'),
-      ),
+      appBar: AppBar(title: const Text('UI Kit Screen')),
       body: Center(
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: const [
-            Text(
-              'UI Kit Screen',
-            ),
+            Text('UI Kit Screen'),
             SizedBox(height: 16),
             // Здесь можно добавить другие компоненты UI Kit
           ],

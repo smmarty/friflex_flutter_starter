@@ -23,25 +23,24 @@ abstract final class MainRoutes {
   static StatefulShellBranch buildShellBranch({
     List<RouteBase> routes = const [],
     List<NavigatorObserver>? observers,
-  }) =>
-      StatefulShellBranch(
-        initialLocation: _mainScreenPath,
-        observers: observers,
+  }) => StatefulShellBranch(
+    initialLocation: _mainScreenPath,
+    observers: observers,
+    routes: [
+      ...routes,
+      GoRoute(
+        path: _mainScreenPath,
+        name: mainScreenName,
+        builder: (context, state) => const MainScreen(),
         routes: [
-          ...routes,
+          // Пример вложенного роута для главного экрана
           GoRoute(
-            path: _mainScreenPath,
-            name: mainScreenName,
-            builder: (context, state) => const MainScreen(),
-            routes: [
-              // Пример вложенного роута для главного экрана
-              GoRoute(
-                path: _mainDetailScreenPath,
-                name: mainDetailScreenName,
-                builder: (context, state) => const MainDetailScreen(),
-              ),
-            ],
+            path: _mainDetailScreenPath,
+            name: mainDetailScreenName,
+            builder: (context, state) => const MainDetailScreen(),
           ),
         ],
-      );
+      ),
+    ],
+  );
 }

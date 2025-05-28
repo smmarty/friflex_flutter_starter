@@ -14,11 +14,7 @@ abstract interface class IDebugService {
   dynamic get blocObserver;
 
   /// Метод для логирования сообщений
-  void log(
-    Object message, {
-    Object logLevel,
-    Map<String, dynamic>? args,
-  });
+  void log(Object message, {Object logLevel, Map<String, dynamic>? args});
 
   /// Метод для логирования предупреждений
   void logWarning(
@@ -37,11 +33,7 @@ abstract interface class IDebugService {
   });
 
   /// Метод для обработки ошибок
-  void logDebug(
-    Object message, {
-    Object logLevel,
-    Map<String, dynamic>? args,
-  });
+  void logDebug(Object message, {Object logLevel, Map<String, dynamic>? args});
 
   /// Метод для открытия окна отладки
   ///

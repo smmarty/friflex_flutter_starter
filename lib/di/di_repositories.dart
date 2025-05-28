@@ -40,7 +40,6 @@ final class DiRepositories {
   /// Интерфейс для работы с репозиторием профиля
   late final IProfileRepository profileRepository;
 
-
   /// Метод для инициализации репозиториев в приложении
   ///
   /// Принимает:
@@ -116,7 +115,7 @@ final class DiRepositories {
         stackTrace,
       );
     }
-    
+
     onProgress(
       'Инициализация репозиториев завершена! Было подменено репозиториев - ${_mockReposToSwitch.length} (${_mockReposToSwitch.join(', ')})',
     );

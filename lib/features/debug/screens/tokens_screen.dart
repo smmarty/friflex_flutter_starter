@@ -15,13 +15,9 @@ class TokensScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: const [
-            Text(
-              'Access Token: ',
-            ),
+            Text('Access Token: '),
             SizedBox(height: 16),
-            Text(
-              'Refresh Token: ',
-            ),
+            Text('Refresh Token: '),
             SizedBox(height: 16),
           ],
         ),

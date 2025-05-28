@@ -1,4 +1,4 @@
-library app_services;
+library;
 
 export 'src/app_path_provider.dart';
 export 'src/app_secure_storage.dart';

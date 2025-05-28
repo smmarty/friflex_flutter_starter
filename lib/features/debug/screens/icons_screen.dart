@@ -12,9 +12,7 @@ class IconsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconList = Assets.icons.values
-        .map(
-          (icon) => _ItemIcon(icon: icon.svg(), name: icon.path),
-        )
+        .map((icon) => _ItemIcon(icon: icon.svg(), name: icon.path))
         .toList();
     return Scaffold(
       appBar: AppBar(title: const Text('Иконки')),

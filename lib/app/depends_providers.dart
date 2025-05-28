@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 /// Класс для внедрения глобальных зависимостей
 final class DependsProviders extends StatelessWidget {
   const DependsProviders({
-    super.key,
     required this.child,
     required this.diContainer,
+    super.key,
   });
 
   final Widget child;

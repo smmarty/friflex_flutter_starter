@@ -11,8 +11,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Assets.lottie.splash.lottie(),
-    );
+    return Center(child: Assets.lottie.splash.lottie());
   }
 }

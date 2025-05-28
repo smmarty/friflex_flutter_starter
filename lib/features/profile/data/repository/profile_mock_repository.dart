@@ -1,4 +1,4 @@
-import '../../domain/repository/i_profile_repository.dart';
+import 'package:friflex_starter/features/profile/domain/repository/i_profile_repository.dart';
 
 /// {@template ProfileMockRepository}
 ///

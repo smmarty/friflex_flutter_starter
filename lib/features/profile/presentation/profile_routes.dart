@@ -16,17 +16,16 @@ abstract final class ProfileRoutes {
   static StatefulShellBranch buildShellBranch({
     List<RouteBase> routes = const [],
     List<NavigatorObserver>? observers,
-  }) =>
-      StatefulShellBranch(
-        initialLocation: _profileScreenPath,
-        observers: observers,
-        routes: [
-          GoRoute(
-            path: _profileScreenPath,
-            name: profileScreenName,
-            builder: (context, state) => const ProfileScreen(),
-            routes: routes,
-          ),
-        ],
-      );
+  }) => StatefulShellBranch(
+    initialLocation: _profileScreenPath,
+    observers: observers,
+    routes: [
+      GoRoute(
+        path: _profileScreenPath,
+        name: profileScreenName,
+        builder: (context, state) => const ProfileScreen(),
+        routes: routes,
+      ),
+    ],
+  );
 }

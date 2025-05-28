@@ -8,9 +8,9 @@ sealed class ProfileEvent extends Equatable {
 }
 
 final class ProfileFetchProfileEvent extends ProfileEvent {
-  final String id;
 
   const ProfileFetchProfileEvent({required this.id});
+  final String id;
 
   @override
   List<Object> get props => [id];
