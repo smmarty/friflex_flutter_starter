@@ -33,7 +33,7 @@ packages:
   app_services:
     dependency: "direct main"
     description:
-      path: "app_services/web/app_services"
+      path: "app_services/base/app_services"
       relative: true
     source: path
     version: "0.0.1"

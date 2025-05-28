@@ -39,9 +39,8 @@ dependencies:
   ### реализация сервисов ###
   ### В зависимости от платформы ###
   app_services:
-    #path: app_services/base/app_services ### Базовая реализация ###
+    path: app_services/base/app_services ### Базовая реализация ###
     #path: app_services/aurora/app_services ### Аврора реализация ###
-    path: app_services/web/app_services ### Web реализация ###
 
 dev_dependencies:
   flutter_test:
