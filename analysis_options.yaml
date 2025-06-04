@@ -86,4 +86,4 @@ linter:
     no_literal_bool_comparisons: true # Запрещать сравнения с литералами true/false
     use_key_in_widget_constructors: true # Обязательное указание ключа для stateful/stateless widgets
     always_use_package_imports: true # Всегда использовать package: импорты
-
+    unawaited_futures: true # Требовать использование unawaited для неожидаемых Future
