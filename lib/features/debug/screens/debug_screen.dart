@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:friflex_starter/app/app_box.dart';
+import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:go_router/go_router.dart';
 
+/// {@template debug_screen}
+/// Экран для отладки приложения
+/// {@endtemplate}
 class DebugScreen extends StatelessWidget {
   const DebugScreen({super.key});
 

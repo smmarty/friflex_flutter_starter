@@ -1,3 +1,4 @@
+import 'package:friflex_starter/features/debug/screens/components_screen.dart';
 import 'package:friflex_starter/features/debug/screens/debug_screen.dart';
 import 'package:friflex_starter/features/debug/screens/icons_screen.dart';
 import 'package:friflex_starter/features/debug/screens/lang_screen.dart';
@@ -18,6 +19,7 @@ abstract final class DebugRoutes {
   static const String iconsScreenName = 'icons_screen';
   static const String themeScreenName = 'theme_screen';
   static const String langScreenName = 'lang_screen';
+  static const String componentsScreenName = 'components_screen';
 
   /// Пути к экранам
   static const String debugScreenPath = '/debug';
@@ -26,6 +28,7 @@ abstract final class DebugRoutes {
   static const String iconsScreenPath = 'debug/icons';
   static const String themeScreenPath = 'debug/theme';
   static const String langScreenPath = 'debug/lang';
+  static const String componentsScreenPath = 'debug/components';
 
   /// Метод для создания роутов для отладки
   ///
@@ -61,6 +64,11 @@ abstract final class DebugRoutes {
         path: langScreenPath,
         name: langScreenName,
         builder: (context, state) => const LangScreen(),
+      ),
+      GoRoute(
+        path: componentsScreenPath,
+        name: componentsScreenName,
+        builder: (context, state) => const ComponentsScreen(),
       ),
     ],
   );

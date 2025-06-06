@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friflex_starter/app/app_box.dart';
+import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/gen/assets.gen.dart';
 
 /// {@template IconsScreen}
