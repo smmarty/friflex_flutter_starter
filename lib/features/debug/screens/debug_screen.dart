@@ -67,6 +67,13 @@ class DebugScreen extends StatelessWidget {
               },
               child: const Text('Экран локализации'),
             ),
+            const HBox(16),
+            ElevatedButton(
+              onPressed: () {
+                context.pushNamed(DebugRoutes.componentsScreenName);
+              },
+              child: const Text('Экран компонентов'),
+            ),
             const HBox(22),
             const Text('Имитирование ошибок:'),
             const HBox(16),

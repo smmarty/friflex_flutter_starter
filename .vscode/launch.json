@@ -7,47 +7,17 @@
             "request": "launch",
             "program": "${workspaceFolder}/lib/targets/dev.dart"
         },
-
         {
             "name": "stage",
             "type": "dart",
             "request": "launch",
             "program": "${workspaceFolder}/lib/targets/stage.dart"
         },
-        // {
-        //     "name": "GMS_stage",
-        //     "type": "dart",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/lib/targets/stage.dart",
-        //     "preLaunchTask": "switch_to_gms"
-        // },
-        // {
-        //     "name": "GMS_prod",
-        //     "type": "dart",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/lib/targets/prod.dart",
-        //     "preLaunchTask": "switch_to_gms"
-        // },
-        // {
-        //     "name": "Aurora_dev",
-        //     "type": "dart",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/lib/targets/dev.dart",
-        //     "preLaunchTask": "switch_to_aurora"
-        // },
-        // {
-        //     "name": "Aurora_stage",
-        //     "type": "dart",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/lib/targets/stage.dart",
-        //     "preLaunchTask": "switch_to_aurora"
-        // },
-        // {
-        //     "name": "Aurora_prod",
-        //     "type": "dart",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/lib/targets/prod.dart",
-        //     "preLaunchTask": "switch_to_aurora"
-        // },
+        {
+            "name": "prod",
+            "type": "dart",
+            "request": "launch",
+            "program": "${workspaceFolder}/lib/targets/prod.dart"
+        },
     ]
 }

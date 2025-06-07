@@ -198,38 +198,37 @@ class _AppSnackBarState extends State<AppSnackBar>
       animation: _slideAnimation,
       builder: (context, child) {
         return Positioned(
+          left: 0,
+          right: 0,
           top: _slideAnimation.value,
           child: Material(
-            color: Colors.transparent,
-            child: Center(
-              child: GestureDetector(
-                onTap: _dismiss,
-                behavior: HitTestBehavior.opaque,
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 350),
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: _getBackgroundColor(widget.type),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 16,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _Icon(type: widget.type),
-                      const WBox(10),
-                      Flexible(
-                        child: Text(
-                          widget.message,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+            child: GestureDetector(
+              onTap: _dismiss,
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 350),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: _getBackgroundColor(widget.type),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 16,
+                ),
+                child: Row(
+                  children: [
+                    _Icon(type: widget.type),
+                    const WBox(10),
+                    Flexible(
+                      child: Text(
+                        widget.message,
+                        style: TextStyle(color: Colors.white),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -250,6 +249,7 @@ class _AppSnackBarState extends State<AppSnackBar>
     };
   }
 }
+
 /// {@template _Icon}
 /// Виджет для отображения иконки в снекбаре
 /// Используется для отображения иконки в зависимости от типа снекбара
