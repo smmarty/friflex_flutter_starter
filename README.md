@@ -4,6 +4,8 @@
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.32.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.8.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
+![Version](https://img.shields.io/badge/Version-v0.0.1-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-BSD--3--Clause-blue?style=for-the-badge)
 
 **Корпоративный стартовый шаблон для разработки масштабируемых Flutter-приложений**
 
@@ -219,6 +221,7 @@ flutter run --target lib/targets/prod.dart
 # Генерация ассетов
 flutter packages pub run flutter_gen
 ```
+
 ```bash
 # Полная перегенерация
 dart run build_runner build --delete-conflicting-outputs
@@ -262,7 +265,6 @@ dart run build_runner build --delete-conflicting-outputs
 | 🏗️ [RFC-projects_structure.md](./tools/rfc/RFC-projects_structure.md) | Структура проекта |
 | 📝 [RFC-documentation.md](./tools/rfc/RFC-documentation.md) | Правила документирования |
 
-
 ## 🎯 Особенности и нюансы
 
 ### ✨ Преимущества
@@ -288,6 +290,14 @@ dart run build_runner build --delete-conflicting-outputs
 - **Используйте** встроенные инструменты отладки
 - **Документируйте** изменения согласно стандартам
 - **Тестируйте** на всех поддерживаемых платформах
+
+---
+
+## 📄 Лицензия
+
+Этот проект распространяется под лицензией BSD 3-Clause License. Подробности смотрите в файле [LICENSE](./LICENCE).
+
+Copyright © 2025 Friflex LLC. Все права защищены.
 
 ---
 
