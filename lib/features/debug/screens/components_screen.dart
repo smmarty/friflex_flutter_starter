@@ -44,6 +44,13 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
               },
               child: const Text('Показать снекбар с успехом'),
             ),
+            const HBox(16),
+            ElevatedButton(
+              onPressed: () {
+                AppSnackBar.showInfo(context, message: 'Это просто сообщение');
+              },
+              child: const Text('Показать снекбар с информацией'),
+            ),
           ],
         ),
       ),

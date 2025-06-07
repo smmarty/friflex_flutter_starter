@@ -12,4 +12,7 @@ extension AppColorsScheme on ColorScheme {
 
   /// Цвет заднего фона снекбара с успехом
   Color get successSnackbarBackground => const Color(0xFF6FB62C);
+
+  /// Цвет заднего фона снекбара с информацией
+  Color get infoSnackbarBackground => const Color.fromARGB(255, 220, 108, 77);
 }

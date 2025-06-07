@@ -15,6 +15,9 @@ enum TypeSnackBar {
 
   /// Снекбар с ошибкой
   error,
+
+  /// Снекбар с информацией
+  info,
 }
 
 /// {@template app_snackbar}
@@ -62,6 +65,24 @@ class AppSnackBar extends StatefulWidget {
       context: context,
       message: message,
       type: TypeSnackBar.error,
+      displayDuration: displayDuration,
+    );
+  }
+
+  /// Показать снекбар с информацией
+  /// [context] - контекст, в котором будет показан снекбар
+  /// [message] - сообщение, которое будет отображаться в снекбаре
+  /// [displayDuration] - продолжительность отображения снекбара
+  /// По умолчанию 3 секунды
+  static void showInfo(
+    BuildContext context, {
+    required String message,
+    Duration displayDuration = const Duration(seconds: 3),
+  }) {
+    _show(
+      context: context,
+      message: message,
+      type: TypeSnackBar.info,
       displayDuration: displayDuration,
     );
   }
@@ -246,6 +267,7 @@ class _AppSnackBarState extends State<AppSnackBar>
     return switch (type) {
       TypeSnackBar.success => context.colors.successSnackbarBackground,
       TypeSnackBar.error => context.colors.errorSnackbarBackground,
+      TypeSnackBar.info => context.colors.infoSnackbarBackground,
     };
   }
 }
@@ -273,6 +295,7 @@ class _Icon extends StatelessWidget {
         size: 32,
       ),
       TypeSnackBar.error => Icon(Icons.error, color: Colors.white, size: 32),
+      TypeSnackBar.info => Icon(Icons.info, color: Colors.white, size: 32),
     };
   }
 }

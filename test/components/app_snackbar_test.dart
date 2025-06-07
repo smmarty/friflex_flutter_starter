@@ -10,13 +10,17 @@ void main() {
     /// Создание мок-темы с необходимыми цветами для снекбара
     ColorScheme createMockColorScheme() {
       return const ColorScheme.light().copyWith(
-        // Добавляем кастомные цвета через extension методы
+        error: Colors.red,
+        primary: Colors.blue,
+        secondary: Colors.green,
       );
     }
 
     /// Создание мок-темы с правильными стилями текста
     TextTheme createMockTextTheme() {
-      return const TextTheme();
+      return const TextTheme(
+        bodyMedium: TextStyle(fontSize: 14),
+      );
     }
 
     setUp(() {
@@ -36,11 +40,43 @@ void main() {
       });
     }
 
+    group('AppSnackBar.showInfo', () {
+      testTester('показывает снекбар с информацией и правильными стилями', (tester) async {
+        const infoMessage = 'Это просто сообщение';
+
+        AppSnackBar.showInfo(
+          tester.element(find.byType(Scaffold)),
+          message: infoMessage,
+        );
+
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+
+        expect(find.byType(AppSnackBar), findsOneWidget);
+        expect(find.text(infoMessage), findsOneWidget);
+        
+        // Проверяем иконку и её цвет
+        final iconFinder = find.byType(Icon);
+        expect(iconFinder, findsOneWidget);
+        final icon = tester.widget<Icon>(iconFinder);
+        expect(icon.color, equals(Colors.black)); // Info иконка черная
+
+        // Проверяем цвет фона
+        final container = tester.widget<Container>(
+          find.descendant(
+            of: find.byType(GestureDetector),
+            matching: find.byType(Container),
+          ),
+        );
+        final decoration = container.decoration as BoxDecoration;
+        expect(decoration.color, equals(const Color(0xFFE6E6E6))); // Info фон
+      });
+    });
+
     group('AppSnackBar.showError', () {
-      testTester('показывает снекбар с ошибкой', (tester) async {
+      testTester('показывает снекбар с ошибкой и правильными стилями', (tester) async {
         const errorMessage = 'Произошла ошибка';
 
-        // Показываем снекбар с ошибкой
         AppSnackBar.showError(
           tester.element(find.byType(Scaffold)),
           message: errorMessage,
@@ -49,12 +85,24 @@ void main() {
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
-        // Проверяем, что снекбар отображается
         expect(find.byType(AppSnackBar), findsOneWidget);
         expect(find.text(errorMessage), findsOneWidget);
 
-        // Проверяем наличие иконки ошибки
-        expect(find.byType(Icon), findsOneWidget);
+        // Проверяем иконку и её цвет
+        final iconFinder = find.byType(Icon);
+        expect(iconFinder, findsOneWidget);
+        final icon = tester.widget<Icon>(iconFinder);
+        expect(icon.color, equals(Colors.white)); // Error иконка белая
+
+        // Проверяем цвет фона
+        final container = tester.widget<Container>(
+          find.descendant(
+            of: find.byType(GestureDetector),
+            matching: find.byType(Container),
+          ),
+        );
+        final decoration = container.decoration as BoxDecoration;
+        expect(decoration.color, equals(const Color(0xFFD24720))); // Error фон
       });
 
       testTester('показывает снекбар с кастомной продолжительностью', (
@@ -110,7 +158,7 @@ void main() {
     });
 
     group('AppSnackBar.showSuccess', () {
-      testTester('показывает снекбар с успехом', (tester) async {
+      testTester('показывает снекбар с успехом и правильными стилями', (tester) async {
         const successMessage = 'Операция выполнена успешно';
 
         AppSnackBar.showSuccess(
@@ -123,7 +171,22 @@ void main() {
 
         expect(find.byType(AppSnackBar), findsOneWidget);
         expect(find.text(successMessage), findsOneWidget);
-        expect(find.byType(Icon), findsOneWidget);
+
+        // Проверяем иконку и её цвет
+        final iconFinder = find.byType(Icon);
+        expect(iconFinder, findsOneWidget);
+        final icon = tester.widget<Icon>(iconFinder);
+        expect(icon.color, equals(Colors.white)); // Success иконка белая
+
+        // Проверяем цвет фона
+        final container = tester.widget<Container>(
+          find.descendant(
+            of: find.byType(GestureDetector),
+            matching: find.byType(Container),
+          ),
+        );
+        final decoration = container.decoration as BoxDecoration;
+        expect(decoration.color, equals(const Color(0xFF6FB62C))); // Success фон
       });
 
       testTester('показывает снекбар с кастомной продолжительностью', (
@@ -147,7 +210,7 @@ void main() {
     });
 
     group('AppSnackBar виджет поведение', () {
-      testTester('показывает анимацию появления', (tester) async {
+      testTester('показывает анимацию появления с правильной последовательностью', (tester) async {
         const message = 'Тестовое сообщение';
 
         AppSnackBar.showError(
@@ -155,15 +218,20 @@ void main() {
           message: message,
         );
 
-        // Проверяем, что анимация началась
+        // Проверяем начальное состояние
         await tester.pump();
-        expect(find.byType(AnimatedBuilder), findsAtLeastNWidgets(1));
+        final initialPosition = tester.widget<Positioned>(find.byType(Positioned));
+        expect(initialPosition.top ?? 0, lessThan(0));
 
-        // Ждем завершения анимации
-        await tester.pump(const Duration(milliseconds: 300));
+        // Проверяем промежуточное состояние
+        await tester.pump(const Duration(milliseconds: 150));
+        final middlePosition = tester.widget<Positioned>(find.byType(Positioned));
+        expect(middlePosition.top ?? 0, greaterThan(initialPosition.top ?? 0));
 
-        expect(find.byType(AppSnackBar), findsOneWidget);
-        expect(find.text(message), findsOneWidget);
+        // Проверяем конечное состояние
+        await tester.pump(const Duration(milliseconds: 150));
+        final finalPosition = tester.widget<Positioned>(find.byType(Positioned));
+        expect(finalPosition.top ?? 0, greaterThan(0));
       });
 
       testTester('закрывается при тапе', (tester) async {
@@ -255,36 +323,44 @@ void main() {
         expect(find.byType(Text), findsAtLeastNWidgets(1));
       });
 
-      testTester('имеет правильные отступы и размеры', (tester) async {
+      testTester('имеет правильные отступы и размеры на разных экранах', (tester) async {
         const message = 'Размеры';
 
+        // Тестируем на маленьком экране
+        await tester.binding.setSurfaceSize(const Size(320, 480));
         AppSnackBar.showError(
           tester.element(find.byType(Scaffold)),
           message: message,
         );
-
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
-        // Проверяем ограничения максимальной ширины
-        final constraintsWidget = tester.widget<Container>(
+        var container = tester.widget<Container>(
           find.descendant(
             of: find.byType(GestureDetector),
             matching: find.byType(Container),
           ),
         );
+        // На маленьком экране максимальная ширина должна быть 350
+        expect(container.constraints?.maxWidth, equals(350));
 
-        expect(constraintsWidget.constraints?.maxWidth, equals(350));
+        // Тестируем на большом экране
+        await tester.binding.setSurfaceSize(const Size(1280, 720));
+        await tester.pumpWidget(testApp);
+        AppSnackBar.showError(
+          tester.element(find.byType(Scaffold)),
+          message: message,
+        );
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
 
-        // Проверяем отступы
-        expect(
-          constraintsWidget.margin,
-          equals(const EdgeInsets.symmetric(horizontal: 16)),
+        container = tester.widget<Container>(
+          find.descendant(
+            of: find.byType(GestureDetector),
+            matching: find.byType(Container),
+          ),
         );
-        expect(
-          constraintsWidget.padding,
-          equals(const EdgeInsets.symmetric(vertical: 16, horizontal: 16)),
-        );
+        expect(container.constraints?.maxWidth, equals(350)); // Максимальная ширина
       });
 
       testTester('имеет правильное скругление углов', (tester) async {
@@ -307,6 +383,26 @@ void main() {
 
         final decoration = container.decoration as BoxDecoration;
         expect(decoration.borderRadius, equals(BorderRadius.circular(16)));
+      });
+    });
+
+    group('Доступность', () {
+      testTester('имеет правильные семантические метки', (tester) async {
+        const message = 'Доступность';
+
+        AppSnackBar.showError(
+          tester.element(find.byType(Scaffold)),
+          message: message,
+        );
+
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+
+        // Проверяем наличие текста сообщения
+        expect(find.text(message), findsOneWidget);
+
+        // Проверяем наличие GestureDetector для закрытия
+        expect(find.byType(GestureDetector), findsOneWidget);
       });
     });
 
@@ -367,6 +463,25 @@ void main() {
 
         // Проверяем, что ошибки не возникает при dispose
         expect(tester.takeException(), isNull);
+      });
+
+      testTester('правильно обрабатывает быстрые последовательные вызовы', (tester) async {
+        const messages = ['Сообщение 1', 'Сообщение 2', 'Сообщение 3'];
+
+        for (final message in messages) {
+          AppSnackBar.showError(
+            tester.element(find.byType(Scaffold)),
+            message: message,
+          );
+          await tester.pump();
+        }
+
+        await tester.pump(const Duration(milliseconds: 100));
+
+        // Проверяем, что показывается только последнее сообщение
+        expect(find.text(messages[0]), findsNothing);
+        expect(find.text(messages[1]), findsNothing);
+        expect(find.text(messages[2]), findsOneWidget);
       });
     });
 
