@@ -1,4 +1,4 @@
-# 🚀 Friflex Starter - Корпоративный шаблон для Flutter приложений
+# 🚀 Friflex Starter - Корпоративный шаблон
 
 <div align="center">
 
