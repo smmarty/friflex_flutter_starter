@@ -1,11 +1,14 @@
+<div align="center">
+
 # 🚀 Friflex Starter - Корпоративный шаблон
 
+</div>
 <div align="center">
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.32.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.8.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-v0.0.1-green?style=for-the-badge)
-![License](https://img.shields.io/badge/MIT-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 **Корпоративный стартовый шаблон для разработки масштабируемых Flutter-приложений**
 
