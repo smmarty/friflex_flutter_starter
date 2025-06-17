@@ -13,15 +13,20 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
   /// * [errorSnackbarBackground] - цвет фона снекбара ошибки
   /// * [successSnackbarBackground] - цвет фона снекбара успеха
   /// * [infoSnackbarBackground] - цвет фона снекбара информации
+  /// * [itemTextColor] - цвет элемента текста
   const AppColors({
     required this.testColor,
+    required this.itemTextColor,
     required this.errorSnackbarBackground,
     required this.successSnackbarBackground,
     required this.infoSnackbarBackground,
   });
 
-  /// Цвет тестового текста
+  /// Цвет тестовый
   final Color testColor;
+
+  /// Цвет элемента текста
+  final Color itemTextColor;
 
   /// Цвет фона снекбара ошибки
   final Color errorSnackbarBackground;
@@ -38,6 +43,7 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
     errorSnackbarBackground: const Color(0xFFD24720),
     successSnackbarBackground: const Color(0xFF6FB62C),
     infoSnackbarBackground: const Color.fromARGB(255, 220, 108, 77),
+    itemTextColor: const Color(0xFFFAF3EB),
   );
 
   /// Цвета тёмной темы
@@ -46,6 +52,7 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
     errorSnackbarBackground: const Color(0xFF638B8B),
     successSnackbarBackground: const Color(0xFF93C499),
     infoSnackbarBackground: const Color.fromARGB(255, 35, 147, 178),
+    itemTextColor: Colors.white,
   );
 
   @override
@@ -54,6 +61,7 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
     Color? errorSnackbarBackground,
     Color? successSnackbarBackground,
     Color? infoSnackbarBackground,
+    Color? itemTextColor,
   }) => AppColors(
     testColor: testColor ?? this.testColor,
     errorSnackbarBackground:
@@ -62,6 +70,7 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
         successSnackbarBackground ?? this.successSnackbarBackground,
     infoSnackbarBackground:
         infoSnackbarBackground ?? this.infoSnackbarBackground,
+    itemTextColor: itemTextColor ?? this.itemTextColor,
   );
 
   @override
@@ -88,6 +97,7 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
         other.infoSnackbarBackground,
         t,
       )!,
+      itemTextColor: Color.lerp(itemTextColor, other.itemTextColor, t)!,
     );
   }
 }

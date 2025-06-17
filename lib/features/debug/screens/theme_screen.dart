@@ -10,6 +10,7 @@ class ThemeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Scaffold(
       appBar: AppBar(title: const Text('Theme')),
       body: Center(
@@ -28,7 +29,25 @@ class ThemeScreen extends StatelessWidget {
               child: const SizedBox(height: 100, width: 100),
             ),
             const SizedBox(height: 16),
-            Text('Текущая тема: ${context.theme.themeMode}'),
+            Card(
+              elevation: 4,
+              shadowColor: colors.infoSnackbarBackground,
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              color: colors.infoSnackbarBackground,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: ListTile(
+                title: Text(
+                  'Текущая тема: ${context.theme.themeMode}',
+                  style: TextStyle(
+                    color: colors.itemTextColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                trailing: Icon(Icons.color_lens, color: colors.itemTextColor),
+              ),
+            ),
           ],
         ),
       ),
