@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
-import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 
 /// {@template ThemeScreen}
 ///  Экран для отладки темы приложения

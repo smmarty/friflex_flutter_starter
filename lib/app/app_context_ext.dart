@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 import 'package:friflex_starter/app/theme/theme_notifier.dart';
 import 'package:friflex_starter/di/di_container.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
@@ -11,7 +12,7 @@ extension AppContextExt on BuildContext {
   DiContainer get di => read<DiContainer>();
 
   /// Геттер для получения цветовой схемы
-  ColorScheme get colors => Theme.of(this).colorScheme;
+  AppColors get colors => Theme.of(this).extension<AppColors>()!;
 
   /// Геттер для получения темы
   ThemeNotifier get theme => read<ThemeNotifier>();
