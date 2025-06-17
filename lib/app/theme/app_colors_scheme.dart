@@ -42,10 +42,10 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
 
   /// Цвета тёмной темы
   static final AppColors dark = AppColors(
-    testColor: Colors.red,
-    errorSnackbarBackground: const Color(0xFFD24720),
-    successSnackbarBackground: const Color(0xFF6FB62C),
-    infoSnackbarBackground: const Color.fromARGB(255, 220, 108, 77),
+    testColor: Colors.green,
+    errorSnackbarBackground: const Color(0xFF638B8B),
+    successSnackbarBackground: const Color(0xFF93C499),
+    infoSnackbarBackground: const Color.fromARGB(255, 35, 147, 178),
   );
 
   @override
