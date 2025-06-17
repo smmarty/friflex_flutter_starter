@@ -56,13 +56,19 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
     Color? infoSnackbarBackground,
   }) => AppColors(
     testColor: testColor ?? this.testColor,
-    errorSnackbarBackground: errorSnackbarBackground ?? this.errorSnackbarBackground,
-    successSnackbarBackground: successSnackbarBackground ?? this.successSnackbarBackground,
-    infoSnackbarBackground: infoSnackbarBackground ?? this.infoSnackbarBackground,
+    errorSnackbarBackground:
+        errorSnackbarBackground ?? this.errorSnackbarBackground,
+    successSnackbarBackground:
+        successSnackbarBackground ?? this.successSnackbarBackground,
+    infoSnackbarBackground:
+        infoSnackbarBackground ?? this.infoSnackbarBackground,
   );
 
   @override
-  ThemeExtension<AppColors> lerp(covariant ThemeExtension<AppColors>? other, double t) {
+  ThemeExtension<AppColors> lerp(
+    covariant ThemeExtension<AppColors>? other,
+    double t,
+  ) {
     if (other is! AppColors) return this;
 
     return AppColors(
@@ -77,7 +83,11 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
         other.successSnackbarBackground,
         t,
       )!,
-      infoSnackbarBackground: Color.lerp(infoSnackbarBackground, other.infoSnackbarBackground, t)!,
+      infoSnackbarBackground: Color.lerp(
+        infoSnackbarBackground,
+        other.infoSnackbarBackground,
+        t,
+      )!,
     );
   }
 }
