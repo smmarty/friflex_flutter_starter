@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
+import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 import 'package:friflex_starter/gen/assets.gen.dart';
 import 'package:friflex_starter/gen/fonts.gen.dart';
 
@@ -36,7 +37,7 @@ class LangScreen extends StatelessWidget {
             Text(
               'Тестовое слово  bold: ${context.l10n.helloWorld}',
               style: TextStyle(
-                color: context.colors.testColor,
+                color: context.appColors.testColor,
                 fontFamily: Assets.fonts.montserratBold,
               ),
             ),
@@ -44,7 +45,7 @@ class LangScreen extends StatelessWidget {
             Text(
               'Тестовое слово  medium: ${context.l10n.helloWorld}',
               style: TextStyle(
-                color: context.colors.testColor,
+                color: context.appColors.testColor,
                 fontFamily: FontFamily.montserrat,
               ),
             ),
