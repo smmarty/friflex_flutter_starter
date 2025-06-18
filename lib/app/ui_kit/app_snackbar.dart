@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
-import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
 
 /// {@template app_snackbar}

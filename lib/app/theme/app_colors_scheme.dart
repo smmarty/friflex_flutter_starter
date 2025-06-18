@@ -1,18 +1,103 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+/// {@template app_colors}
 /// Класс, реализующий расширение для добавления токенов в цветовую схему
-extension AppColorsScheme on ColorScheme {
-  bool get _isDark => brightness == Brightness.dark;
+/// {@endtemplate}
+class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
+  /// {@macro app_colors}
+  ///
+  /// Принимает:
+  ///
+  /// * [testColor] - цвет тестового текста
+  /// * [errorSnackbarBackground] - цвет фона снекбара ошибки
+  /// * [successSnackbarBackground] - цвет фона снекбара успеха
+  /// * [infoSnackbarBackground] - цвет фона снекбара информации
+  /// * [itemTextColor] - цвет элемента текста
+  const AppColors({
+    required this.testColor,
+    required this.itemTextColor,
+    required this.errorSnackbarBackground,
+    required this.successSnackbarBackground,
+    required this.infoSnackbarBackground,
+  });
 
-  // Тестовый цвет
-  Color get testColor => _isDark ? Colors.green : Colors.red;
+  /// Цвет тестовый
+  final Color testColor;
 
-  /// Цвет заднего фона снекбара с ошибкой
-  Color get errorSnackbarBackground => const Color(0xFFD24720);
+  /// Цвет элемента текста
+  final Color itemTextColor;
 
-  /// Цвет заднего фона снекбара с успехом
-  Color get successSnackbarBackground => const Color(0xFF6FB62C);
+  /// Цвет фона снекбара ошибки
+  final Color errorSnackbarBackground;
 
-  /// Цвет заднего фона снекбара с информацией
-  Color get infoSnackbarBackground => const Color.fromARGB(255, 220, 108, 77);
+  /// Цвет фона снекбара успеха
+  final Color successSnackbarBackground;
+
+  /// Цвет фона снекбара информации
+  final Color infoSnackbarBackground;
+
+  /// Цвета светлой темы
+  static final AppColors light = AppColors(
+    testColor: Colors.red,
+    errorSnackbarBackground: const Color(0xFFD24720),
+    successSnackbarBackground: const Color(0xFF6FB62C),
+    infoSnackbarBackground: const Color.fromARGB(255, 220, 108, 77),
+    itemTextColor: const Color(0xFFFAF3EB),
+  );
+
+  /// Цвета тёмной темы
+  static final AppColors dark = AppColors(
+    testColor: Colors.green,
+    errorSnackbarBackground: const Color(0xFF638B8B),
+    successSnackbarBackground: const Color(0xFF93C499),
+    infoSnackbarBackground: const Color.fromARGB(255, 35, 147, 178),
+    itemTextColor: Colors.white,
+  );
+
+  @override
+  ThemeExtension<AppColors> copyWith({
+    Color? testColor,
+    Color? errorSnackbarBackground,
+    Color? successSnackbarBackground,
+    Color? infoSnackbarBackground,
+    Color? itemTextColor,
+  }) => AppColors(
+    testColor: testColor ?? this.testColor,
+    errorSnackbarBackground:
+        errorSnackbarBackground ?? this.errorSnackbarBackground,
+    successSnackbarBackground:
+        successSnackbarBackground ?? this.successSnackbarBackground,
+    infoSnackbarBackground:
+        infoSnackbarBackground ?? this.infoSnackbarBackground,
+    itemTextColor: itemTextColor ?? this.itemTextColor,
+  );
+
+  @override
+  ThemeExtension<AppColors> lerp(
+    covariant ThemeExtension<AppColors>? other,
+    double t,
+  ) {
+    if (other is! AppColors) return this;
+
+    return AppColors(
+      testColor: Color.lerp(testColor, other.testColor, t)!,
+      errorSnackbarBackground: Color.lerp(
+        errorSnackbarBackground,
+        other.errorSnackbarBackground,
+        t,
+      )!,
+      successSnackbarBackground: Color.lerp(
+        successSnackbarBackground,
+        other.successSnackbarBackground,
+        t,
+      )!,
+      infoSnackbarBackground: Color.lerp(
+        infoSnackbarBackground,
+        other.infoSnackbarBackground,
+        t,
+      )!,
+      itemTextColor: Color.lerp(itemTextColor, other.itemTextColor, t)!,
+    );
+  }
 }
