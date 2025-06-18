@@ -1,10 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
+
+part 'app_colors_scheme.tailor.dart';
 
 /// {@template app_colors}
 /// Класс, реализующий расширение для добавления токенов в цветовую схему
 /// {@endtemplate}
-class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
+@TailorMixin(themeGetter: ThemeGetter.onBuildContext)
+class AppColors extends ThemeExtension<AppColors> with _$AppColorsTailorMixin {
   /// {@macro app_colors}
   ///
   /// Принимает:
@@ -23,18 +26,23 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
   });
 
   /// Цвет тестовый
+  @override
   final Color testColor;
 
   /// Цвет элемента текста
+  @override
   final Color itemTextColor;
 
   /// Цвет фона снекбара ошибки
+  @override
   final Color errorSnackbarBackground;
 
   /// Цвет фона снекбара успеха
+  @override
   final Color successSnackbarBackground;
 
   /// Цвет фона снекбара информации
+  @override
   final Color infoSnackbarBackground;
 
   /// Цвета светлой темы
@@ -54,50 +62,4 @@ class AppColors extends ThemeExtension<AppColors> with DiagnosticableTreeMixin {
     infoSnackbarBackground: const Color.fromARGB(255, 35, 147, 178),
     itemTextColor: Colors.white,
   );
-
-  @override
-  ThemeExtension<AppColors> copyWith({
-    Color? testColor,
-    Color? errorSnackbarBackground,
-    Color? successSnackbarBackground,
-    Color? infoSnackbarBackground,
-    Color? itemTextColor,
-  }) => AppColors(
-    testColor: testColor ?? this.testColor,
-    errorSnackbarBackground:
-        errorSnackbarBackground ?? this.errorSnackbarBackground,
-    successSnackbarBackground:
-        successSnackbarBackground ?? this.successSnackbarBackground,
-    infoSnackbarBackground:
-        infoSnackbarBackground ?? this.infoSnackbarBackground,
-    itemTextColor: itemTextColor ?? this.itemTextColor,
-  );
-
-  @override
-  ThemeExtension<AppColors> lerp(
-    covariant ThemeExtension<AppColors>? other,
-    double t,
-  ) {
-    if (other is! AppColors) return this;
-
-    return AppColors(
-      testColor: Color.lerp(testColor, other.testColor, t)!,
-      errorSnackbarBackground: Color.lerp(
-        errorSnackbarBackground,
-        other.errorSnackbarBackground,
-        t,
-      )!,
-      successSnackbarBackground: Color.lerp(
-        successSnackbarBackground,
-        other.successSnackbarBackground,
-        t,
-      )!,
-      infoSnackbarBackground: Color.lerp(
-        infoSnackbarBackground,
-        other.infoSnackbarBackground,
-        t,
-      )!,
-      itemTextColor: Color.lerp(itemTextColor, other.itemTextColor, t)!,
-    );
-  }
 }
