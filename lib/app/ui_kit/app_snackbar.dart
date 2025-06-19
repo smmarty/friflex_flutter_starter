@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:friflex_starter/app/app_context_ext.dart';
+import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
 
 /// {@template app_snackbar}
@@ -264,9 +264,9 @@ class _AppSnackBarState extends State<AppSnackBar>
   /// [TypeSnackBar.error] - цвет ошибки
   Color _getBackgroundColor(TypeSnackBar type) {
     return switch (type) {
-      TypeSnackBar.success => context.colors.successSnackbarBackground,
-      TypeSnackBar.error => context.colors.errorSnackbarBackground,
-      TypeSnackBar.info => context.colors.infoSnackbarBackground,
+      TypeSnackBar.success => context.appColors.successSnackbarBackground,
+      TypeSnackBar.error => context.appColors.errorSnackbarBackground,
+      TypeSnackBar.info => context.appColors.infoSnackbarBackground,
     };
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
+import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 
 /// {@template ThemeScreen}
 ///  Экран для отладки темы приложения
@@ -10,7 +11,7 @@ class ThemeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colors;
+    final colors = context.appColors;
     return Scaffold(
       appBar: AppBar(title: const Text('Theme')),
       body: Center(
@@ -25,7 +26,7 @@ class ThemeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ColoredBox(
-              color: context.colors.testColor,
+              color: context.appColors.testColor,
               child: const SizedBox(height: 100, width: 100),
             ),
             const SizedBox(height: 16),
