@@ -50,6 +50,3 @@ app.*.map.json
 /windows/
 /linux/
 /web/
-
-# Ignore theme code generation
-*.tailor.dart
