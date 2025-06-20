@@ -4,15 +4,21 @@ import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:go_router/go_router.dart';
 
-/// Класс для реализации корневой страницы приложения
+/// {@template root_screen}
+/// Корневой экран приложения с навигационной структурой.
+///
+/// Отвечает за:
+/// - Отображение основного навигационного интерфейса
+/// - Управление переключением между основными разделами приложения
+/// - Отображение кнопки отладки в не-продакшн окружениях
+/// - Интеграцию с GoRouter для навигации
+/// {@endtemplate}
 class RootScreen extends StatelessWidget {
-  /// Создает корневую страницу приложения
-  ///
-  /// Принимает:
-  /// - [navigationShell] - текущая ветка навигации
+  /// {@macro root_screen}
   const RootScreen({required this.navigationShell, super.key});
 
-  /// Текущая ветка навигации
+  /// Текущая ветка навигации от GoRouter
+  /// Содержит информацию о текущем состоянии навигации
   final StatefulNavigationShell navigationShell;
 
   @override
@@ -29,7 +35,7 @@ class RootScreen extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Профиль'),
         ],
         currentIndex: navigationShell.currentIndex,

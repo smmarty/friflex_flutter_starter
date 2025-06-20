@@ -2,18 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/app/ui_kit/app_snackbar.dart';
 
-/// {@template ComponentsScreen}
-/// Экран для демонстрации компонентов приложения.
+/// {@template components_screen}
+/// Экран для демонстрации и тестирования компонентов приложения.
+///
+/// Отвечает за:
+/// - Демонстрацию различных типов снекбаров (ошибка, успех, информация)
+/// - Тестирование кастомных UI компонентов
+/// - Предоставление примеров использования компонентов
+/// - Валидацию корректности работы компонентов
 /// {@endtemplate}
 class ComponentsScreen extends StatefulWidget {
-  /// {@macro ComponentsScreen}
+  /// {@macro components_screen}
   const ComponentsScreen({super.key});
 
   @override
   State<ComponentsScreen> createState() => _ComponentsScreenState();
 }
 
+/// {@template components_screen_state}
+/// Состояние экрана компонентов.
+///
+/// Управляет отображением различных типов снекбаров
+/// и демонстрирует их функциональность.
+/// {@endtemplate}
 class _ComponentsScreenState extends State<ComponentsScreen> {
+  /// {@macro components_screen_state}
+  _ComponentsScreenState();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

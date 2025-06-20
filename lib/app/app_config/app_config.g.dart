@@ -24,11 +24,13 @@ final class _Dev {
     4081271699,
   ];
 
-  static final String secretKey = String.fromCharCodes(List<int>.generate(
-    _envieddatasecretKey.length,
-    (int i) => i,
-    growable: false,
-  ).map((int i) => _envieddatasecretKey[i] ^ _enviedkeysecretKey[i]));
+  static final String secretKey = String.fromCharCodes(
+    List<int>.generate(
+      _envieddatasecretKey.length,
+      (int i) => i,
+      growable: false,
+    ).map((int i) => _envieddatasecretKey[i] ^ _enviedkeysecretKey[i]),
+  );
 }
 
 // coverage:ignore-file
@@ -65,11 +67,13 @@ final class _Prod {
     655048645,
   ];
 
-  static final String baseUrl = String.fromCharCodes(List<int>.generate(
-    _envieddatabaseUrl.length,
-    (int i) => i,
-    growable: false,
-  ).map((int i) => _envieddatabaseUrl[i] ^ _enviedkeybaseUrl[i]));
+  static final String baseUrl = String.fromCharCodes(
+    List<int>.generate(
+      _envieddatabaseUrl.length,
+      (int i) => i,
+      growable: false,
+    ).map((int i) => _envieddatabaseUrl[i] ^ _enviedkeybaseUrl[i]),
+  );
 
   static const List<int> _enviedkeysecretKey = <int>[
     359753139,
@@ -85,11 +89,13 @@ final class _Prod {
     3044498279,
   ];
 
-  static final String secretKey = String.fromCharCodes(List<int>.generate(
-    _envieddatasecretKey.length,
-    (int i) => i,
-    growable: false,
-  ).map((int i) => _envieddatasecretKey[i] ^ _enviedkeysecretKey[i]));
+  static final String secretKey = String.fromCharCodes(
+    List<int>.generate(
+      _envieddatasecretKey.length,
+      (int i) => i,
+      growable: false,
+    ).map((int i) => _envieddatasecretKey[i] ^ _enviedkeysecretKey[i]),
+  );
 }
 
 // coverage:ignore-file
@@ -128,11 +134,13 @@ final class _Stage {
     568662398,
   ];
 
-  static final String baseUrl = String.fromCharCodes(List<int>.generate(
-    _envieddatabaseUrl.length,
-    (int i) => i,
-    growable: false,
-  ).map((int i) => _envieddatabaseUrl[i] ^ _enviedkeybaseUrl[i]));
+  static final String baseUrl = String.fromCharCodes(
+    List<int>.generate(
+      _envieddatabaseUrl.length,
+      (int i) => i,
+      growable: false,
+    ).map((int i) => _envieddatabaseUrl[i] ^ _enviedkeybaseUrl[i]),
+  );
 
   static const List<int> _enviedkeysecretKey = <int>[
     2132342089,
@@ -150,9 +158,11 @@ final class _Stage {
     1192880631,
   ];
 
-  static final String secretKey = String.fromCharCodes(List<int>.generate(
-    _envieddatasecretKey.length,
-    (int i) => i,
-    growable: false,
-  ).map((int i) => _envieddatasecretKey[i] ^ _enviedkeysecretKey[i]));
+  static final String secretKey = String.fromCharCodes(
+    List<int>.generate(
+      _envieddatasecretKey.length,
+      (int i) => i,
+      growable: false,
+    ).map((int i) => _envieddatasecretKey[i] ^ _enviedkeysecretKey[i]),
+  );
 }

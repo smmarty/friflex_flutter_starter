@@ -4,11 +4,17 @@ import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 import 'package:friflex_starter/gen/assets.gen.dart';
 import 'package:friflex_starter/gen/fonts.gen.dart';
 
-/// {@template LangScreen}
-/// Экран для отладки языков приложения
+/// {@template lang_screen}
+/// Экран для отладки и тестирования локализации приложения.
+///
+/// Отвечает за:
+/// - Демонстрацию переключения между поддерживаемыми языками
+/// - Отображение локализованных строк с разными шрифтами
+/// - Тестирование системы локализации и шрифтов
+/// - Показ текущего языка приложения
 /// {@endtemplate}
 class LangScreen extends StatelessWidget {
-  /// {@macro LangScreen}
+  /// {@macro lang_screen}
   const LangScreen({super.key});
 
   @override

@@ -3,17 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/features/profile/domain/bloc/profile_bloc.dart';
 
-// Класс экрана, где мы инициализируем ProfileBloc
-// и вызываем событие ProfileFetchProfileEvent
+/// {@template profile_screen}
+/// Экран профиля пользователя.
+///
+/// Отвечает за:
+/// - Инициализацию ProfileBloc с репозиторием профиля
+/// - Отображение данных профиля пользователя
+/// - Обработку состояний загрузки, успеха и ошибок
+/// {@endtemplate}
 class ProfileScreen extends StatelessWidget {
+  /// {@macro profile_screen}
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final profileRepository = context.di.repositories.profileRepository;
-    // Здесь мы инициализируем ProfileBloc
-    // и вызываем событие ProfileFetchProfileEvent
-    // Или любые другие события, которые вам нужны
+    // Инициализируем ProfileBloc с репозиторием и загружаем данные профиля
     return BlocProvider(
       create: (context) =>
           ProfileBloc(profileRepository)
@@ -23,8 +28,16 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-/// Виджет, который отображает UI экрана
+/// {@template profile_screen_view}
+/// Виджет для отображения UI экрана профиля.
+///
+/// Отображает данные профиля в зависимости от состояния ProfileBloc:
+/// - Индикатор загрузки во время получения данных
+/// - Данные профиля при успешной загрузке
+/// - Сообщение об ошибке при неудачной загрузке
+/// {@endtemplate}
 class _ProfileScreenView extends StatelessWidget {
+  /// {@macro profile_screen_view}
   const _ProfileScreenView();
 
   @override

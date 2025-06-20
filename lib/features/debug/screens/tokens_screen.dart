@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
-/// {@template TokensScreen}
-///  Экран для отображения токенов
+/// {@template tokens_screen}
+/// Экран для отображения и управления токенами аутентификации.
+///
+/// Отвечает за:
+/// - Отображение текущих токенов доступа и обновления
+/// - Демонстрацию работы с токенами в приложении
+/// - Тестирование функциональности аутентификации
+///
+/// В текущей реализации является заглушкой для будущей функциональности.
 /// {@endtemplate}
 class TokensScreen extends StatelessWidget {
-  /// {@macro TokensScreen}
+  /// {@macro tokens_screen}
   const TokensScreen({super.key});
 
   @override

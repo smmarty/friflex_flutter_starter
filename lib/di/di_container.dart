@@ -1,5 +1,4 @@
 import 'package:friflex_starter/app/app_config/app_config.dart';
-import 'package:friflex_starter/app/app_config/i_app_config.dart';
 import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/app/http/app_http_client.dart';
 import 'package:friflex_starter/app/http/i_http_client.dart';

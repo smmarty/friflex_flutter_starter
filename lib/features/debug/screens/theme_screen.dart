@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
 
-/// {@template ThemeScreen}
-///  Экран для отладки темы приложения
+/// {@template theme_screen}
+/// Экран для отладки и тестирования темы приложения.
+///
+/// Отвечает за:
+/// - Демонстрацию переключения между светлой и темной темами
+/// - Отображение тестовых цветов из цветовой схемы
+/// - Показ текущего режима темы
+/// - Тестирование системы управления темами
 /// {@endtemplate}
 class ThemeScreen extends StatelessWidget {
-  /// {@macro ThemeScreen}
+  /// {@macro theme_screen}
   const ThemeScreen({super.key});
 
   @override
