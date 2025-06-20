@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:friflex_starter/app/app_config/i_app_config.dart';
+import 'package:friflex_starter/app/app_config/app_config.dart';
 import 'package:friflex_starter/app/http/i_http_client.dart';
 
 import 'package:friflex_starter/features/debug/i_debug_service.dart';

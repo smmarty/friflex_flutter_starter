@@ -2,15 +2,19 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:i_app_services/i_app_services.dart';
 
 /// {@template app_secure_storage}
-/// Класс для Aurora реализации сервис по работе с защищенным хранилищем
-/// [secretKey] - ключ для шифрования данных, если нужен
+/// Класс для базовой реализации сервиса работы с защищенным хранилищем.
+///
+/// Использует flutter_secure_storage для безопасного хранения данных.
+/// Поддерживает все основные операции с защищенным хранилищем.
 /// {@endtemplate}
 final class AppSecureStorage implements ISecureStorage {
+  /// {@macro app_secure_storage}
   AppSecureStorage({this.secretKey});
 
   @override
   final String? secretKey;
 
+  /// Наименование сервиса
   static const name = 'BaseAppSecureStorage';
 
   /// Экземпляр хранилища данных

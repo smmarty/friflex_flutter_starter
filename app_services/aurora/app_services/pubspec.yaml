@@ -1,11 +1,10 @@
 name: app_services
-description: "Google сервисы для приложения"
+description: "Аврора ОС сервисы для приложения"
 version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
-
+  sdk: '>=3.16.2 <4.0.0'
 
 dependencies:
   flutter:
@@ -18,13 +17,8 @@ dependencies:
       url: https://gitlab.com/omprussia/flutter/flutter-community-plugins/flutter_secure_storage_aurora.git
       ref: aurora-0.5.3
 
-  # для работы с путями в хранилища
-  path_provider: 2.1.4
-  path_provider_aurora:
-    git:
-      url: https://gitlab.com/omprussia/flutter/packages.git
-      ref: aurora-path_provider_aurora-0.6.0
-      path: packages/path_provider_aurora
+  # для работы с путями (плагин встроен в sdk flutter 3.27.1)
+  path_provider: 2.1.5
 
   # Обязательные интерфейсы
   i_app_services:

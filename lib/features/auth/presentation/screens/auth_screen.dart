@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
-/// {@template AuthScreen}
+/// {@template auth_screen}
+/// Экран авторизации пользователя.
 ///
+/// Отвечает за:
+/// - Отображение формы входа в приложение
+/// - Обработку процесса аутентификации
+/// - Навигацию после успешной авторизации
+///
+/// В текущей реализации является заглушкой для будущей функциональности.
 /// {@endtemplate}
 class AuthScreen extends StatelessWidget {
-  /// {@macro AuthScreen}
+  /// {@macro auth_screen}
   const AuthScreen({super.key});
 
   @override

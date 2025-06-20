@@ -12,22 +12,43 @@ import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
 import 'package:go_router/go_router.dart';
 
-/// Класс приложения
+/// {@template app}
+/// Главный виджет приложения, управляющий инициализацией зависимостей
+/// и отображением основного интерфейса приложения.
+///
+/// Отвечает за:
+/// - Инициализацию зависимостей приложения
+/// - Отображение экрана загрузки во время инициализации
+/// - Обработку ошибок инициализации
+/// - Настройку провайдеров для темы и локализации
+/// {@endtemplate}
 class App extends StatefulWidget {
+  /// {@macro app}
   const App({required this.router, required this.initDependencies, super.key});
 
-  /// Роутер приложения
+  /// Роутер приложения для навигации между экранами
   final GoRouter router;
 
-  /// Функция для инициализации зависимостей
+  /// Функция для инициализации зависимостей приложения
+  /// Возвращает Future с контейнером зависимостей
   final Future<DiContainer> Function() initDependencies;
 
   @override
   State<App> createState() => _AppState();
 }
 
+/// {@template app_state}
+/// Состояние главного виджета приложения.
+///
+/// Управляет процессом инициализации зависимостей и отображением
+/// соответствующих экранов в зависимости от состояния инициализации.
+/// {@endtemplate}
 class _AppState extends State<App> {
+  /// {@macro app_state}
+  _AppState();
+
   /// Мутабельная Future для инициализации зависимостей
+  /// Позволяет перезапускать инициализацию при ошибках
   late Future<DiContainer> _initFuture;
 
   @override
@@ -83,6 +104,8 @@ class _AppState extends State<App> {
     );
   }
 
+  /// Метод для перезапуска инициализации зависимостей
+  /// Вызывается при ошибках инициализации для повторной попытки
   void _retryInit() {
     setState(() {
       _initFuture = widget.initDependencies();
@@ -90,9 +113,17 @@ class _AppState extends State<App> {
   }
 }
 
+/// {@template app_internal}
+/// Внутренний виджет приложения, отображающий основной интерфейс
+/// после успешной инициализации зависимостей.
+///
+/// Настраивает MaterialApp с роутером, темами и локализацией.
+/// {@endtemplate}
 class _App extends StatelessWidget {
+  /// {@macro app_internal}
   const _App({required this.router});
 
+  /// Роутер приложения для навигации
   final GoRouter router;
 
   @override

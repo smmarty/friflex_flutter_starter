@@ -18,9 +18,7 @@ void main() {
 
     /// Создание мок-темы с правильными стилями текста
     TextTheme createMockTextTheme() {
-      return const TextTheme(
-        bodyMedium: TextStyle(fontSize: 14),
-      );
+      return const TextTheme(bodyMedium: TextStyle(fontSize: 14));
     }
 
     setUp(() {
@@ -41,7 +39,9 @@ void main() {
     }
 
     group('AppSnackBar.showInfo', () {
-      testTester('показывает снекбар с информацией и правильными стилями', (tester) async {
+      testTester('показывает снекбар с информацией и правильными стилями', (
+        tester,
+      ) async {
         const infoMessage = 'Это просто сообщение';
 
         AppSnackBar.showInfo(
@@ -54,7 +54,7 @@ void main() {
 
         expect(find.byType(AppSnackBar), findsOneWidget);
         expect(find.text(infoMessage), findsOneWidget);
-        
+
         // Проверяем иконку и её цвет
         final iconFinder = find.byType(Icon);
         expect(iconFinder, findsOneWidget);
@@ -74,7 +74,9 @@ void main() {
     });
 
     group('AppSnackBar.showError', () {
-      testTester('показывает снекбар с ошибкой и правильными стилями', (tester) async {
+      testTester('показывает снекбар с ошибкой и правильными стилями', (
+        tester,
+      ) async {
         const errorMessage = 'Произошла ошибка';
 
         AppSnackBar.showError(
@@ -158,7 +160,9 @@ void main() {
     });
 
     group('AppSnackBar.showSuccess', () {
-      testTester('показывает снекбар с успехом и правильными стилями', (tester) async {
+      testTester('показывает снекбар с успехом и правильными стилями', (
+        tester,
+      ) async {
         const successMessage = 'Операция выполнена успешно';
 
         AppSnackBar.showSuccess(
@@ -186,7 +190,10 @@ void main() {
           ),
         );
         final decoration = container.decoration as BoxDecoration;
-        expect(decoration.color, equals(const Color(0xFF6FB62C))); // Success фон
+        expect(
+          decoration.color,
+          equals(const Color(0xFF6FB62C)),
+        ); // Success фон
       });
 
       testTester('показывает снекбар с кастомной продолжительностью', (
@@ -210,29 +217,41 @@ void main() {
     });
 
     group('AppSnackBar виджет поведение', () {
-      testTester('показывает анимацию появления с правильной последовательностью', (tester) async {
-        const message = 'Тестовое сообщение';
+      testTester(
+        'показывает анимацию появления с правильной последовательностью',
+        (tester) async {
+          const message = 'Тестовое сообщение';
 
-        AppSnackBar.showError(
-          tester.element(find.byType(Scaffold)),
-          message: message,
-        );
+          AppSnackBar.showError(
+            tester.element(find.byType(Scaffold)),
+            message: message,
+          );
 
-        // Проверяем начальное состояние
-        await tester.pump();
-        final initialPosition = tester.widget<Positioned>(find.byType(Positioned));
-        expect(initialPosition.top ?? 0, lessThan(0));
+          // Проверяем начальное состояние
+          await tester.pump();
+          final initialPosition = tester.widget<Positioned>(
+            find.byType(Positioned),
+          );
+          expect(initialPosition.top ?? 0, lessThan(0));
 
-        // Проверяем промежуточное состояние
-        await tester.pump(const Duration(milliseconds: 150));
-        final middlePosition = tester.widget<Positioned>(find.byType(Positioned));
-        expect(middlePosition.top ?? 0, greaterThan(initialPosition.top ?? 0));
+          // Проверяем промежуточное состояние
+          await tester.pump(const Duration(milliseconds: 150));
+          final middlePosition = tester.widget<Positioned>(
+            find.byType(Positioned),
+          );
+          expect(
+            middlePosition.top ?? 0,
+            greaterThan(initialPosition.top ?? 0),
+          );
 
-        // Проверяем конечное состояние
-        await tester.pump(const Duration(milliseconds: 150));
-        final finalPosition = tester.widget<Positioned>(find.byType(Positioned));
-        expect(finalPosition.top ?? 0, greaterThan(0));
-      });
+          // Проверяем конечное состояние
+          await tester.pump(const Duration(milliseconds: 150));
+          final finalPosition = tester.widget<Positioned>(
+            find.byType(Positioned),
+          );
+          expect(finalPosition.top ?? 0, greaterThan(0));
+        },
+      );
 
       testTester('закрывается при тапе', (tester) async {
         const message = 'Тап для закрытия';
@@ -323,7 +342,9 @@ void main() {
         expect(find.byType(Text), findsAtLeastNWidgets(1));
       });
 
-      testTester('имеет правильные отступы и размеры на разных экранах', (tester) async {
+      testTester('имеет правильные отступы и размеры на разных экранах', (
+        tester,
+      ) async {
         const message = 'Размеры';
 
         // Тестируем на маленьком экране
@@ -360,7 +381,10 @@ void main() {
             matching: find.byType(Container),
           ),
         );
-        expect(container.constraints?.maxWidth, equals(350)); // Максимальная ширина
+        expect(
+          container.constraints?.maxWidth,
+          equals(350),
+        ); // Максимальная ширина
       });
 
       testTester('имеет правильное скругление углов', (tester) async {
@@ -465,7 +489,9 @@ void main() {
         expect(tester.takeException(), isNull);
       });
 
-      testTester('правильно обрабатывает быстрые последовательные вызовы', (tester) async {
+      testTester('правильно обрабатывает быстрые последовательные вызовы', (
+        tester,
+      ) async {
         const messages = ['Сообщение 1', 'Сообщение 2', 'Сообщение 3'];
 
         for (final message in messages) {

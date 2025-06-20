@@ -5,10 +5,16 @@ import 'package:friflex_starter/features/profile/domain/repository/i_profile_rep
 part 'profile_event.dart';
 part 'profile_state.dart';
 
+/// {@template profile_bloc}
+/// Bloc для управления состоянием профиля пользователя.
+///
+/// Обрабатывает события загрузки данных профиля и управляет
+/// соответствующими состояниями (загрузка, успех, ошибка).
+/// {@endtemplate}
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
+  /// {@macro profile_bloc}
   ProfileBloc(this._profileRepository) : super(ProfileInitialState()) {
-    // Вам необходимо добавлять только
-    // один обработчик событий в конструкторе
+    // Регистрируем обработчики событий в конструкторе
     on<ProfileEvent>((event, emit) async {
       if (event is ProfileFetchProfileEvent) {
         await _fetchProfile(event, emit);
@@ -16,8 +22,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     });
   }
 
+  /// Репозиторий для работы с данными профиля
   final IProfileRepository _profileRepository;
 
+  /// Метод для загрузки данных профиля пользователя.
+  ///
+  /// Принимает:
+  /// - [event] - событие с ID пользователя для загрузки
+  /// - [emit] - функция для эмиссии состояний
+  ///
+  /// Последовательность состояний:
+  /// 1. ProfileWaitingState - начало загрузки
+  /// 2. ProfileSuccessState - успешная загрузка с данными
+  /// 3. ProfileErrorState - ошибка загрузки с сообщением
   Future<void> _fetchProfile(
     ProfileFetchProfileEvent event,
     Emitter<ProfileState> emit,

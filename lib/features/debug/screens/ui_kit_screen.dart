@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-/// {@template UiKitScreen}
-///  Экран для отрисовки UI Kit
-///  и тестирования его компонентов.
+/// {@template ui_kit_screen}
+/// Экран для демонстрации и тестирования компонентов UI Kit.
+///
+/// Отвечает за:
+/// - Отображение всех доступных компонентов UI Kit
+/// - Демонстрацию использования кастомных виджетов
+/// - Тестирование стилей и тем оформления
+/// - Предоставление примера использования UI компонентов
+///
+/// В текущей реализации является заглушкой для будущих компонентов.
 /// {@endtemplate}
 class UiKitScreen extends StatelessWidget {
-  /// {@macro UiKitScreen}
+  /// {@macro ui_kit_screen}
   const UiKitScreen({super.key});
 
   @override
