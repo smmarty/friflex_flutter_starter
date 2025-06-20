@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Friflex Starter - Корпоративный шаблон
+# 🚀 Friflex Flutter Starter - Корпоративный шаблон
 
 </div>
 <div align="center">
