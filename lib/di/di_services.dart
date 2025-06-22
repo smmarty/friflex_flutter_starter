@@ -22,6 +22,9 @@ final class DiServices {
   /// Сервис для работы с защищенным локальным хранилищем
   late final ISecureStorage secureStorage;
 
+  /// Сервис для работы с URL
+  late final IUrlLauncher urlLauncher;
+
   /// Метод для инициализации сервисов в приложении.
   ///
   /// Принимает:
@@ -32,6 +35,7 @@ final class DiServices {
   /// Последовательность инициализации:
   /// 1. Инициализация сервиса путей (AppPathProvider)
   /// 2. Инициализация защищенного хранилища (AppSecureStorage)
+  /// 3. Инициализация сервиса URL (AppUrlLauncherService)
   void init({
     required OnProgress onProgress,
     required OnError onError,
@@ -44,12 +48,17 @@ final class DiServices {
       onError('Ошибка инициализации ${IPathProvider.name}', error, stackTrace);
     }
     try {
-      secureStorage = AppSecureStorage(
-        secretKey: diContainer.appConfig.secretKey,
-      );
+      secureStorage = AppSecureStorage(secretKey: diContainer.appConfig.secretKey);
       onProgress(AppSecureStorage.name);
     } on Object catch (error, stackTrace) {
       onError('Ошибка инициализации ${ISecureStorage.name}', error, stackTrace);
+    }
+
+    try {
+      urlLauncher = AppUrlLauncher();
+      onProgress(AppUrlLauncher.name);
+    } on Object catch (error, stackTrace) {
+      onError('Ошибка инициализации ${IUrlLauncher.name}', error, stackTrace);
     }
 
     onProgress('Инициализация сервисов завершена!');

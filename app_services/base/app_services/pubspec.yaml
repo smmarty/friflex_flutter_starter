@@ -19,6 +19,9 @@ dependencies:
   # для работы с путями в хранилища
   path_provider: 2.1.5
 
+  # Зависимости для сервиса внешних ссылок
+  url_launcher: 6.3.1
+
   # Обязательные интерфейсы
   i_app_services:
     path: ../../i_app_services

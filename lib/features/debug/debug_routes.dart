@@ -2,9 +2,12 @@ import 'package:friflex_starter/features/debug/screens/components_screen.dart';
 import 'package:friflex_starter/features/debug/screens/debug_screen.dart';
 import 'package:friflex_starter/features/debug/screens/icons_screen.dart';
 import 'package:friflex_starter/features/debug/screens/lang_screen.dart';
+import 'package:friflex_starter/features/debug/screens/path_provider_screen.dart';
+import 'package:friflex_starter/features/debug/screens/secure_storage_screen.dart';
 import 'package:friflex_starter/features/debug/screens/theme_screen.dart';
 import 'package:friflex_starter/features/debug/screens/tokens_screen.dart';
 import 'package:friflex_starter/features/debug/screens/ui_kit_screen.dart';
+import 'package:friflex_starter/features/debug/screens/url_launcher_screen.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template debug_routes}
@@ -20,6 +23,9 @@ abstract final class DebugRoutes {
   static const String themeScreenName = 'theme_screen';
   static const String langScreenName = 'lang_screen';
   static const String componentsScreenName = 'components_screen';
+  static const String pathProviderScreenName = 'path_provider_screen';
+  static const String secureStorageScreenName = 'secure_storage_screen';
+  static const String urlLauncherScreenName = 'url_launcher_screen';
 
   /// Пути к экранам
   static const String debugScreenPath = '/debug';
@@ -29,6 +35,9 @@ abstract final class DebugRoutes {
   static const String themeScreenPath = 'debug/theme';
   static const String langScreenPath = 'debug/lang';
   static const String componentsScreenPath = 'debug/components';
+  static const String pathProviderScreenPath = 'debug/path_provider';
+  static const String secureStorageScreenPath = 'debug/secure_storage';
+  static const String urlLauncherScreenPath = 'debug/url_launcher';
 
   /// Метод для создания роутов для отладки
   ///
@@ -69,6 +78,21 @@ abstract final class DebugRoutes {
         path: componentsScreenPath,
         name: componentsScreenName,
         builder: (context, state) => const ComponentsScreen(),
+      ),
+      GoRoute(
+        path: pathProviderScreenPath,
+        name: pathProviderScreenName,
+        builder: (context, state) => const PathProviderScreen(),
+      ),
+      GoRoute(
+        path: secureStorageScreenPath,
+        name: secureStorageScreenName,
+        builder: (context, state) => const SecureStorageScreen(),
+      ),
+      GoRoute(
+        path: urlLauncherScreenPath,
+        name: urlLauncherScreenName,
+        builder: (context, state) => const UrlLauncherScreen(),
       ),
     ],
   );
