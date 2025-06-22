@@ -11,6 +11,8 @@ class AppPathProvider implements IPathProvider {
   /// Наименование сервиса
   static const name = 'AuroraAppPathProvider';
 
+  String get nameImpl => AppPathProvider.name;
+
   @override
   Future<String> getAppDocumentsDirectoryPath() async {
     return (await getApplicationDocumentsDirectory()).path;

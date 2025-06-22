@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
+import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,9 +20,7 @@ class DebugScreen extends StatelessWidget {
           children: [
             Text('Окружение: ${context.di.appConfig.env.name}'),
             const HBox(22),
-            Text(
-              'Реализация AppServices: ${context.di.services.secureStorage.nameImpl}',
-            ),
+            Text('Реализация AppServices: ${context.di.services.secureStorage.nameImpl}'),
             const HBox(22),
             ElevatedButton(
               onPressed: () async {
@@ -74,14 +72,33 @@ class DebugScreen extends StatelessWidget {
               },
               child: const Text('Экран компонентов'),
             ),
+            const HBox(16),
+            ElevatedButton(
+              onPressed: () {
+                context.pushNamed(DebugRoutes.pathProviderScreenName);
+              },
+              child: const Text('Экран Path Provider'),
+            ),
+            const HBox(16),
+            ElevatedButton(
+              onPressed: () {
+                context.pushNamed(DebugRoutes.secureStorageScreenName);
+              },
+              child: const Text('Экран Secure Storage'),
+            ),
+            const HBox(16),
+            ElevatedButton(
+              onPressed: () {
+                context.pushNamed(DebugRoutes.urlLauncherScreenName);
+              },
+              child: const Text('Экран Url Launcher'),
+            ),
             const HBox(22),
             const Text('Имитирование ошибок:'),
             const HBox(16),
             ElevatedButton(
               onPressed: () {
-                throw Exception(
-                  'Тестовая ошибка Exception для отладки FlutterError',
-                );
+                throw Exception('Тестовая ошибка Exception для отладки FlutterError');
               },
               child: const Text('Вызывать ошибку FlutterError'),
             ),

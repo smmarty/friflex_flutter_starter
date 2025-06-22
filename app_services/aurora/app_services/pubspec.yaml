@@ -17,8 +17,11 @@ dependencies:
       url: https://gitlab.com/omprussia/flutter/flutter-community-plugins/flutter_secure_storage_aurora.git
       ref: aurora-0.5.3
 
-  # для работы с путями (плагин встроен в sdk flutter 3.27.1)
+  # Зависимости для работы с путями (плагин встроен в sdk flutter 3.27.3)
   path_provider: 2.1.5
+
+  # Зависимости для работы с открытием ссылок (плагин встроен в sdk flutter 3.27.3)
+  url_launcher: 6.3.1
 
   # Обязательные интерфейсы
   i_app_services:

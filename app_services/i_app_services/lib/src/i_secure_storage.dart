@@ -1,4 +1,4 @@
-/// Класс интерфейса для работы с защищенным хранилищем
+/// Класс для описания интерфейса для работы с защищенным хранилищем
 abstract interface class ISecureStorage {
   /// Описывает обязательные параметры имплементаций
   ///
@@ -6,13 +6,16 @@ abstract interface class ISecureStorage {
   /// - [secretKey] - секретный ключ для шифрования данных
   const ISecureStorage._({required this.secretKey});
 
+  /// Наименования интерфейса
+  static const name = 'ISecureStorage';
+
+  /// Получение имени имплементации
+  String get nameImpl;
+
   /// Секретный ключ для шифрования данных
   /// Нужен, если надо передать ключ в реализацию
   /// например, в Aurora
   final String? secretKey;
-
-  /// Наименования интерфейса
-  static const name = 'ISecureStorage';
 
   /// Метод для получения значения из защищенного хранилища
   ///
@@ -41,6 +44,4 @@ abstract interface class ISecureStorage {
   /// Принимает:
   /// - [key] - ключ
   Future<bool> containsKey(String key);
-
-  String get nameImpl;
 }

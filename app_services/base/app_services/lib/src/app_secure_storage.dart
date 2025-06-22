@@ -11,11 +11,14 @@ final class AppSecureStorage implements ISecureStorage {
   /// {@macro app_secure_storage}
   AppSecureStorage({this.secretKey});
 
-  @override
-  final String? secretKey;
-
   /// Наименование сервиса
   static const name = 'BaseAppSecureStorage';
+
+  @override
+  String get nameImpl => AppSecureStorage.name;
+
+  @override
+  final String? secretKey;
 
   /// Экземпляр хранилища данных
   final _box = const FlutterSecureStorage();
@@ -44,7 +47,4 @@ final class AppSecureStorage implements ISecureStorage {
   Future<void> write(String key, String value) async {
     await _box.write(key: key, value: value);
   }
-
-  @override
-  String get nameImpl => AppSecureStorage.name;
 }
