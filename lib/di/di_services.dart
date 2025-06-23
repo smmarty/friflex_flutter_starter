@@ -22,6 +22,9 @@ final class DiServices {
   /// Сервис для работы с защищенным локальным хранилищем
   late final ISecureStorage secureStorage;
 
+  /// Сервис для работы с геолокацией
+  late final ILocationService locationService;
+
   /// Метод для инициализации сервисов в приложении.
   ///
   /// Принимает:
@@ -50,6 +53,17 @@ final class DiServices {
       onProgress(AppSecureStorage.name);
     } on Object catch (error, stackTrace) {
       onError('Ошибка инициализации ${ISecureStorage.name}', error, stackTrace);
+    }
+
+    try {
+      locationService = const AppLocationService();
+      onProgress(AppLocationService.name);
+    } on Object catch (error, stackTrace) {
+      onError(
+        'Ошибка инициализации ${ILocationService.name}',
+        error,
+        stackTrace,
+      );
     }
 
     onProgress('Инициализация сервисов завершена!');

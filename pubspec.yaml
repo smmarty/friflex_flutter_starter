@@ -42,7 +42,9 @@ dependencies:
   ### В зависимости от платформы ###
   app_services:
     path: app_services/base/app_services ### Базовая реализация ###
-    #path: app_services/aurora/app_services ### Аврора реализация ###
+    # path: app_services/aurora/app_services ### Аврора реализация ###
+    # path: app_services/hms/app_services ### HarmonyOS реализация ###
+
 
 dev_dependencies:
   flutter_test:
