@@ -4,7 +4,7 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -18,6 +18,9 @@ dependencies:
 
   # для работы с путями в хранилища
   path_provider: 2.1.5
+
+  # Работа с геолокацией
+  geolocator: 14.0.1
 
   # Обязательные интерфейсы
   i_app_services:

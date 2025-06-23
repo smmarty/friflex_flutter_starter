@@ -1,5 +1,3 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_secure_storage_aurora/flutter_secure_storage_aurora.dart';
 import 'package:i_app_services/i_app_services.dart';
 
 /// {@template app_secure_storage}
@@ -12,7 +10,8 @@ final class AppSecureStorage implements ISecureStorage {
   /// Принимает:
   /// - [secretKey] - ключ шифрования данных
   AppSecureStorage({required this.secretKey}) {
-    FlutterSecureStorageAurora.setSecret(secretKey);
+    // Инициализация Aurora Secure Storage с ключом шифрования
+    // FlutterSecureStorageAurora.setSecret(secretKey);
   }
 
   @override
@@ -20,34 +19,36 @@ final class AppSecureStorage implements ISecureStorage {
 
   static const name = 'AuroraAppSecureStorage';
 
-  /// Экземпляр хранилища данных
-  final _box = const FlutterSecureStorage();
-
-  @override
-  Future<void> clear() async {
-    await _box.deleteAll();
-  }
-
   @override
   Future<void> delete(String key) async {
-    await _box.delete(key: key);
-  }
-
-  @override
-  Future<bool> exists(String key) {
-    return _box.containsKey(key: key);
+    // TODO: Реализовать удаление ключа из Aurora Secure Storage
+    throw UnimplementedError();
   }
 
   @override
   Future<String?> read(String key) async {
-    return _box.read(key: key);
+    // TODO: Реализовать чтение значения по ключу из Aurora Secure Storage
+    throw UnimplementedError();
   }
 
   @override
   Future<void> write(String key, String value) async {
-    await _box.write(key: key, value: value);
+    // TODO: Реализовать запись значения по ключу в Aurora Secure Storage
+    throw UnimplementedError();
   }
 
   @override
   String get nameImpl => AppSecureStorage.name;
+
+  @override
+  Future<bool> containsKey(String key) {
+    // TODO: Реализовать проверку наличия ключа в Aurora Secure Storage
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteAll() {
+    // TODO: Реализовать удаление всех ключей из Aurora Secure Storage
+    throw UnimplementedError();
+  }
 }

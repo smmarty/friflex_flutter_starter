@@ -4,6 +4,6 @@ abstract interface class IPathProvider {
   /// Наименования интерфейса
   static const name = 'IPathProvider';
 
-  /// Получение path на внутренне хранилище приложения
+  /// Получение path на внутреннее хранилище приложения
   Future<String?> getAppDocumentsDirectoryPath();
 }
