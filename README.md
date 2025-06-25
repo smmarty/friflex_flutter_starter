@@ -262,6 +262,8 @@ dart run build_runner build --delete-conflicting-outputs
 | 🔄 [RFC-gitflow.md](./tools/rfc/RFC-gitflow.md) | Git workflow |
 | 🏗️ [RFC-projects_structure.md](./tools/rfc/RFC-projects_structure.md) | Структура проекта |
 | 📝 [RFC-documentation.md](./tools/rfc/RFC-documentation.md) | Правила документирования |
+| 🔧 [RFC-managing_generated_files.md](./tools/rfc/RFC-managing_generated_files.md) | Рекомендации по управлению сгенерированными файлами |
+| 🌐 [RFC-managing_pubspec_lock.md](./tools/rfc/RFC-managing_pubspec_lock.md) | Рекомендации по управлению pubspec.lock
 
 ## 🎯 Особенности и нюансы
 
