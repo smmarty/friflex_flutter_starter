@@ -16,8 +16,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this._profileRepository) : super(ProfileInitialState()) {
     // Регистрируем обработчики событий в конструкторе
     on<ProfileEvent>((event, emit) async {
+      // Обрабатываем событие загрузки профиля
       if (event is ProfileFetchProfileEvent) {
         await _fetchProfile(event, emit);
+      }
+      // Обрабатываем событие выхода из профиля
+      else if (event is ProfileLogoutProfileEvent) {
+        await _logout(event, emit);
       }
     });
   }
@@ -44,6 +49,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final data = await _profileRepository.fetchUserProfile(event.id);
       emit(ProfileSuccessState(data: data));
     } on Object catch (error, stackTrace) {
+      // Обработка ошибки при загрузке профиля
       emit(
         ProfileErrorState(
           message: 'Ошибка при загрузке профиля',
@@ -51,6 +57,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           stackTrace: stackTrace,
         ),
       );
+      // Пробрасываем исключение дальше, для логирования или обработки
+      rethrow;
     }
+  }
+
+  /// Метод для выхода из профиля пользователя.
+  Future<void> _logout(
+    ProfileLogoutProfileEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    // Здесь можно добавить логику выхода из профиля
+    // Например, очистка токенов, данных пользователя и т.д.
+    // В данном примере просто эмитим начальное состояние
+    emit(ProfileInitialState());
   }
 }
