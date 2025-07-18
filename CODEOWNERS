@@ -1,1 +1,29 @@
-Friflex LCC
+# Файл CODEOWNERS определяет владельцев кода для автоматического назначения ревьюеров
+
+# GitHub Actions и CI/CD
+.github/ @petrovyuri
+actions/ @petrovyuri
+
+# Конфигурация разработки и IDE
+.vscode/ @petrovyuri
+
+# Ресурсы и конфигурация приложения
+assets/ @petrovyuri
+env/ @petrovyuri
+tools/ @petrovyuri
+
+# Исходный код приложения
+lib/ @petrovyuri
+app_services/ @petrovyuri
+
+# Конфигурационные файлы проекта
+analysis_options.yaml @petrovyuri
+build.yaml @petrovyuri
+pubspec.yaml @petrovyuri
+
+# Документация
+CHANGELOG.md @petrovyuri
+README.md @petrovyuri
+
+# По умолчанию все остальные файлы
+* @petrovyuri
