@@ -94,7 +94,14 @@ class _AppState extends State<App> {
                 return DependsProviders(
                   diContainer: diContainer,
                   child: ThemeConsumer(
-                    builder: () => _App(router: widget.router),
+                    builder: () => MediaQuery(
+                      key: ValueKey('prevent_rebuild'),
+                      data: MediaQuery.of(context).copyWith(
+                        textScaler: TextScaler.noScaling,
+                        boldText: false,
+                      ),
+                      child: _App(router: widget.router),
+                    ),
                   ),
                 );
             }
