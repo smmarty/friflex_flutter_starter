@@ -51,8 +51,6 @@ class _AppState extends State<App> {
   /// Позволяет перезапускать инициализацию при ошибках
   late Future<DiContainer> _initFuture;
 
-  final Key _key = GlobalKey();
-
   @override
   void initState() {
     super.initState();
@@ -97,7 +95,7 @@ class _AppState extends State<App> {
                   diContainer: diContainer,
                   child: ThemeConsumer(
                     builder: () => MediaQuery(
-                      key: _key,
+                      key: ValueKey('prevent_rebuild'),
                       data: MediaQuery.of(context).copyWith(
                         textScaler: TextScaler.noScaling,
                         boldText: false,
