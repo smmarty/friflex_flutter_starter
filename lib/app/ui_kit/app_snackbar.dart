@@ -184,7 +184,7 @@ class _AppSnackBarState extends State<AppSnackBar>
   }
 
   /// Запуск таймера для автоматического закрытия снекбара
-  /// Таймер срабатывает по истечении [widget.displayDuration]
+  /// Таймер срабатывает по истечении widget.displayDuration
   /// и вызывает метод [_dismiss] для закрытия снекбара
   void _startDismissTimer() {
     _dismissTimer = Timer(widget.displayDuration, _dismiss);
@@ -192,7 +192,7 @@ class _AppSnackBarState extends State<AppSnackBar>
 
   /// Закрытие снекбара
   /// Отменяет таймер, если он существует, и запускает обратную анимацию
-  /// После завершения анимации вызывает функцию [widget.onDismiss], если она задана
+  /// После завершения анимации вызывает функцию widget.onDismiss, если она задана
   /// Если виджет не смонтирован, ничего не делает
   void _dismiss() {
     if (!mounted) return;
