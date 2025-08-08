@@ -87,3 +87,4 @@ linter:
     use_key_in_widget_constructors: true # Обязательное указание ключа для stateful/stateless widgets
     always_use_package_imports: true # Всегда использовать package: импорты
     unawaited_futures: true # Требовать использование unawaited для неожидаемых Future
+    comment_references: true # Использовать только видимые параметры в документации
