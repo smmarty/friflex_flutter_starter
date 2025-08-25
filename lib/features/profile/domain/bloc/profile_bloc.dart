@@ -57,8 +57,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           stackTrace: stackTrace,
         ),
       );
-      // Пробрасываем исключение дальше, для логирования или обработки
-      rethrow;
+      // Пробрасываем исключение в BlocObserver, для логирования или обработки
+      addError(error, stackTrace);
     }
   }
 

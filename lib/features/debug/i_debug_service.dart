@@ -1,17 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Интерфейс для сервиса отладки
 abstract interface class IDebugService {
   static const name = 'IDebugService';
 
   /// Наблюдение за dio
-  dynamic get dioLogger;
+  Interceptor get dioLogger;
 
   /// Наблюдение за роутами
-  dynamic get routeObserver;
+  NavigatorObserver get routeObserver;
 
   /// Наблюдение за BLoC
-  dynamic get blocObserver;
+  BlocObserver get blocObserver;
 
   /// Метод для логирования сообщений
   void log(Object message, {Object logLevel, Map<String, dynamic>? args});
