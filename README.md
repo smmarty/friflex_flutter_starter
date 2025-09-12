@@ -1,20 +1,14 @@
-<div align="center">
 
 # 🚀 Friflex Flutter Starter - Корпоративный шаблон
-
-</div>
-<div align="center">
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.32.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.8.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-v0.0.1-green?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-**Корпоративный стартовый шаблон для разработки масштабируемых Flutter-приложений**
+Корпоративный стартовый шаблон для разработки масштабируемых Flutter-приложений
 
 [📋 Документация](#-документация) • [🏗️ Архитектура](#️-архитектура) • [🚀 Быстрый старт](#-быстрый-старт) • [🔧 Конфигурация](#-конфигурация)
-
-</div>
 
 ---
 
@@ -162,33 +156,33 @@ enum AppEnv {
 
 ### 🛠️ Установка
 
-1. **Клонирование проекта**
+#### Клонирование проекта
 
 ```bash
 git clone https://github.com/smmarty/friflex_starter.git
 cd friflex_starter
 ```
 
-2. **Установка зависимостей**
+#### Установка зависимостей
 
 ```bash
 flutter pub get
 ```
 
-3. **Генерация файлов**
+#### Генерация файлов
 
 ```bash
 dart run build_runner build --delete-conflicting-outputs
 flutter packages pub run flutter_gen
 ```
 
-4. **Запуск приложения**
+#### Запуск приложения
 
 ```bash
 flutter run
 ```
 
-5. **Замените название пакета на ваш**
+#### Замените название пакета на ваш
 
 ### 🎯 Запуск с разными окружениями
 
@@ -263,7 +257,7 @@ dart run build_runner build --delete-conflicting-outputs
 | 🏗️ [RFC-projects_structure.md](./tools/rfc/RFC-projects_structure.md) | Структура проекта |
 | 📝 [RFC-documentation.md](./tools/rfc/RFC-documentation.md) | Правила документирования |
 | 🔧 [RFC-managing_generated_files.md](./tools/rfc/RFC-managing_generated_files.md) | Рекомендации по управлению сгенерированными файлами |
-| 🌐 [RFC-managing_pubspec_lock.md](./tools/rfc/RFC-managing_pubspec_lock.md) | Рекомендации по управлению pubspec.lock
+| 🌐 [RFC-managing_pubspec_lock.md](./tools/rfc/RFC-managing_pubspec_lock.md) | Рекомендации по управлению pubspec.lock |
 
 ## 🎯 Особенности и нюансы
 
@@ -294,9 +288,4 @@ Copyright © 2025 Friflex LLC. Все права защищены.
 
 ---
 
-
-<div align="right">
-
-*Разработано с любовью командой Friflex ❤️*
-
-</div>
+### Разработано с любовью командой Friflex ❤️
