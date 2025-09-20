@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/app/theme/app_colors_scheme.dart';
-import 'package:friflex_starter/gen/assets.gen.dart';
-import 'package:friflex_starter/gen/fonts.gen.dart';
 
 /// {@template lang_screen}
 /// Экран для отладки и тестирования локализации приложения.
@@ -42,18 +40,12 @@ class LangScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               'Тестовое слово  bold: ${context.l10n.helloWorld}',
-              style: TextStyle(
-                color: context.appColors.testColor,
-                fontFamily: Assets.fonts.montserratBold,
-              ),
+              style: TextStyle(color: context.appColors.testColor),
             ),
             const SizedBox(height: 16),
             Text(
               'Тестовое слово  medium: ${context.l10n.helloWorld}',
-              style: TextStyle(
-                color: context.appColors.testColor,
-                fontFamily: FontFamily.montserrat,
-              ),
+              style: TextStyle(color: context.appColors.testColor),
             ),
             const SizedBox(height: 16),
             Text('Текущий язык: ${context.l10n.localeName}'),
