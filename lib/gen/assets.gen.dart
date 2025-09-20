@@ -13,34 +13,6 @@ import 'package:flutter_svg/flutter_svg.dart' as _svg;
 import 'package:lottie/lottie.dart' as _lottie;
 import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
-class $AssetsFontsGen {
-  const $AssetsFontsGen();
-
-  /// File path: assets/fonts/Montserrat-Bold.ttf
-  String get montserratBold => 'assets/fonts/Montserrat-Bold.ttf';
-
-  /// File path: assets/fonts/Montserrat-ExtraBold.ttf
-  String get montserratExtraBold => 'assets/fonts/Montserrat-ExtraBold.ttf';
-
-  /// File path: assets/fonts/Montserrat-Medium.ttf
-  String get montserratMedium => 'assets/fonts/Montserrat-Medium.ttf';
-
-  /// File path: assets/fonts/Montserrat-Regular.ttf
-  String get montserratRegular => 'assets/fonts/Montserrat-Regular.ttf';
-
-  /// File path: assets/fonts/Montserrat-SemiBold.ttf
-  String get montserratSemiBold => 'assets/fonts/Montserrat-SemiBold.ttf';
-
-  /// List of all assets
-  List<String> get values => [
-    montserratBold,
-    montserratExtraBold,
-    montserratMedium,
-    montserratRegular,
-    montserratSemiBold,
-  ];
-}
-
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -63,9 +35,8 @@ class $AssetsLottieGen {
 }
 
 class Assets {
-  Assets._();
+  const Assets._();
 
-  static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
@@ -171,6 +142,9 @@ class LottieGenImage {
     bool? addRepaintBoundary,
     FilterQuality? filterQuality,
     void Function(String)? onWarning,
+    _lottie.LottieDecoder? decoder,
+    _lottie.RenderCache? renderCache,
+    bool? backgroundLoading,
   }) {
     return _lottie.Lottie.asset(
       _assetName,
@@ -195,6 +169,9 @@ class LottieGenImage {
       addRepaintBoundary: addRepaintBoundary,
       filterQuality: filterQuality,
       onWarning: onWarning,
+      decoder: decoder,
+      renderCache: renderCache,
+      backgroundLoading: backgroundLoading,
     );
   }
 
