@@ -5,7 +5,7 @@ abstract final class UpdateRoutes {
   /// Название роута главной страницы
   static const String hardUpdateScreenName = 'update_screen';
 
-  /// Путь роута страницы профиля пользователя
+  /// Путь роута экрана обновления
   static const String _hardUpdateScreenPath = '/update';
 
   /// Метод для построения роутов по Update
