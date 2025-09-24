@@ -25,7 +25,7 @@ final class UpdateMockRepository implements IUpdateRepository {
   const UpdateMockRepository();
 
   @override
-  Future<UpdateEntity> checkForUpdates({
+  Future<UpdateEntity?> checkForUpdates({
     required String versionCode,
     required String platform,
   }) async {
