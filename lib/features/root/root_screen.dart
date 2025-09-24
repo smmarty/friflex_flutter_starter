@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/features/debug/debug_routes.dart';
+import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
+import 'package:friflex_starter/features/update/presentation/components/soft_modal_sheet.dart';
+import 'package:friflex_starter/features/update/update_const.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template root_screen}
@@ -13,13 +17,40 @@ import 'package:go_router/go_router.dart';
 /// - Отображение кнопки отладки в не-продакшн окружениях
 /// - Интеграцию с GoRouter для навигации
 /// {@endtemplate}
-class RootScreen extends StatelessWidget {
+class RootScreen extends StatefulWidget {
   /// {@macro root_screen}
   const RootScreen({required this.navigationShell, super.key});
 
   /// Текущая ветка навигации от GoRouter
   /// Содержит информацию о текущем состоянии навигации
   final StatefulNavigationShell navigationShell;
+
+  @override
+  State<RootScreen> createState() => _RootScreenState();
+}
+
+class _RootScreenState extends State<RootScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // После построения виджета, проверяем состояние кубита обновлений
+    // и если есть обновление, то показываем модальное окно
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final updateCubitState = context.read<UpdateCubit>().state;
+      if (updateCubitState is UpdateSuccessState) {
+        final updateEntity = updateCubitState.updateInfo;
+        if (updateEntity?.updateType == UpdateConst.updateTypeSoft) {
+          SoftUpdateModal.show(
+            context,
+            updateEntity: updateEntity,
+            onUpdate: () {
+              // TODO(yura): Здесь будет логика обновления мягкого обновления
+            },
+          );
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +63,14 @@ class RootScreen extends StatelessWidget {
               },
             )
           : null,
-      body: navigationShell,
+      body: widget.navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Профиль'),
         ],
-        currentIndex: navigationShell.currentIndex,
-        onTap: navigationShell.goBranch,
+        currentIndex: widget.navigationShell.currentIndex,
+        onTap: widget.navigationShell.goBranch,
       ),
     );
   }

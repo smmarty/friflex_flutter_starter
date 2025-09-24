@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/app/ui_kit/app_snackbar.dart';
+import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
+import 'package:friflex_starter/features/update/presentation/components/soft_modal_sheet.dart';
+import 'package:friflex_starter/features/update/update_routes.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 /// {@template components_screen}
 /// Экран для демонстрации и тестирования компонентов приложения.
@@ -65,6 +70,39 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
                 AppSnackBar.showInfo(context, message: 'Это просто сообщение');
               },
               child: const Text('Показать снекбар с информацией'),
+            ),
+            const HBox(16),
+            ElevatedButton(
+              onPressed: () {
+                final updateCubitState = context.read<UpdateCubit>().state;
+                final updateEntity = updateCubitState is UpdateSuccessState
+                    ? updateCubitState.updateInfo
+                    : null;
+                SoftUpdateModal.show(
+                  context,
+                  updateEntity: updateEntity,
+                  onUpdate: () {
+                    AppSnackBar.showSuccess(
+                      context: context,
+                      message: 'Начато обновление приложения',
+                    );
+                  },
+                  onSkip: () {
+                    AppSnackBar.showInfo(
+                      context,
+                      message: 'Обновление отложено',
+                    );
+                  },
+                );
+              },
+              child: const Text('Показать модальное окно обновления'),
+            ),
+            const HBox(16),
+            ElevatedButton(
+              onPressed: () {
+                context.pushNamed(UpdateRoutes.hardUpdateScreenName);
+              },
+              child: const Text('Переход на экран Hard Update обновления'),
             ),
           ],
         ),

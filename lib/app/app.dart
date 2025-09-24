@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
 import 'package:friflex_starter/app/app_providers.dart';
 import 'package:friflex_starter/app/depends_providers.dart';
 import 'package:friflex_starter/app/theme/app_theme.dart';
 import 'package:friflex_starter/app/theme/theme_notifier.dart';
 import 'package:friflex_starter/di/di_container.dart';
-
 import 'package:friflex_starter/features/error/error_screen.dart';
 import 'package:friflex_starter/features/splash/splash_screen.dart';
+import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
+import 'package:friflex_starter/features/update/update_const.dart';
+import 'package:friflex_starter/features/update/update_routes.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
 import 'package:go_router/go_router.dart';
@@ -67,44 +70,22 @@ class _AppState extends State<App> {
         builder: () => FutureBuilder<DiContainer>(
           future: _initFuture,
           builder: (_, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-              case ConnectionState.active:
-                // Пока инициализация показываем Splash
-                return const SplashScreen();
-              case ConnectionState.done:
-                if (snapshot.hasError) {
-                  return ErrorScreen(
-                    error: snapshot.error,
-                    stackTrace: snapshot.stackTrace,
-                    onRetry: _retryInit,
-                  );
-                }
-
-                final diContainer = snapshot.data;
-                if (diContainer == null) {
-                  return ErrorScreen(
-                    error:
-                        'Ошибка инициализации зависимостей, diContainer = null',
-                    stackTrace: null,
-                    onRetry: _retryInit,
-                  );
-                }
-                return DependsProviders(
-                  diContainer: diContainer,
-                  child: ThemeConsumer(
-                    builder: () => MediaQuery(
-                      key: ValueKey('prevent_rebuild'),
-                      data: MediaQuery.of(context).copyWith(
-                        textScaler: TextScaler.noScaling,
-                        boldText: false,
+            return switch (snapshot.connectionState) {
+              // Если состояние не определено, ожидается или активно, то отображаем экран загрузки
+              ConnectionState.none ||
+              ConnectionState.waiting ||
+              ConnectionState.active => const SplashScreen(),
+              ConnectionState.done =>
+                // Если данные получены и не равны null, то отображаем внутренний виджет приложения
+                // Иначе отображаем экран ошибки
+                (snapshot.hasData && snapshot.data != null)
+                    ? _App(router: widget.router, diContainer: snapshot.data!)
+                    : ErrorScreen(
+                        error: snapshot.error,
+                        stackTrace: snapshot.stackTrace,
+                        onRetry: _retryInit,
                       ),
-                      child: _App(router: widget.router),
-                    ),
-                  ),
-                );
-            }
+            };
           },
         ),
       ),
@@ -128,21 +109,50 @@ class _AppState extends State<App> {
 /// {@endtemplate}
 class _App extends StatelessWidget {
   /// {@macro app_internal}
-  const _App({required this.router});
+  const _App({required this.router, required this.diContainer});
 
   /// Роутер приложения для навигации
   final GoRouter router;
 
+  /// Контейнер зависимостей
+  final DiContainer diContainer;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
-      darkTheme: AppTheme.dark,
-      theme: AppTheme.light,
-      themeMode: context.theme.themeMode,
-      locale: context.localization.locale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+    return DependsProviders(
+      diContainer: diContainer,
+      child: BlocConsumer<UpdateCubit, UpdateState>(
+        listener: (context, state) {
+          if (state is UpdateSuccessState &&
+              state.updateInfo?.updateType == UpdateConst.updateTypeHard &&
+              context.mounted) {
+            router.goNamed(UpdateRoutes.hardUpdateScreenName);
+          }
+        },
+        builder: (context, state) {
+          // Если состояние загрузки, то отображаем экран загрузки
+          if (state is UpdateLoadingState) {
+            return const SplashScreen();
+          }
+          return ThemeConsumer(
+            builder: () => MediaQuery(
+              key: ValueKey('prevent_rebuild'),
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.noScaling, boldText: false),
+              child: MaterialApp.router(
+                routerConfig: router,
+                darkTheme: AppTheme.dark,
+                theme: AppTheme.light,
+                themeMode: context.theme.themeMode,
+                locale: context.localization.locale,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

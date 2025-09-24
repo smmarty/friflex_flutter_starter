@@ -14,5 +14,23 @@
 			"/// {@macro ${TM_FILENAME_BASE}}"
 		],
 		"description": "DartDoc короткая запись macro с именем файла"
-	}
+	},
+	"TODO": {
+		"prefix": "todo",
+		"body": [
+			"// TODO($1): $2"
+		],
+		"description": "Create todo"
+	},
+	"TRYCATCH": {
+		"prefix": "tryc",
+		"body": [
+			"try {",
+			"$1",
+			"} on Object catch (error,stackTrace) {",
+			"",
+			"}",
+		],
+		"description": "Create trycatch"
+	},
 }
