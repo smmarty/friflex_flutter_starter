@@ -28,7 +28,7 @@ final class UpdateSuccessState extends UpdateState {
   final UpdateEntity? updateInfo;
 
   @override
-  List<Object> get props => [updateInfo ?? Object];
+  List<Object> get props => [updateInfo ?? const Object()];
 }
 
 /// Состояние ошибки при получении информации об обновлении
