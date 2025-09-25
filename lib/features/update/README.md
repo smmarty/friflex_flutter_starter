@@ -7,12 +7,12 @@
 - **`UpdateEntity`**: доменная сущность с данными об обновлении
   - `availableVersion`: доступная версия
   - `updateUrl`: ссылка на обновление
-  - `updateType`: тип (`soft` | `hard`), см. `UpdateConst`
+  - `updateType`: тип (`soft` | `hard`), см. `UpdateType`
   - `whatIsNew`: описание изменений
 
-- **`UpdateConst`**: константы типов обновления
-  - `updateTypeSoft = 'soft'`
-  - `updateTypeHard = 'hard'`
+- **`UpdateType`**: перечисление типов обновления
+  - `UpdateType.soft`
+  - `UpdateType.hard`
 
 - **`UpdateCubit`**: управление состоянием проверки обновлений
   - Состояния: `UpdateInitialState`, `UpdateLoadingState`, `UpdateSuccessState(UpdateEntity?)`, `UpdateErrorState(message)`
@@ -21,7 +21,7 @@
 ## Репозитории
 
 - **`IUpdateRepository`**: Интерфейс, описывающий методы для проверки обновлений.
-  - Возвращает `UpdateEntity?` (или `null`, если обновлений нет)
+  - Возвращает `Future<UpdateEntity>` (не может быть `null`)
 
 - **`UpdateRepository`**: заготовка для реальной интеграции (бэкенд/стор)
   - Реализуйте логику в `checkForUpdates`
@@ -105,7 +105,7 @@ features/update/
 │   │   └── soft_modal_sheet.dart         # модалка для soft-обновления
 │   └── screens/
 │       └── hard_update_screen.dart       # экран для hard-обновления
-├── update_const.dart                      # константы типов обновления
+├── update_type.dart                       # константы типов обновления
 └── update_routes.dart                     # роут на hard-экран
 ```
 

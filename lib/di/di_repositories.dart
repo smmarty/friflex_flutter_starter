@@ -86,7 +86,7 @@ final class DiRepositories {
       onProgress(updatesRepository.name);
     } on Object catch (error, stackTrace) {
       onError(
-        'Ошибка инициализации репозитория IUpdatesRepository',
+        'Ошибка инициализации репозитория IUpdateRepository',
         error,
         stackTrace,
       );
