@@ -9,7 +9,6 @@ abstract interface class IUpdateRepository with DiBaseRepo {
   /// [versionCode] - текущий код версии приложения
   /// [platform] - платформа (например, 'android' или 'ios')
   /// Возвращает [UpdateEntity] с информацией об обновлении
-  /// или null, если обновлений нет
   Future<UpdateEntity> checkForUpdates({
     required String versionCode,
     required String platform,
