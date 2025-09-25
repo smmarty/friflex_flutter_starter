@@ -10,10 +10,10 @@ part 'update_state.dart';
 /// {@endtemplate}
 class UpdateCubit extends Cubit<UpdateState> {
   /// {@macro UpdateCubit}
-  UpdateCubit(this.updatesRepository) : super(UpdateInitialState());
+  UpdateCubit(this._updatesRepository) : super(UpdateInitialState());
 
   /// Репозиторий для проверки обновлений
-  final IUpdateRepository updatesRepository;
+  final IUpdateRepository _updatesRepository;
 
   /// Метод для проверки доступности обновлений
   /// [versionCode] - текущий код версии приложения
@@ -25,7 +25,7 @@ class UpdateCubit extends Cubit<UpdateState> {
     if (state is UpdateLoadingState) return;
     emit(UpdateLoadingState());
     try {
-      final updateInfo = await updatesRepository.checkForUpdates(
+      final updateInfo = await _updatesRepository.checkForUpdates(
         versionCode: versionCode,
         platform: platform,
       );
