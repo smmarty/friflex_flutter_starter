@@ -35,19 +35,24 @@ class _RootScreenState extends State<RootScreen> {
     super.initState();
     // После построения виджета, проверяем состояние кубита обновлений
     // и если есть обновление, то показываем модальное окно
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final updateCubitState = context.read<UpdateCubit>().state;
-      if (updateCubitState is UpdateSuccessState) {
-        final updateEntity = updateCubitState.updateInfo;
-        if (updateEntity?.updateType == UpdateConst.updateTypeSoft) {
-          SoftUpdateModal.show(
-            context,
-            updateEntity: updateEntity,
-            onUpdate: () {
-              // TODO(yura): Здесь будет логика обновления мягкого обновления
-            },
-          );
-        }
+    _checkSoftUpdate();
+  }
+
+  /// Проверяет состояние кубита обновлений и показывает модальное окно при наличии мягкого обновления
+  void _checkSoftUpdate() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final updateState = context.read<UpdateCubit>().state;
+
+      // Проверяем только состояние успеха с доступной информацией об обновлении
+      if (updateState is UpdateSuccessState &&
+          updateState.updateInfo?.updateType == UpdateConst.updateTypeSoft) {
+        SoftUpdateModal.show(
+          context,
+          updateEntity: updateState.updateInfo,
+          onUpdate: () {
+            // TODO(yura): реализовать логику обновления приложения
+          },
+        );
       }
     });
   }
