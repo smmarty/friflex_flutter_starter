@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
-import 'package:friflex_starter/app/ui_kit/app_snackbar.dart';
 import 'package:friflex_starter/features/update/domain/entity/update_entity.dart';
 import 'package:go_router/go_router.dart';
 
