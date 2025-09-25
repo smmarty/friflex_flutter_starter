@@ -1,19 +1,20 @@
 import 'package:friflex_starter/features/update/domain/entity/update_entity.dart';
 import 'package:friflex_starter/features/update/domain/repository/i_update_repository.dart';
+import 'package:friflex_starter/features/update/update_type.dart';
 
-// ignore: unused_element
-const _mockHardUpdateEntity = UpdateEntity(
+/// Мок обновления обязательное, можно использовать для тестирования
+const mockHardUpdateEntity = UpdateEntity(
   availableVersion: '2.0.0',
   updateUrl: 'https://example.com/update',
-  updateType: 'hard',
+  updateType: UpdateType.hard,
   whatIsNew: 'Добавлены новые функции и исправлены ошибки.',
 );
 
-// ignore: unused_element
-const _mockSoftUpdateEntity = UpdateEntity(
+/// Мок обновления мягкое, можно использовать для тестирования
+const mockSoftUpdateEntity = UpdateEntity(
   availableVersion: '2.0.0',
   updateUrl: 'https://example.com/update',
-  updateType: 'soft',
+  updateType: UpdateType.soft,
   whatIsNew: 'Добавлены новые функции и исправлены ошибки.',
 );
 
@@ -25,7 +26,7 @@ final class UpdateMockRepository implements IUpdateRepository {
   const UpdateMockRepository();
 
   @override
-  Future<UpdateEntity?> checkForUpdates({
+  Future<UpdateEntity> checkForUpdates({
     required String versionCode,
     required String platform,
   }) async {
@@ -34,7 +35,7 @@ final class UpdateMockRepository implements IUpdateRepository {
 
     // Возвращаем фиктивные данные об обновлении
     // Можно возвращать [_mockHardUpdateEntity] или [_mockSoftUpdateEntity]
-    return _mockSoftUpdateEntity;
+    return mockSoftUpdateEntity;
   }
 
   @override

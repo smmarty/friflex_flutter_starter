@@ -35,7 +35,7 @@ final class UpdateSuccessState extends UpdateState {
   const UpdateSuccessState(this.updateInfo);
 
   /// Информация об обновлении
-  final UpdateEntity? updateInfo;
+  final UpdateEntity updateInfo;
 
   @override
   List<Object?> get props => [updateInfo];

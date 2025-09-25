@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:friflex_starter/features/update/update_type.dart';
 
 /// {@template UpdateEntity}
 ///  Сущность для представления информации об обновлении
@@ -18,8 +19,8 @@ class UpdateEntity extends Equatable {
   /// URL для загрузки обновления
   final String updateUrl;
 
-  /// Тип обновления (например, 'hard' или 'soft')
-  final String updateType;
+  /// Тип обновления (например, 'hard' или 'soft', или не требуется)
+  final UpdateType updateType;
 
   /// Описание изменений в обновлении
   final String whatIsNew;

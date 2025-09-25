@@ -5,7 +5,7 @@ import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
 import 'package:friflex_starter/features/update/presentation/components/soft_modal_sheet.dart';
-import 'package:friflex_starter/features/update/update_const.dart';
+import 'package:friflex_starter/features/update/update_type.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template root_screen}
@@ -45,11 +45,10 @@ class _RootScreenState extends State<RootScreen> {
 
       // Проверяем только состояние успеха с доступной информацией об обновлении
       if (updateState is UpdateSuccessState &&
-          updateState.updateInfo?.updateType == UpdateConst.updateTypeSoft &&
-          updateState.updateInfo != null) {
+          updateState.updateInfo.updateType == UpdateType.soft) {
         SoftUpdateModal.show(
           context,
-          updateEntity: updateState.updateInfo!,
+          updateEntity: updateState.updateInfo,
           onUpdate: () {
             // TODO(yura): реализовать логику обновления приложения
           },

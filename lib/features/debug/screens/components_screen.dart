@@ -4,6 +4,7 @@ import 'package:friflex_starter/app/ui_kit/app_snackbar.dart';
 import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
 import 'package:friflex_starter/features/update/presentation/components/soft_modal_sheet.dart';
 import 'package:friflex_starter/features/update/update_routes.dart';
+import 'package:friflex_starter/features/update/update_type.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -75,28 +76,19 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
             ElevatedButton(
               onPressed: () {
                 final updateCubitState = context.read<UpdateCubit>().state;
-                final updateEntity = updateCubitState is UpdateSuccessState
-                    ? updateCubitState.updateInfo
-                    : null;
-                    
-                if (updateEntity == null) {
-                  AppSnackBar.showInfo(
+                if (updateCubitState is UpdateSuccessState &&
+                    updateCubitState.updateInfo.updateType == UpdateType.soft) {
+                  SoftUpdateModal.show(
                     context,
-                    message: 'Нет доступной информации об обновлении.',
+                    updateEntity: updateCubitState.updateInfo,
+                    onUpdate: () {
+                      AppSnackBar.showSuccess(
+                        context: context,
+                        message: 'Начато обновление приложения',
+                      );
+                    },
                   );
-                  return;
                 }
-
-                SoftUpdateModal.show(
-                  context,
-                  updateEntity: updateEntity,
-                  onUpdate: () {
-                    AppSnackBar.showSuccess(
-                      context: context,
-                      message: 'Начато обновление приложения',
-                    );
-                  },
-                );
               },
               child: const Text('Показать модальное окно обновления'),
             ),

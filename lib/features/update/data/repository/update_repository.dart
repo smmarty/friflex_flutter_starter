@@ -9,7 +9,7 @@ final class UpdateRepository implements IUpdateRepository {
   const UpdateRepository();
 
   @override
-  Future<UpdateEntity?> checkForUpdates({
+  Future<UpdateEntity> checkForUpdates({
     required String versionCode,
     required String platform,
   }) {

@@ -23,7 +23,9 @@ class HardUpdateScreen extends StatelessWidget {
                   'Доступна новая версия приложения. Пожалуйста, обновите его.',
                 ),
                 const HBox(16),
-                Text('Доступная версия: ${updateEntity?.availableVersion ?? ''}'),
+                Text(
+                  'Доступная версия: ${updateEntity?.availableVersion ?? ''}',
+                ),
                 const HBox(8),
                 Text('Что нового: ${updateEntity?.whatIsNew ?? ''}'),
                 const HBox(8),
