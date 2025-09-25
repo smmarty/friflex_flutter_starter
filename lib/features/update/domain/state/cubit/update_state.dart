@@ -4,35 +4,48 @@ part of 'update_cubit.dart';
 ///  Состояния для управления процессом обновления приложения
 /// {@endtemplate}
 sealed class UpdateState extends Equatable {
+  /// {@macro UpdateState}
   const UpdateState();
 
   @override
   List<Object?> get props => [];
 }
 
-/// Состояние начальной инициализации
+/// {@template UpdateInitialState}
+///  Состояние начальной инициализации
+/// {@endtemplate}
 final class UpdateInitialState extends UpdateState {
+  /// {@macro UpdateInitialState}
   const UpdateInitialState();
 }
 
-/// Состояние загрузки информации об обновлении
+/// {@template UpdateLoadingState}
+///  Состояние загрузки информации об обновлении
+/// {@endtemplate}
 final class UpdateLoadingState extends UpdateState {
+  /// {@macro UpdateLoadingState}
   const UpdateLoadingState();
 }
 
-/// Состояние успешного получения информации об обновлении
+/// {@template UpdateSuccessState}
+///  Состояние успешного получения информации об обновлении
+/// {@endtemplate}
 final class UpdateSuccessState extends UpdateState {
-  /// {@macro UpdateState}
+  /// {@macro UpdateSuccessState}
   const UpdateSuccessState(this.updateInfo);
 
+  /// Информация об обновлении
   final UpdateEntity? updateInfo;
 
   @override
   List<Object?> get props => [updateInfo];
 }
 
-/// Состояние ошибки при получении информации об обновлении
+/// {@template UpdateErrorState}
+///  Состояние ошибки при получении информации об обновлении
+/// {@endtemplate}
 final class UpdateErrorState extends UpdateState {
+  /// {@macro UpdateErrorState}
   const UpdateErrorState(this.message);
 
   /// Сообщение об ошибке в UI
