@@ -105,7 +105,7 @@ features/update/
 │   │   └── soft_modal_sheet.dart         # модалка для soft-обновления
 │   └── screens/
 │       └── hard_update_screen.dart       # экран для hard-обновления
-├── update_const.dart                      # константы типов обновления
+├── update_type.dart                       # константы типов обновления
 └── update_routes.dart                     # роут на hard-экран
 ```
 
