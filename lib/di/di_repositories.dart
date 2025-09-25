@@ -180,6 +180,7 @@ final class DiRepositories {
     required T Function() mockFactory,
     required OnProgress onProgress,
   }) {
+    // TODO(yura): https://github.com/smmarty/friflex_flutter_starter/issues/31  - добавить onError
     final mockRepo = mockFactory();
     final mainRepo = mainFactory();
 
