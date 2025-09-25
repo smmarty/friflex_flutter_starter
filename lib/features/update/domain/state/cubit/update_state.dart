@@ -7,7 +7,7 @@ sealed class UpdateState extends Equatable {
   const UpdateState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 /// Состояние начальной инициализации
@@ -28,7 +28,7 @@ final class UpdateSuccessState extends UpdateState {
   final UpdateEntity? updateInfo;
 
   @override
-  List<Object> get props => [updateInfo ?? const Object()];
+  List<Object?> get props => [updateInfo];
 }
 
 /// Состояние ошибки при получении информации об обновлении
