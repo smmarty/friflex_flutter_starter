@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
 
-/// Блокируюший экран для обязательного обновления приложения
+/// Блокирующий экран для обязательного обновления приложения
 class HardUpdateScreen extends StatelessWidget {
   const HardUpdateScreen({super.key});
 
