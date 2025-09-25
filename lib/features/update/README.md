@@ -13,6 +13,7 @@
 - **`UpdateType`**: перечисление типов обновления
   - `UpdateType.soft`
   - `UpdateType.hard`
+  - `UpdateType.none`
 
 - **`UpdateCubit`**: управление состоянием проверки обновлений
   - Состояния: `UpdateInitialState`, `UpdateLoadingState`, `UpdateSuccessState(UpdateEntity?)`, `UpdateErrorState(message)`
@@ -53,35 +54,6 @@ await SoftUpdateModal.show(
 
 - `UpdateRoutes.buildRoutes()` — регистрирует экран hard-обновления по пути `/update`
 
-## Интеграция
-
-1) Вызов проверки обновлений через `UpdateCubit` (например, после старта приложения):
-```dart
-context.read<UpdateCubit>().checkForUpdates(
-  versionCode: '1.0.0',
-  platform: 'android',
-);
-```
-
-2) Реакция на результат (пример в `RootScreen.initState`):
-```dart
-final updateCubitState = context.read<UpdateCubit>().state;
-if (updateCubitState is UpdateSuccessState) {
-  final updateEntity = updateCubitState.updateInfo;
-  if (updateEntity?.updateType == UpdateConst.updateTypeSoft) {
-    SoftUpdateModal.show(
-      context,
-      updateEntity: updateEntity,
-      onUpdate: () {
-        // TODO: переход по updateEntity.updateUrl
-      },
-    );
-  } else if (updateEntity?.updateType == UpdateConst.updateTypeHard) {
-    // Навигация на hard-экран (пример):
-    // context.pushNamed(UpdateRoutes.hardUpdateScreenName);
-  }
-}
-```
 
 ## Структура модуля
 
