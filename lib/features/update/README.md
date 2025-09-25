@@ -7,12 +7,12 @@
 - **`UpdateEntity`**: доменная сущность с данными об обновлении
   - `availableVersion`: доступная версия
   - `updateUrl`: ссылка на обновление
-  - `updateType`: тип (`soft` | `hard`), см. `UpdateConst`
+  - `updateType`: тип (`soft` | `hard`), см. `UpdateType`
   - `whatIsNew`: описание изменений
 
-- **`UpdateConst`**: константы типов обновления
-  - `updateTypeSoft = 'soft'`
-  - `updateTypeHard = 'hard'`
+- **`UpdateType`**: перечисление типов обновления
+  - `UpdateType.soft`
+  - `UpdateType.hard`
 
 - **`UpdateCubit`**: управление состоянием проверки обновлений
   - Состояния: `UpdateInitialState`, `UpdateLoadingState`, `UpdateSuccessState(UpdateEntity?)`, `UpdateErrorState(message)`
