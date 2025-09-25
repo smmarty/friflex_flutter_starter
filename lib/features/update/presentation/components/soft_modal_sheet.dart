@@ -89,23 +89,11 @@ class SoftUpdateModal extends StatelessWidget {
   /// [context] - контекст для отображения модального окна
   /// [updateEntity] - информация об обновлении
   /// [onUpdate] - функция при нажатии "Обновить"
-  /// [onSkip] - функция при нажатии "Отложить"
   static Future<void> show(
     BuildContext context, {
-    UpdateEntity? updateEntity,
+    required UpdateEntity updateEntity,
     VoidCallback? onUpdate,
-    VoidCallback? onSkip,
   }) {
-    if (updateEntity == null) {
-      AppSnackBar.showInfo(
-        context,
-        message: 'Нет доступной информации об обновлении.',
-      );
-
-      // Если информация об обновлении отсутствует, не показываем модальное окно
-      return Future.value();
-    }
-
     return showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,

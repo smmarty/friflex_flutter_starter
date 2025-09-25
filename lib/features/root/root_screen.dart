@@ -45,10 +45,11 @@ class _RootScreenState extends State<RootScreen> {
 
       // Проверяем только состояние успеха с доступной информацией об обновлении
       if (updateState is UpdateSuccessState &&
-          updateState.updateInfo?.updateType == UpdateConst.updateTypeSoft) {
+          updateState.updateInfo?.updateType == UpdateConst.updateTypeSoft &&
+          updateState.updateInfo != null) {
         SoftUpdateModal.show(
           context,
-          updateEntity: updateState.updateInfo,
+          updateEntity: updateState.updateInfo!,
           onUpdate: () {
             // TODO(yura): реализовать логику обновления приложения
           },

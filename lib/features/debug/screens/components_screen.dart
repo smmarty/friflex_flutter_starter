@@ -78,6 +78,15 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
                 final updateEntity = updateCubitState is UpdateSuccessState
                     ? updateCubitState.updateInfo
                     : null;
+                    
+                if (updateEntity == null) {
+                  AppSnackBar.showInfo(
+                    context,
+                    message: 'Нет доступной информации об обновлении.',
+                  );
+                  return;
+                }
+
                 SoftUpdateModal.show(
                   context,
                   updateEntity: updateEntity,
@@ -85,12 +94,6 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
                     AppSnackBar.showSuccess(
                       context: context,
                       message: 'Начато обновление приложения',
-                    );
-                  },
-                  onSkip: () {
-                    AppSnackBar.showInfo(
-                      context,
-                      message: 'Обновление отложено',
                     );
                   },
                 );
