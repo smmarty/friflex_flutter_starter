@@ -11,6 +11,9 @@ import 'package:friflex_starter/features/main/domain/repository/i_main_repositor
 import 'package:friflex_starter/features/profile/data/repository/profile_mock_repository.dart';
 import 'package:friflex_starter/features/profile/data/repository/profile_repository.dart';
 import 'package:friflex_starter/features/profile/domain/repository/i_profile_repository.dart';
+import 'package:friflex_starter/features/update/data/repository/update_mock_repository.dart';
+import 'package:friflex_starter/features/update/data/repository/update_repository.dart';
+import 'package:friflex_starter/features/update/domain/repository/i_update_repository.dart';
 
 /// Список названий моковых репозиториев, которые должны быть подменены
 /// для использования в сборке stage окружения.
@@ -23,7 +26,7 @@ import 'package:friflex_starter/features/profile/domain/repository/i_profile_rep
 /// ```
 ///   [ AuthCheckRepositoryMock().name, ]
 /// ```
-final List<String> _mockReposToSwitch = [];
+final List<String> _mockReposToSwitch = [UpdateMockRepository().name];
 
 /// {@template di_repositories}
 /// Класс для инициализации и управления репозиториями приложения.
@@ -52,6 +55,9 @@ final class DiRepositories {
   /// Интерфейс для работы с репозиторием профиля
   late final IProfileRepository profileRepository;
 
+  /// Интерфейс для работы с репозиторием обновлений
+  late final IUpdateRepository updatesRepository;
+
   /// Метод для инициализации репозиториев в приложении.
   ///
   /// Принимает:
@@ -68,6 +74,24 @@ final class DiRepositories {
     required OnError onError,
     required DiContainer diContainer,
   }) {
+    onProgress('Начинаем инициализацию репозиториев...');
+    try {
+      // Инициализация репозитория обновлений
+      updatesRepository = _lazyInitRepo<IUpdateRepository>(
+        mockFactory: UpdateMockRepository.new,
+        mainFactory: UpdateRepository.new,
+        onProgress: onProgress,
+        environment: diContainer.env,
+      );
+      onProgress(updatesRepository.name);
+    } on Object catch (error, stackTrace) {
+      onError(
+        'Ошибка инициализации репозитория IUpdateRepository',
+        error,
+        stackTrace,
+      );
+    }
+
     try {
       // Инициализация репозитория авторизации
       authRepository = _lazyInitRepo<IAuthRepository>(
@@ -156,6 +180,7 @@ final class DiRepositories {
     required T Function() mockFactory,
     required OnProgress onProgress,
   }) {
+    // TODO(yura): https://github.com/smmarty/friflex_flutter_starter/issues/31  - добавить onError
     final mockRepo = mockFactory();
     final mainRepo = mainFactory();
 

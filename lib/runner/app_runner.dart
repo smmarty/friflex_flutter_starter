@@ -125,9 +125,6 @@ class AppRunner {
     required AppEnv env,
     required TimerRunner timerRunner,
   }) async {
-    // Имитация задержки инициализации
-    // TODO(yura): Удалить после проверки
-    await Future.delayed(const Duration(seconds: 3));
     debugService.log(() => 'Тип сборки: ${env.name}');
     final diContainer = DiContainer(env: env, dService: debugService);
     await diContainer.init(
