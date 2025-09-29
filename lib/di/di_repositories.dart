@@ -182,10 +182,10 @@ final class DiRepositories {
     // TODO(yura): https://github.com/smmarty/friflex_flutter_starter/issues/31  - добавить onError
 
     final repo = switch (environment) {
-      AppEnv.dev => mainFactory(),
-      AppEnv.prod => mockFactory(),
+      AppEnv.dev => mockFactory(),
+      AppEnv.prod => mainFactory(),
       AppEnv.stage =>
-        _mockReposToSwitch.contains(T) ? mainFactory() : mockFactory(),
+        _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
     };
 
     onProgress(repo.name);
