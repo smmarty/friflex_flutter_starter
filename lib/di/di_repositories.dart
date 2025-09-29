@@ -24,9 +24,9 @@ import 'package:friflex_starter/features/update/domain/repository/i_update_repos
 ///
 /// Пример:
 /// ```
-///   [ AuthCheckRepositoryMock().name, ]
+///   <Type>{ IUpdateRepository }
 /// ```
-final List<String> _mockReposToSwitch = [UpdateMockRepository().name];
+const _mockReposToSwitch = <Type>{IUpdateRepository};
 
 /// {@template di_repositories}
 /// Класс для инициализации и управления репозиториями приложения.
@@ -181,14 +181,12 @@ final class DiRepositories {
     required OnProgress onProgress,
   }) {
     // TODO(yura): https://github.com/smmarty/friflex_flutter_starter/issues/31  - добавить onError
-    final mockRepo = mockFactory();
-    final mainRepo = mainFactory();
 
     final repo = switch (environment) {
-      AppEnv.dev => mockRepo,
-      AppEnv.prod => mainRepo,
+      AppEnv.dev => mainFactory(),
+      AppEnv.prod => mockFactory(),
       AppEnv.stage =>
-        _mockReposToSwitch.contains(mockRepo.name) ? mockRepo : mainRepo,
+        _mockReposToSwitch.contains(T) ? mainFactory() : mockFactory(),
     };
 
     onProgress(repo.name);
