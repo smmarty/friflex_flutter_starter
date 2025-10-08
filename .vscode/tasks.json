@@ -62,6 +62,16 @@
             "type": "shell",
             "command": "./tools/switch_service.sh aurora",
             "problemMatcher": []
+        },
+        {
+            "label": "flutter gen-l10n",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "gen-l10n"
+            ],
+            "group": "build",
+            "problemMatcher": [],
         }
     ]
 }
