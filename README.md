@@ -1,9 +1,8 @@
 
 # 🚀 Friflex Flutter Starter - Корпоративный шаблон
 
-![Flutter](https://img.shields.io/badge/Flutter-3.32.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
-![Dart](https://img.shields.io/badge/Dart-3.8.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
-![Version](https://img.shields.io/badge/Version-v0.0.1-green?style=for-the-badge)
+![Flutter](https://img.shields.io/badge/Flutter-3.35.5+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-3.9.2+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 Корпоративный стартовый шаблон для разработки масштабируемых Flutter-приложений
@@ -91,13 +90,13 @@ features/
 
 | Категория | Библиотека | Версия | Описание |
 |-----------|------------|--------|----------|
-| 🧭 **Навигация** | [go_router](https://pub.dev/packages/go_router) | `15.1.2` | Декларативный роутинг |
+| 🧭 **Навигация** | [go_router](https://pub.dev/packages/go_router) | `16.2.4` | Декларативный роутинг |
 | 🔄 **State Management** | [flutter_bloc](https://pub.dev/packages/flutter_bloc) | `9.1.1` | Управление состоянием |
 | 💉 **DI** | Custom InheritedWidget | - | Внедрение зависимостей |
-| 🎨 **Resources** | [flutter_gen](https://pub.dev/packages/flutter_gen) | `5.10.0` | Генерация ресурсов |
-| 🌐 **HTTP** | [dio](https://pub.dev/packages/dio) | `5.8.0+1` | HTTP клиент |
+| 🎨 **Resources** | [flutter_gen](https://pub.dev/packages/flutter_gen) | `5.12.0` | Генерация ресурсов |
+| 🌐 **HTTP** | [dio](https://pub.dev/packages/dio) | `5.9.0` | HTTP клиент |
 | 🔒 **Secure Storage** | [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) | - | Защищенное хранилище |
-| 📊 **Logging** | [talker](https://pub.dev/packages/talker_flutter) | `4.8.0` | Логирование и отладка |
+| 📊 **Logging** | [talker](https://pub.dev/packages/talker_flutter) | `5.0.1` | Логирование и отладка |
 
 ### 🔧 Инструменты разработки
 
