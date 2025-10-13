@@ -74,88 +74,57 @@ final class DiRepositories {
     required DiContainer diContainer,
   }) {
     onProgress('Начинаем инициализацию репозиториев...');
-    try {
-      // Инициализация репозитория обновлений
-      updatesRepository = _lazyInitRepo<IUpdateRepository>(
-        mockFactory: UpdateMockRepository.new,
-        mainFactory: UpdateRepository.new,
-        onProgress: onProgress,
-        environment: diContainer.env,
-      );
-      onProgress(updatesRepository.name);
-    } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации репозитория IUpdateRepository',
-        error,
-        stackTrace,
-      );
-    }
 
-    try {
-      // Инициализация репозитория авторизации
-      authRepository = _lazyInitRepo<IAuthRepository>(
-        mockFactory: AuthMockRepository.new,
-        mainFactory: () => AuthRepository(
-          httpClient: diContainer.httpClientFactory(
-            diContainer.debugService,
-            diContainer.appConfig,
-          ),
-        ),
-        onProgress: onProgress,
-        environment: diContainer.env,
-      );
-      onProgress(authRepository.name);
-    } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации репозитория IAuthRepository',
-        error,
-        stackTrace,
-      );
-    }
+    // Инициализация репозитория обновлений
+    updatesRepository = _lazyInitRepo<IUpdateRepository>(
+      mockFactory: UpdateMockRepository.new,
+      mainFactory: UpdateRepository.new,
+      onProgress: onProgress,
+      onError: onError,
+      environment: diContainer.env,
+    );
 
-    try {
-      // Инициализация репозитория сервиса управления токеном доступа
-      mainRepository = _lazyInitRepo<IMainRepository>(
-        mockFactory: MainMockRepository.new,
-        mainFactory: () => MainRepository(
-          httpClient: diContainer.httpClientFactory(
-            diContainer.debugService,
-            diContainer.appConfig,
-          ),
+    // Инициализация репозитория авторизации
+    authRepository = _lazyInitRepo<IAuthRepository>(
+      mockFactory: AuthMockRepository.new,
+      mainFactory: () => AuthRepository(
+        httpClient: diContainer.httpClientFactory(
+          diContainer.debugService,
+          diContainer.appConfig,
         ),
-        onProgress: onProgress,
-        environment: diContainer.env,
-      );
-      onProgress(mainRepository.name);
-    } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации репозитория IMainRepository',
-        error,
-        stackTrace,
-      );
-    }
+      ),
+      onProgress: onProgress,
+      onError: onError,
+      environment: diContainer.env,
+    );
 
-    try {
-      // Инициализация репозитория профиля
-      profileRepository = _lazyInitRepo<IProfileRepository>(
-        mockFactory: ProfileMockRepository.new,
-        mainFactory: () => ProfileRepository(
-          httpClient: diContainer.httpClientFactory(
-            diContainer.debugService,
-            diContainer.appConfig,
-          ),
+    // Инициализация репозитория сервиса управления токеном доступа
+    mainRepository = _lazyInitRepo<IMainRepository>(
+      mockFactory: MainMockRepository.new,
+      mainFactory: () => MainRepository(
+        httpClient: diContainer.httpClientFactory(
+          diContainer.debugService,
+          diContainer.appConfig,
         ),
-        onProgress: onProgress,
-        environment: diContainer.env,
-      );
-      onProgress(profileRepository.name);
-    } on Object catch (error, stackTrace) {
-      onError(
-        'Ошибка инициализации репозитория IProfileRepository',
-        error,
-        stackTrace,
-      );
-    }
+      ),
+      onProgress: onProgress,
+      onError: onError,
+      environment: diContainer.env,
+    );
+
+    // Инициализация репозитория профиля
+    profileRepository = _lazyInitRepo<IProfileRepository>(
+      mockFactory: ProfileMockRepository.new,
+      mainFactory: () => ProfileRepository(
+        httpClient: diContainer.httpClientFactory(
+          diContainer.debugService,
+          diContainer.appConfig,
+        ),
+      ),
+      onProgress: onProgress,
+      onError: onError,
+      environment: diContainer.env,
+    );
 
     onProgress(
       'Инициализация репозиториев завершена! Было подменено репозиториев - ${_mockReposToSwitch.length} (${_mockReposToSwitch.join(', ')})',
@@ -169,26 +138,35 @@ final class DiRepositories {
   /// - [mockFactory] - функция-фабрика для инициализации мокового репозитория
   /// - [mainFactory] - функция-фабрика для инициализации основного репозитория
   /// - [onProgress] - обратный вызов для уведомления о прогрессе
+  /// - [onError] - обратный вызов для обработки ошибок инициализации
   /// - [environment] - окружение приложения для определения стратегии инициализации
   ///
   /// Возвращает:
   /// - Экземпляр репозитория в зависимости от окружения
+  ///
+  /// Throws:
+  /// - Перебрасывает исключение, если инициализация репозитория завершилась с ошибкой
   T _lazyInitRepo<T extends DiBaseRepo>({
     required AppEnv environment,
     required T Function() mainFactory,
     required T Function() mockFactory,
     required OnProgress onProgress,
+    required OnError onError,
   }) {
-    // TODO(yura): https://github.com/smmarty/friflex_flutter_starter/issues/31  - добавить onError
+    try {
+      final repo = switch (environment) {
+        AppEnv.dev => mockFactory(),
+        AppEnv.prod => mainFactory(),
+        AppEnv.stage =>
+          _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
+      };
 
-    final repo = switch (environment) {
-      AppEnv.dev => mockFactory(),
-      AppEnv.prod => mainFactory(),
-      AppEnv.stage =>
-        _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
-    };
-
-    onProgress(repo.name);
-    return repo;
+      // throw Exception('Тестовая - ошибка инициализации репозитория $T');
+      onProgress(repo.name);
+      return repo;
+    } on Object catch (error, stackTrace) {
+      onError('Ошибка инициализации репозитория $T', error, stackTrace);
+      rethrow;
+    }
   }
 }
