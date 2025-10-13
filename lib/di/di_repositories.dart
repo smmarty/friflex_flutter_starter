@@ -166,6 +166,7 @@ final class DiRepositories {
       return repo;
     } on Object catch (error, stackTrace) {
       onError('Ошибка инициализации репозитория $T', error, stackTrace);
+      // Перебрасываем исключение дальше, чтобы не скрыть ошибку инициализации
       rethrow;
     }
   }
