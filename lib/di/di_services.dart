@@ -41,6 +41,7 @@ final class DiServices {
     required DiContainer diContainer,
   }) {
     try {
+      // throw Exception('Тестовая - ошибка инициализации сервиса путей');
       pathProvider = const AppPathProvider();
       onProgress(AppPathProvider.name);
     } on Object catch (error, stackTrace) {

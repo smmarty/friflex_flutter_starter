@@ -134,8 +134,11 @@ class AppRunner {
           ..logOnComplete(name)
           ..stop();
       },
-      onError: (message, error, [stackTrace]) =>
-          debugService.logError(message, error: error, stackTrace: stackTrace),
+      onError: (message, error, [stackTrace]) {
+        timerRunner.stop();
+        _debugService.logError(message, error: error, stackTrace: stackTrace);
+        throw Exception('Ошибка инициализации зависимостей: $message');
+      },
     );
     //throw Exception('Test error');
     return diContainer;
