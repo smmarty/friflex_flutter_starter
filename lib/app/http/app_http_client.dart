@@ -25,6 +25,7 @@ final class AppHttpClient implements IHttpClient {
       ..connectTimeout = const Duration(seconds: 5)
       ..sendTimeout = const Duration(seconds: 7)
       ..receiveTimeout = const Duration(seconds: 10)
+      ..responseType = ResponseType.json
       ..headers = {'Content-Type': 'application/json'};
     debugService.log('HTTP client created');
     _httpClient.interceptors.add(debugService.dioLogger);
