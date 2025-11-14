@@ -25,8 +25,8 @@ void _initErrorHandlers(IDebugService debugService) {
 
 /// Метод для показа экрана ошибки
 void _showErrorScreen(Object error, StackTrace? stackTrace) {
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    AppRouter.rootNavigatorKey.currentState?.push(
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    await AppRouter.rootNavigatorKey.currentState?.push(
       MaterialPageRoute(
         builder: (_) => ErrorScreen(error: error, stackTrace: stackTrace),
       ),

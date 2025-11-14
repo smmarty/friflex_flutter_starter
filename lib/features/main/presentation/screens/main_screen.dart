@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/features/main/presentation/main_routes.dart';
@@ -23,7 +25,7 @@ class MainScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Переход на экран с деталями
-                context.pushNamed(MainRoutes.mainDetailScreenName);
+                unawaited(context.pushNamed(MainRoutes.mainDetailScreenName));
               },
               child: const Text('Переход на экран с деталями'),
             ),

@@ -46,20 +46,20 @@ class AppColors extends ThemeExtension<AppColors> with _$AppColorsTailorMixin {
   final Color infoSnackbarBackground;
 
   /// Цвета светлой темы
-  static final AppColors light = AppColors(
+  static final AppColors light = const AppColors(
     testColor: Colors.red,
-    errorSnackbarBackground: const Color(0xFFD24720),
-    successSnackbarBackground: const Color(0xFF6FB62C),
-    infoSnackbarBackground: const Color.fromARGB(255, 220, 108, 77),
-    itemTextColor: const Color(0xFFFAF3EB),
+    errorSnackbarBackground: Color(0xFFD24720),
+    successSnackbarBackground: Color(0xFF6FB62C),
+    infoSnackbarBackground: Color.fromARGB(255, 220, 108, 77),
+    itemTextColor: Color(0xFFFAF3EB),
   );
 
   /// Цвета тёмной темы
-  static final AppColors dark = AppColors(
+  static final AppColors dark = const AppColors(
     testColor: Colors.green,
-    errorSnackbarBackground: const Color(0xFF638B8B),
-    successSnackbarBackground: const Color(0xFF93C499),
-    infoSnackbarBackground: const Color.fromARGB(255, 35, 147, 178),
+    errorSnackbarBackground: Color(0xFF638B8B),
+    successSnackbarBackground: Color(0xFF93C499),
+    infoSnackbarBackground: Color.fromARGB(255, 35, 147, 178),
     itemTextColor: Colors.white,
   );
 }

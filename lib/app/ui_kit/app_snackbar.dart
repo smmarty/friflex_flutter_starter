@@ -180,7 +180,7 @@ class _AppSnackBarState extends State<AppSnackBar>
           CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
         );
 
-    _animationController.forward();
+    unawaited(_animationController.forward());
   }
 
   /// Запуск таймера для автоматического закрытия снекбара
@@ -198,11 +198,13 @@ class _AppSnackBarState extends State<AppSnackBar>
     if (!mounted) return;
 
     _dismissTimer?.cancel();
-    _animationController.reverse().then((_) {
-      if (mounted) {
-        widget.onDismiss?.call();
-      }
-    });
+    unawaited(
+      _animationController.reverse().then((_) {
+        if (mounted) {
+          widget.onDismiss?.call();
+        }
+      }),
+    );
   }
 
   @override
@@ -243,7 +245,7 @@ class _AppSnackBarState extends State<AppSnackBar>
                     Flexible(
                       child: Text(
                         widget.message,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -288,13 +290,21 @@ class _Icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (type) {
-      TypeSnackBar.success => Icon(
+      TypeSnackBar.success => const Icon(
         Icons.check_circle,
         color: Colors.white,
         size: 32,
       ),
-      TypeSnackBar.error => Icon(Icons.error, color: Colors.white, size: 32),
-      TypeSnackBar.info => Icon(Icons.info, color: Colors.white, size: 32),
+      TypeSnackBar.error => const Icon(
+        Icons.error,
+        color: Colors.white,
+        size: 32,
+      ),
+      TypeSnackBar.info => const Icon(
+        Icons.info,
+        color: Colors.white,
+        size: 32,
+      ),
     };
   }
 }

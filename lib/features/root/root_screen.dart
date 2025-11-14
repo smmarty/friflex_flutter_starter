@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
@@ -46,12 +48,14 @@ class _RootScreenState extends State<RootScreen> {
       // Проверяем только состояние успеха с доступной информацией об обновлении
       if (updateState is UpdateSuccessState &&
           updateState.updateInfo.updateType == UpdateType.soft) {
-        SoftUpdateModal.show(
-          context,
-          updateEntity: updateState.updateInfo,
-          onUpdate: () {
-            // TODO(yura): реализовать логику обновления приложения
-          },
+        unawaited(
+          SoftUpdateModal.show(
+            context,
+            updateEntity: updateState.updateInfo,
+            onUpdate: () {
+              // TODO(yura): реализовать логику обновления приложения
+            },
+          ),
         );
       }
     });
@@ -64,7 +68,7 @@ class _RootScreenState extends State<RootScreen> {
           ? FloatingActionButton(
               child: const Icon(Icons.bug_report),
               onPressed: () {
-                context.pushNamed(DebugRoutes.debugScreenName);
+                unawaited(context.pushNamed(DebugRoutes.debugScreenName));
               },
             )
           : null,

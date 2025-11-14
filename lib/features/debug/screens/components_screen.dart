@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/app/ui_kit/app_snackbar.dart';
@@ -78,15 +80,17 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
                 final updateCubitState = context.read<UpdateCubit>().state;
                 if (updateCubitState is UpdateSuccessState &&
                     updateCubitState.updateInfo.updateType == UpdateType.soft) {
-                  SoftUpdateModal.show(
-                    context,
-                    updateEntity: updateCubitState.updateInfo,
-                    onUpdate: () {
-                      AppSnackBar.showSuccess(
-                        context: context,
-                        message: 'Начато обновление приложения',
-                      );
-                    },
+                  unawaited(
+                    SoftUpdateModal.show(
+                      context,
+                      updateEntity: updateCubitState.updateInfo,
+                      onUpdate: () {
+                        AppSnackBar.showSuccess(
+                          context: context,
+                          message: 'Начато обновление приложения',
+                        );
+                      },
+                    ),
                   );
                 }
               },
@@ -95,7 +99,7 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
             const HBox(16),
             ElevatedButton(
               onPressed: () {
-                context.pushNamed(UpdateRoutes.hardUpdateScreenName);
+                unawaited(context.pushNamed(UpdateRoutes.hardUpdateScreenName));
               },
               child: const Text('Переход на экран Hard Update обновления'),
             ),
