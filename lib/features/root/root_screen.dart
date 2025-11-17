@@ -3,11 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
-import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
 import 'package:friflex_starter/features/update/presentation/components/soft_modal_sheet.dart';
-import 'package:friflex_starter/features/update/update_type.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template root_screen}
@@ -47,7 +45,7 @@ class _RootScreenState extends State<RootScreen> {
 
       // Проверяем только состояние успеха с доступной информацией об обновлении
       if (updateState is UpdateSuccessState &&
-          updateState.updateInfo.updateType == UpdateType.soft) {
+          updateState.updateInfo.updateType == .soft) {
         unawaited(
           SoftUpdateModal.show(
             context,
@@ -64,7 +62,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: context.di.env != AppEnv.prod
+      floatingActionButton: context.di.env != .prod
           ? FloatingActionButton(
               child: const Icon(Icons.bug_report),
               onPressed: () {

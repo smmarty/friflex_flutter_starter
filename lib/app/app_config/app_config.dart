@@ -41,7 +41,7 @@ class AppConfigDev implements IAppConfig {
   AppConfigDev();
 
   @override
-  AppEnv get env => AppEnv.dev;
+  AppEnv get env => .dev;
 
   @override
   String get name => 'AppConfigDev';
@@ -67,7 +67,7 @@ class AppConfigProd implements IAppConfig {
   AppConfigProd();
 
   @override
-  AppEnv get env => AppEnv.prod;
+  AppEnv get env => .prod;
 
   @override
   String get name => 'AppConfigProd';
@@ -93,7 +93,7 @@ class AppConfigStage implements IAppConfig {
   AppConfigStage();
 
   @override
-  AppEnv get env => AppEnv.stage;
+  AppEnv get env => .stage;
 
   @override
   String get name => 'AppConfigStage';

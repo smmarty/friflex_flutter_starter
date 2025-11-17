@@ -1,8 +1,8 @@
 
 # 🚀 Friflex Flutter Starter - Корпоративный шаблон
 
-![Flutter](https://img.shields.io/badge/Flutter-3.35.5+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
-![Dart](https://img.shields.io/badge/Dart-3.9.2+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
+![Flutter](https://img.shields.io/badge/Flutter-3.38.1+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-3.10.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 Корпоративный стартовый шаблон для разработки масштабируемых Flutter-приложений
@@ -24,6 +24,7 @@
 - 🌍 Поддержка интернационализации
 - 🎨 UI Kit и система токенов дизайна
 - 🔍 Инструменты отладки и мониторинга
+- ⚡ Современный Dart 3.10+ с dot shorthands
 
 ## 🎯 Для чего нужен стартер
 
@@ -90,20 +91,27 @@ features/
 
 | Категория | Библиотека | Версия | Описание |
 |-----------|------------|--------|----------|
-| 🧭 **Навигация** | [go_router](https://pub.dev/packages/go_router) | `16.2.4` | Декларативный роутинг |
+| 🧭 **Навигация** | [go_router](https://pub.dev/packages/go_router) | `17.0.0` | Декларативный роутинг |
 | 🔄 **State Management** | [flutter_bloc](https://pub.dev/packages/flutter_bloc) | `9.1.1` | Управление состоянием |
 | 💉 **DI** | Custom InheritedWidget | - | Внедрение зависимостей |
 | 🎨 **Resources** | [flutter_gen](https://pub.dev/packages/flutter_gen) | `5.12.0` | Генерация ресурсов |
 | 🌐 **HTTP** | [dio](https://pub.dev/packages/dio) | `5.9.0` | HTTP клиент |
+| 🎨 **SVG** | [flutter_svg](https://pub.dev/packages/flutter_svg) | `2.2.2` | Поддержка SVG |
+| 🎬 **Animation** | [lottie](https://pub.dev/packages/lottie) | `3.3.2` | Анимации Lottie |
 | 🔒 **Secure Storage** | [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) | - | Защищенное хранилище |
-| 📊 **Logging** | [talker](https://pub.dev/packages/talker_flutter) | `5.0.1` | Логирование и отладка |
+| 📊 **Logging** | [talker](https://pub.dev/packages/talker_flutter) | `5.0.2` | Логирование и отладка |
+| 🎨 **Theme** | [theme_tailor](https://pub.dev/packages/theme_tailor) | `3.1.1` | Генерация тем |
+| ⚙️ **Environment** | [envied](https://pub.dev/packages/envied) | `1.3.1` | Управление переменными окружения |
 
 ### 🔧 Инструменты разработки
 
-- **📝 Линтинг**: корпоративные правила кода
-- **🏗️ Code Generation**: `build_runner` для генерации кода
-- **🌍 Локализация**: `flutter_localizations` + `intl`
-- **⚙️ Окружения**: `envied` для управления переменными
+| Инструмент | Версия | Описание |
+|-----------|--------|----------|
+| **📝 Линтинг** | `flutter_lints: 6.0.0` | Корпоративные правила кода |
+| **🏗️ Code Generation** | `build_runner: 2.10.3` | Генерация кода |
+| **🌍 Локализация** | `intl: 0.20.2` | Интернационализация |
+| **⚙️ Environment** | `envied: 1.3.1` + `envied_generator: 1.3.1` | Управление переменными окружения |
+| **🎨 Theme Generator** | `theme_tailor: 3.1.1` | Генерация тем |
 
 ## 🗂️ Структура проекта
 

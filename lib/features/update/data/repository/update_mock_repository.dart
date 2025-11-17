@@ -1,12 +1,11 @@
 import 'package:friflex_starter/features/update/domain/entity/update_entity.dart';
 import 'package:friflex_starter/features/update/domain/repository/i_update_repository.dart';
-import 'package:friflex_starter/features/update/update_type.dart';
 
 /// Мок обновления обязательное, можно использовать для тестирования
 const mockHardUpdateEntity = UpdateEntity(
   availableVersion: '2.0.0',
   updateUrl: 'https://example.com/update',
-  updateType: UpdateType.hard,
+  updateType: .hard,
   whatIsNew: 'Добавлены новые функции и исправлены ошибки.',
 );
 
@@ -14,7 +13,7 @@ const mockHardUpdateEntity = UpdateEntity(
 const mockSoftUpdateEntity = UpdateEntity(
   availableVersion: '2.0.0',
   updateUrl: 'https://example.com/update',
-  updateType: UpdateType.soft,
+  updateType: .soft,
   whatIsNew: 'Добавлены новые функции и исправлены ошибки.',
 );
 

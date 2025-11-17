@@ -10,7 +10,6 @@ import 'package:friflex_starter/features/error/error_screen.dart';
 import 'package:friflex_starter/features/splash/splash_screen.dart';
 import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
 import 'package:friflex_starter/features/update/update_routes.dart';
-import 'package:friflex_starter/features/update/update_type.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
 import 'package:go_router/go_router.dart';
@@ -124,7 +123,7 @@ class _App extends StatelessWidget {
       child: BlocConsumer<UpdateCubit, UpdateState>(
         listener: (context, state) {
           if (state is UpdateSuccessState &&
-              state.updateInfo.updateType == UpdateType.hard &&
+              state.updateInfo.updateType == .hard &&
               context.mounted) {
             router.goNamed(UpdateRoutes.hardUpdateScreenName);
           }
