@@ -6,7 +6,6 @@ import 'package:friflex_starter/app/ui_kit/app_snackbar.dart';
 import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
 import 'package:friflex_starter/features/update/presentation/components/soft_modal_sheet.dart';
 import 'package:friflex_starter/features/update/update_routes.dart';
-import 'package:friflex_starter/features/update/update_type.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -79,7 +78,7 @@ class _ComponentsScreenState extends State<ComponentsScreen> {
               onPressed: () {
                 final updateCubitState = context.read<UpdateCubit>().state;
                 if (updateCubitState is UpdateSuccessState &&
-                    updateCubitState.updateInfo.updateType == UpdateType.soft) {
+                    updateCubitState.updateInfo.updateType == .soft) {
                   unawaited(
                     SoftUpdateModal.show(
                       context,

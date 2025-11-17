@@ -63,7 +63,7 @@ class AppSnackBar extends StatefulWidget {
     _show(
       context: context,
       message: message,
-      type: TypeSnackBar.error,
+      type: .error,
       displayDuration: displayDuration,
     );
   }
@@ -81,7 +81,7 @@ class AppSnackBar extends StatefulWidget {
     _show(
       context: context,
       message: message,
-      type: TypeSnackBar.info,
+      type: .info,
       displayDuration: displayDuration,
     );
   }
@@ -99,7 +99,7 @@ class AppSnackBar extends StatefulWidget {
     _show(
       context: context,
       message: message,
-      type: TypeSnackBar.success,
+      type: .success,
       displayDuration: displayDuration,
     );
   }
@@ -266,9 +266,9 @@ class _AppSnackBarState extends State<AppSnackBar>
   /// [TypeSnackBar.error] - цвет ошибки
   Color _getBackgroundColor(TypeSnackBar type) {
     return switch (type) {
-      TypeSnackBar.success => context.appColors.successSnackbarBackground,
-      TypeSnackBar.error => context.appColors.errorSnackbarBackground,
-      TypeSnackBar.info => context.appColors.infoSnackbarBackground,
+      .success => context.appColors.successSnackbarBackground,
+      .error => context.appColors.errorSnackbarBackground,
+      .info => context.appColors.infoSnackbarBackground,
     };
   }
 }
@@ -290,17 +290,17 @@ class _Icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (type) {
-      TypeSnackBar.success => const Icon(
+      .success => const Icon(
         Icons.check_circle,
         color: Colors.white,
         size: 32,
       ),
-      TypeSnackBar.error => const Icon(
+      .error => const Icon(
         Icons.error,
         color: Colors.white,
         size: 32,
       ),
-      TypeSnackBar.info => const Icon(
+      .info => const Icon(
         Icons.info,
         color: Colors.white,
         size: 32,

@@ -50,7 +50,7 @@ class AppColors extends ThemeExtension<AppColors> with _$AppColorsTailorMixin {
     testColor: Colors.red,
     errorSnackbarBackground: Color(0xFFD24720),
     successSnackbarBackground: Color(0xFF6FB62C),
-    infoSnackbarBackground: Color.fromARGB(255, 220, 108, 77),
+    infoSnackbarBackground: .fromARGB(255, 220, 108, 77),
     itemTextColor: Color(0xFFFAF3EB),
   );
 
@@ -59,7 +59,7 @@ class AppColors extends ThemeExtension<AppColors> with _$AppColorsTailorMixin {
     testColor: Colors.green,
     errorSnackbarBackground: Color(0xFF638B8B),
     successSnackbarBackground: Color(0xFF93C499),
-    infoSnackbarBackground: Color.fromARGB(255, 35, 147, 178),
+    infoSnackbarBackground: .fromARGB(255, 35, 147, 178),
     itemTextColor: Colors.white,
   );
 }

@@ -155,9 +155,9 @@ final class DiRepositories {
   }) {
     try {
       final repo = switch (environment) {
-        AppEnv.dev => mockFactory(),
-        AppEnv.prod => mainFactory(),
-        AppEnv.stage =>
+        .dev => mockFactory(),
+        .prod => mainFactory(),
+        .stage =>
           _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
       };
 

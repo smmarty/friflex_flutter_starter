@@ -41,9 +41,9 @@ final class DiContainer {
   }) async {
     // Инициализация конфигурации приложения
     appConfig = switch (env) {
-      AppEnv.dev => AppConfigDev(),
-      AppEnv.prod => AppConfigProd(),
-      AppEnv.stage => AppConfigStage(),
+      .dev => AppConfigDev(),
+      .prod => AppConfigProd(),
+      .stage => AppConfigStage(),
     };
 
     // Инициализация HTTP клиента
