@@ -1,90 +1,135 @@
 include: package:flutter_lints/flutter.yaml
 
-# Включает правила из:
-# - package:lints/core.yaml: основные правила критических проблем
-# - package:lints/recommended.yaml: рекомендуемые правила для чистого кода
-# - package:flutter_lints/flutter.yaml: специфичные правила для Flutter
+# Персонализированные настройки анализатора и линтера.
+# Базовый набор flutter_lints + дополнительные ужесточения.
 
 analyzer:
   exclude:
-    - "android/**"
-    - "assets/**"
-    - "build/**"
-    - "config/**"
-    - "core/**"
-    - "res/**"
-    - "ios/**"
-    - "**/*.g.dart"
-    - "**/*.config.dart"
-    - "**/*.gen.dart"
-    - "**/*.freezed.dart"
-    - "**/generated/*"
-    - "**/*.gr.dart"
-    - "**/*.yaml"
-    - "app_services/aurora/**"
-    - "/app_services/aurora/**"
-    - "**/app_services/aurora/**"
-    - "**/*.lock.dart"
-errors:
-  # Переопределения уровней ошибок (error/warning/info)
-  avoid_dynamic_calls: error # Запрещает использование dynamic для вызовов методов
-  avoid_returning_null_for_future: error # Запрещает возврат null вместо Future
-  avoid_slow_async_io: warning # Предупреждает о медленных асинхронных операциях ввода/вывода
-  avoid_type_to_string: warning # Предупреждает о неправильном использовании toString() для типов
-  cancel_subscriptions: error # Требует отмены подписок, предотвращает утечки памяти
-  close_sinks: error # Требует закрытия sink-ов, предотвращает утечки ресурсов
-  comment_references: warning # Проверяет корректность ссылок в комментариях
-  always_declare_return_types: error # Требует явного указания возвращаемых типов методов
-  always_require_non_null_named_parameters: warning # Требует использования @required для ненулевых параметров
-  avoid_bool_literals_in_conditional_expressions: warning # Запрещает избыточные булевы литералы в условных выражениях
-  avoid_return_types_on_setters: warning # Запрещает возвращаемые типы для сеттеров
-  avoid_returning_null: error # Запрещает возврат null
-  avoid_setters_without_getters: error # Требует создания геттера при наличии сеттера
-  avoid_void_async: error # Запрещает использование void для асинхронных функций
-  constant_identifier_names: error # Проверяет правильность именования констант
-  unnecessary_new: warning # Запрещает избыточное использование ключевого слова new
-  use_decorated_box: warning # Рекомендует использовать DecoratedBox вместо Container
-  use_colored_box: warning # Рекомендует использовать ColoredBox вместо Container с цветом
+    - "build/**"                   # Исключаем артефакты сборки (генерируемый код, кэш, ресурсы)
+    - "android/**"                 # Платформенный код Android (Java/Kotlin, Gradle) не анализируем Dart линтером
+    - "ios/**"                     # Платформенный код iOS (Swift/ObjC) вне области Dart анализа
+    - "assets/**"                  # Статические ассеты (шрифты, изображения, json и др.)
+    - "**/*.g.dart"                # Сгенерированные файлы build_runner / json_serializable
+    - "**/*.freezed.dart"          # Сгенерированные модели пакетом freezed
+    - "**/*.gen.dart"              # Общий паттерн для доп. генераторов
+    - "**/*.gr.dart"               # Генерируемые маршруты (auto_route / другие)
+    - "**/*.config.dart"           # Сгенерированные конфигурационные файлы
+    - "**/generated/**"            # Папки с автогенерируемыми исходниками
+    - "**/*.lock"             # Временные/lock файлы генераторов (если создаются)
+    - "**/app_services/aurora/**"  # Внутренний сервисный код (предположительно внешняя интеграция) исключён
+  errors:
+    avoid_dynamic_calls: error              # Запрет неявных dynamic вызовов (типобезопасность)
+    avoid_returning_null_for_future: error  # Future не должен завершаться null без явной модели
+    avoid_slow_async_io: warning            # Подсказка о потенциально медленных IO операциях
+    avoid_type_to_string: warning           # Предупреждение против использования Type.toString для логики
+    cancel_subscriptions: error             # Требование отменять StreamSubscription для предотвращения утечек
+    close_sinks: error                      # Обязательное закрытие Sink (ресурсное управление)
+    comment_references: warning             # Проверка корректности ссылок в документационных комментариях
+    always_declare_return_types: error      # Явный тип возвращаемого значения повышает читаемость
+    avoid_bool_literals_in_conditional_expressions: warning # Избегать выражений вида condition ? true : false
+    avoid_return_types_on_setters: warning  # Сеттеры не должны объявлять тип возврата
+    avoid_returning_null: warning           # Предпочтительнее nullable типы / Option объекты вместо raw null
+    avoid_setters_without_getters: error    # Сеттер без геттера может скрывать состояние
+    avoid_void_async: error                 # async void нежелателен (трудно ловить ошибки)
+    constant_identifier_names: error        # Единый стиль именования констант (UPPER_CASE)
+    unnecessary_new: warning                # Снижение шума: new не нужен в современном Dart
+    use_decorated_box: warning              # Оптимизация: DecoratedBox вместо контейнера без лишних виджетов
+    use_colored_box: warning                # Оптимизация: ColoredBox для простого цвета фона
 
 linter:
   rules:
-    # Нестандартные правила или правила с измененными значениями
-    always_put_required_named_parameters_first: true # Требовать размещать обязательные именованные параметры первыми
-    avoid_catches_without_on_clauses: true # Избегать catch без указания типа исключения
-    avoid_catching_errors: true # Избегать перехвата ошибок типа Error
-    avoid_equals_and_hash_code_on_mutable_classes: true # Избегать equals и hashCode в изменяемых классах
-    avoid_escaping_inner_quotes: true # Избегать экранирования внутренних кавычек
-    avoid_field_initializers_in_const_classes: true # Избегать инициализаторов полей в константных классах
-    avoid_implementing_value_types: true # Избегать реализации интерфейсов значимых типов
-    avoid_multiple_declarations_per_line: false # Разрешать несколько объявлений в одной строке
-    avoid_positional_boolean_parameters: true # Избегать позиционных булевых параметров
-    avoid_private_typedef_functions: true # Избегать приватных typedef-функций
-    avoid_redundant_argument_values: true # Избегать избыточных значений аргументов
-    avoid_returning_this: true # Избегать возврата this
-    cascade_invocations: true # Использовать каскадные вызовы
-    deprecated_consistency: true # Поддерживать согласованность устаревших элементов
-    do_not_use_environment: false # Разрешить использование Environment
-    leading_newlines_in_multiline_strings: true # Начинать многострочные строки с новой строки
-    no_runtimeType_toString: true # Не использовать runtimeType.toString()
-    one_member_abstracts: false # Разрешать абстрактные классы с одним методом
-    only_throw_errors: true # Выбрасывать только объекты Error
-    parameter_assignments: true # Запрещать присваивание значений параметрам
-    prefer_asserts_with_message: true # Использовать сообщения с assert
-    prefer_constructors_over_static_methods: true # Предпочитать конструкторы статическим методам
-    prefer_final_in_for_each: true # Использовать final в for-each циклах
-    prefer_final_locals: true # Использовать final для локальных переменных
-    public_member_api_docs: false # Не требовать документацию для всех публичных членов
-    require_trailing_commas: true # Требовать запятые в конце для улучшения форматирования
-    sort_constructors_first: true # Требовать размещать конструкторы первыми
-    sort_pub_dependencies: false # Не требовать сортировки зависимостей в pubspec
-    sort_unnamed_constructors_first: false # Не требовать размещать безымянные конструкторы первыми
-    use_is_even_rather_than_modulo: true # Использовать isEven вместо % 2 == 0
-    use_late_for_private_fields_and_variables: false # Не требовать late для приватных полей
-    use_setters_to_change_properties: true # Использовать сеттеры для изменения свойств
-    use_string_buffers: true # Использовать StringBuffer для сложной конкатенации
-    use_to_and_as_if_applicable: true # Использовать методы to и as при применимости
-    no_literal_bool_comparisons: true # Запрещать сравнения с литералами true/false
-    use_key_in_widget_constructors: true # Обязательное указание ключа для stateful/stateless widgets
-    always_use_package_imports: true # Всегда использовать package: импорты
-    unawaited_futures: true # Требовать использование unawaited для неожидаемых Future
-    comment_references: true # Использовать только видимые параметры в документации
+    # === Именование и стиль ===
+    - always_put_required_named_parameters_first   # Обязательные именованные параметры первыми повышают читаемость
+    - always_use_package_imports                   # Единый стиль импортов через package: упрощает refactoring
+    - curly_braces_in_flow_control_structures      # Обязательные фигурные скобки в if/for/while для безопасности
+    - directives_ordering                          # Упорядочивание импортов (dart → package → relative)
+    - eol_at_end_of_file                           # Пустая строка в конце файла (POSIX standard)
+    - prefer_single_quotes                         # Единый стиль кавычек (одинарные быстрее печатать)
+    - slash_for_doc_comments                       # Использовать /// вместо /** */ для документации
+    - sort_constructors_first                      # Конструкторы в начале класса — быстрый обзор API
+    
+    # === Обработка ошибок и типобезопасность ===
+    - avoid_catching_errors                        # Не перехватывать Error (только Exception) — ошибки системные
+    - await_only_futures                           # await только для Future (ловит ошибки типизации)
+    - control_flow_in_finally                      # Запрет return/break/continue в finally блоках
+    - empty_catches                                # Предупреждение о пустых catch (скрытые баги)
+    - hash_and_equals                              # Требует переопределять hashCode и == вместе
+    - only_throw_errors                            # Бросать Error/Exception типы, а не произвольные объекты
+    - test_types_in_equals                         # Проверка типа в equals для безопасности
+    - unrelated_type_equality_checks               # Запрет сравнения несовместимых типов
+    - use_build_context_synchronously              # КРИТИЧНО: запрет BuildContext после async gap
+    - use_rethrow_when_possible                    # Использовать rethrow вместо throw e (сохраняет stacktrace)
+    - discarded_futures                            # Выявляет неожиданные Future без await
+    - unawaited_futures                            # Явно помечать намеренно не ожидаемые Future
+    
+    # === Иммутабельность и const ===
+    - avoid_equals_and_hash_code_on_mutable_classes # hashCode/== на изменяемых классах приводит к багам в коллекциях
+    - prefer_const_constructors                    # Константные конструкторы для производительности
+    - prefer_const_constructors_in_immutables      # Обязательные const в неизменяемых классах
+    - prefer_const_literals_to_create_immutables   # Константные литералы коллекций
+    - prefer_final_fields                          # final для полей где возможно
+    - prefer_final_in_for_each                     # final в forEach предотвращает случайные изменения
+    - prefer_final_locals                          # final локальные переменные — стремимся к иммутабельности
+    - parameter_assignments                        # Не переназначать параметры — вводит путаницу
+    
+    # === Flutter оптимизации ===
+    - avoid_unnecessary_containers                 # Убирает лишние Container виджеты
+    - sized_box_for_whitespace                     # SizedBox вместо Container для отступов
+    - sized_box_shrink_expand                      # Специализированные конструкторы SizedBox.shrink/expand
+    - sort_child_properties_last                   # child/children последними в виджетах
+    - use_colored_box                              # ColoredBox для простого цвета фона
+    - use_decorated_box                            # DecoratedBox вместо контейнера без лишних виджетов
+    - use_key_in_widget_constructors               # Ключ позволяет корректно применить дифф к дереву виджетов
+    
+    # === Современный Dart (2.17+, 3.x) ===
+    - use_super_parameters                         # super параметры для краткости
+    - combinators_ordering                         # Сортировка show/hide в импортах
+    - implicit_call_tearoffs                       # Разрешить неявные tearoffs
+    - matching_super_parameters                    # Автоматическое соответствие параметрам супер-конструктора
+    - use_enums                                    # Предпочитать enums вместо статических констант
+    
+    # === Читаемость кода ===
+    - avoid_escaping_inner_quotes                  # Предпочтительно менять тип кавычек вместо экранирования
+    - avoid_field_initializers_in_const_classes    # Инициализация в константных классах тяжеловесна/избыточна
+    - avoid_implementing_value_types               # Не реализовывать value-type интерфейсы вручную (риск несовпадений)
+    - avoid_positional_boolean_parameters          # Булевые позиционные параметры плохо читаются (использовать именованные)
+    - avoid_private_typedef_functions              # Приватные typedef затрудняют повторное использование / читаемость
+    - avoid_redundant_argument_values              # Удалять аргументы совпадающие с значениями по умолчанию
+    - avoid_returning_this                         # Возврат this усложняет fluent API и может скрывать ошибки
+    - cascade_invocations                          # Использовать каскады для последовательности операций над объектом
+    - deprecated_consistency                       # Единый стиль пометок @deprecated
+    - leading_newlines_in_multiline_strings        # Многострочные строки начинают с новой строки — чище diff
+    - no_literal_bool_comparisons                  # Исключить сравнения вида flag == true
+    - no_runtimeType_toString                      # runtimeType.toString нестабилен для логики (только отладка)
+    - prefer_asserts_with_message                  # Сообщение в assert облегчает диагностику
+    - prefer_constructors_over_static_methods      # Конструкторы лучше выражают создание экземпляра
+    - comment_references                           # Корректные ссылки в комментариях (небитые, видимые)
+    
+    # === Сахар и идиомы ===
+    - avoid_init_to_null                           # Не писать = null явно (по умолчанию)
+    - prefer_if_null_operators                     # ?? оператор вместо тернарника с null
+    - prefer_interpolation_to_compose_strings      # Интерполяция вместо конкатенации
+    - prefer_is_empty                              # .isEmpty вместо .length == 0
+    - prefer_is_not_empty                          # .isNotEmpty вместо .length > 0
+    - use_is_even_rather_than_modulo               # isEven более явно и может быть эффективнее
+    - use_setters_to_change_properties             # Изменение полей через сеттеры (инкапсуляция)
+    - use_string_buffers                           # StringBuffer эффективнее при конкатенации в циклах
+    - use_to_and_as_if_applicable                  # Использовать to*/as* если семантика преобразования доступна
+    
+    # === Удаление избыточности ===
+    - avoid_return_types_on_setters                # Сеттеры не должны объявлять тип возврата
+    - unnecessary_const                            # Убирает лишние const
+    - unnecessary_new                              # Убирает лишние new
+    - unnecessary_this                             # Убирает лишние this
+    - unnecessary_parenthesis                      # Лишние скобки
+    
+    # === Продакшн / отладка ===
+    - avoid_print                                  # Запрет print в продакшене (использовать logger)
+
+bloc:
+  rules:
+    - avoid_flutter_imports        # Логика блока должна быть платформенно независимой
+    - avoid_public_bloc_methods    # Публичные методы могут нарушать чистоту паттерна (использовать события)
+    - avoid_public_fields          # Публичные поля обходят инкапсуляцию; использовать состояние/события
+    - prefer_file_naming_conventions # Единообразие именования файлов блоков повышает навигацию
+    

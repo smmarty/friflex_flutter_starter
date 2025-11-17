@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/app/app_context_ext.dart';
+import 'package:friflex_starter/app/ui_kit/app_box.dart';
 import 'package:friflex_starter/features/debug/debug_routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,42 +37,42 @@ class DebugScreen extends StatelessWidget {
             const HBox(16),
             ElevatedButton(
               onPressed: () {
-                context.pushNamed(DebugRoutes.iconsScreenName);
+                unawaited(context.pushNamed(DebugRoutes.iconsScreenName));
               },
               child: const Text('Экран с иконками'),
             ),
             const HBox(16),
             ElevatedButton(
               onPressed: () {
-                context.pushNamed(DebugRoutes.themeScreenName);
+                unawaited(context.pushNamed(DebugRoutes.themeScreenName));
               },
               child: const Text('Экран настроек темы'),
             ),
             const HBox(16),
             ElevatedButton(
               onPressed: () {
-                context.pushNamed(DebugRoutes.tokensScreenName);
+                unawaited(context.pushNamed(DebugRoutes.tokensScreenName));
               },
               child: const Text('Экран с токенами'),
             ),
             const HBox(16),
             ElevatedButton(
               onPressed: () {
-                context.pushNamed(DebugRoutes.uiKitScreenName);
+                unawaited(context.pushNamed(DebugRoutes.uiKitScreenName));
               },
               child: const Text('Экран UI Kit'),
             ),
             const HBox(16),
             ElevatedButton(
               onPressed: () {
-                context.pushNamed(DebugRoutes.langScreenName);
+                unawaited(context.pushNamed(DebugRoutes.langScreenName));
               },
               child: const Text('Экран локализации'),
             ),
             const HBox(16),
             ElevatedButton(
-              onPressed: () {
-                context.pushNamed(DebugRoutes.componentsScreenName);
+              onPressed: () async {
+                await context.pushNamed(DebugRoutes.componentsScreenName);
               },
               child: const Text('Экран компонентов'),
             ),

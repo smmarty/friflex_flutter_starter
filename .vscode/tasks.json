@@ -2,23 +2,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "fluttergen",
-            "type": "shell",
-            "command": "/Users/yura/.pub-cache/bin/fluttergen",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "reveal": "always"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "build_runner --delete-conflicting-outputs",
             "type": "shell",
-            "command": "dart",
+            "command": "flutter",
             "args": [
+                "pub",
                 "run",
                 "build_runner",
                 "build",

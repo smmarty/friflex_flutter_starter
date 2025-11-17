@@ -631,12 +631,12 @@ void main() {
 
         // Создаем приложение с кастомными отступами
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: MediaQuery(
-              data: const MediaQueryData(
+              data: MediaQueryData(
                 padding: EdgeInsets.only(top: 50), // Симулируем статус бар
               ),
-              child: const Scaffold(body: Center(child: Text('Test'))),
+              child: Scaffold(body: Center(child: Text('Test'))),
             ),
           ),
         );

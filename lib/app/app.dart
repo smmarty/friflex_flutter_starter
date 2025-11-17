@@ -9,8 +9,8 @@ import 'package:friflex_starter/di/di_container.dart';
 import 'package:friflex_starter/features/error/error_screen.dart';
 import 'package:friflex_starter/features/splash/splash_screen.dart';
 import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.dart';
-import 'package:friflex_starter/features/update/update_type.dart';
 import 'package:friflex_starter/features/update/update_routes.dart';
+import 'package:friflex_starter/features/update/update_type.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
 import 'package:go_router/go_router.dart';
@@ -136,7 +136,7 @@ class _App extends StatelessWidget {
           }
           return ThemeConsumer(
             builder: () => MediaQuery(
-              key: ValueKey('prevent_rebuild'),
+              key: const ValueKey('prevent_rebuild'),
               data: MediaQuery.of(
                 context,
               ).copyWith(textScaler: TextScaler.noScaling, boldText: false),

@@ -10,7 +10,7 @@ part 'update_state.dart';
 /// {@endtemplate}
 class UpdateCubit extends Cubit<UpdateState> {
   /// {@macro UpdateCubit}
-  UpdateCubit(this._updatesRepository) : super(UpdateInitialState());
+  UpdateCubit(this._updatesRepository) : super(const UpdateInitialState());
 
   /// Репозиторий для проверки обновлений
   final IUpdateRepository _updatesRepository;
@@ -23,7 +23,7 @@ class UpdateCubit extends Cubit<UpdateState> {
     required String platform,
   }) async {
     if (state is UpdateLoadingState) return;
-    emit(UpdateLoadingState());
+    emit(const UpdateLoadingState());
     try {
       final updateInfo = await _updatesRepository.checkForUpdates(
         versionCode: versionCode,
