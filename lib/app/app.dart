@@ -108,9 +108,8 @@ class _AppInternal extends StatefulWidget {
   /// {@macro app_internal}
   const _AppInternal({
     required this.diContainer,
-    @visibleForTesting this.mockRouter,
+    @visibleForTesting this.mockRouter, // ignore: unused_element_parameter
   });
-
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
