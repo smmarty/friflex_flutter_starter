@@ -108,7 +108,6 @@ class _AppInternal extends StatefulWidget {
   /// {@macro app_internal}
   const _AppInternal({required this.diContainer});
 
-  /// Роутер приложения для навигации
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
