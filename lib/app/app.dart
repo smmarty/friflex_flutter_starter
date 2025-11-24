@@ -12,6 +12,7 @@ import 'package:friflex_starter/features/update/domain/state/cubit/update_cubit.
 import 'package:friflex_starter/features/update/update_routes.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
+import 'package:friflex_starter/router/app_router.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template app}
@@ -26,10 +27,7 @@ import 'package:go_router/go_router.dart';
 /// {@endtemplate}
 class App extends StatefulWidget {
   /// {@macro app}
-  const App({required this.router, required this.initDependencies, super.key});
-
-  /// Роутер приложения для навигации между экранами
-  final GoRouter router;
+  const App({required this.initDependencies, super.key});
 
   /// Функция для инициализации зависимостей приложения
   /// Возвращает Future с контейнером зависимостей
@@ -78,7 +76,7 @@ class _AppState extends State<App> {
                 // Если данные получены и не равны null, то отображаем внутренний виджет приложения
                 // Иначе отображаем экран ошибки
                 (snapshot.hasData && snapshot.data != null)
-                    ? _App(router: widget.router, diContainer: snapshot.data!)
+                    ? _AppInternal(diContainer: snapshot.data!)
                     : ErrorScreen(
                         error: snapshot.error,
                         stackTrace: snapshot.stackTrace,
@@ -106,20 +104,39 @@ class _AppState extends State<App> {
 ///
 /// Настраивает MaterialApp с роутером, темами и локализацией.
 /// {@endtemplate}
-class _App extends StatelessWidget {
+class _AppInternal extends StatefulWidget {
   /// {@macro app_internal}
-  const _App({required this.router, required this.diContainer});
+  const _AppInternal({required this.diContainer});
 
   /// Роутер приложения для навигации
-  final GoRouter router;
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
 
   @override
+  State<_AppInternal> createState() => _AppInternalState();
+}
+
+class _AppInternalState extends State<_AppInternal> {
+  /// Роутер приложения для навигации
+  late final GoRouter router;
+
+  @override
+  void initState() {
+    super.initState();
+    router = AppRouter.createRouter(widget.diContainer.debugService);
+  }
+
+  @override
+  void dispose() {
+    router.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DependsProviders(
-      diContainer: diContainer,
+      diContainer: widget.diContainer,
       child: BlocConsumer<UpdateCubit, UpdateState>(
         listener: (context, state) {
           if (state is UpdateSuccessState &&
