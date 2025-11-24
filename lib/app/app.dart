@@ -106,12 +106,18 @@ class _AppState extends State<App> {
 /// {@endtemplate}
 class _AppInternal extends StatefulWidget {
   /// {@macro app_internal}
-  const _AppInternal({required this.diContainer});
+  const _AppInternal({
+    required this.diContainer,
+    @visibleForTesting this.mockRouter,
+  });
 
   /// Роутер приложения для навигации
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
+
+  /// Роутер приложения для навигации для тестирования
+  final GoRouter? mockRouter;
 
   @override
   State<_AppInternal> createState() => _AppInternalState();
@@ -124,7 +130,9 @@ class _AppInternalState extends State<_AppInternal> {
   @override
   void initState() {
     super.initState();
-    router = AppRouter.createRouter(widget.diContainer.debugService);
+    router =
+        widget.mockRouter ??
+        AppRouter.createRouter(widget.diContainer.debugService);
   }
 
   @override
