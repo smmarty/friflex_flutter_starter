@@ -111,7 +111,6 @@ class _AppInternal extends StatefulWidget {
     @visibleForTesting this.mockRouter,
   });
 
-  /// Роутер приложения для навигации
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
