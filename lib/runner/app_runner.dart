@@ -65,14 +65,10 @@ class AppRunner {
       // Инициализация метода обработки ошибок
       _initErrorHandlers(_debugService);
 
-      // Инициализация роутера
-      router = AppRouter.createRouter(_debugService);
-
       // throw Exception('Test error');
 
       runApp(
         App(
-          router: router,
           initDependencies: () {
             return _initDependencies(
               debugService: _debugService,
