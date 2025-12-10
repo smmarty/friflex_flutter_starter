@@ -86,7 +86,7 @@ void updateFirstElement() {}
 Примеры:
 
 ```dart
-const String carItem;
+const String carItem = 'default';
 ```
 
 или
