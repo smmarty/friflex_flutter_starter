@@ -92,7 +92,7 @@ const String carItem = 'default';
 или
 
 ```dart
-final userName;
+final String userName = 'user';
 ```
 
 ## Виджеты
