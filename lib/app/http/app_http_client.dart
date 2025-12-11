@@ -12,7 +12,10 @@ final class AppHttpClient {
   /// Принимает:
   /// - [debugService] - сервис для логирования запросов
   /// - [appConfig] - конфигурация приложения
-  AppHttpClient({required IDebugService debugService, required IAppConfig appConfig}) {
+  AppHttpClient({
+    required IDebugService debugService,
+    required IAppConfig appConfig,
+  }) {
     _httpClient = Dio();
 
     _httpClient.options

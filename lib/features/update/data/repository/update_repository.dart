@@ -13,7 +13,10 @@ final class UpdateRepository implements IUpdateRepository {
   final AppHttpClient httpClient;
 
   @override
-  Future<UpdateEntity> checkForUpdates({required String versionCode, required String platform}) {
+  Future<UpdateEntity> checkForUpdates({
+    required String versionCode,
+    required String platform,
+  }) {
     // TODO: Реализовать реальную логику проверки обновлений
     // Если обновления нет, возвращаем null
     throw UnimplementedError();

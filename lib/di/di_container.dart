@@ -13,7 +13,8 @@ import 'package:friflex_starter/features/debug/i_debug_service.dart';
 /// {@endtemplate}
 final class DiContainer {
   /// {@macro dependencies_container}
-  DiContainer({required this.env, required IDebugService dService}) : debugService = dService;
+  DiContainer({required this.env, required IDebugService dService})
+    : debugService = dService;
   final AppEnv env;
 
   /// Сервис для отладки, получаем из конструктора
@@ -45,13 +46,18 @@ final class DiContainer {
     };
 
     // Инициализация HTTP клиента
-    httpClient = AppHttpClient(debugService: debugService, appConfig: appConfig);
+    httpClient = AppHttpClient(
+      debugService: debugService,
+      appConfig: appConfig,
+    );
 
     // Инициализация сервисов
-    services = DiServices()..init(onProgress: onProgress, onError: onError, diContainer: this);
+    services = DiServices()
+      ..init(onProgress: onProgress, onError: onError, diContainer: this);
     // throw Exception('Тестовая - ошибка инициализации зависимостей');
     // Инициализация репозиториев
-    repositories = DiRepositories()..init(onProgress: onProgress, onError: onError, diContainer: this);
+    repositories = DiRepositories()
+      ..init(onProgress: onProgress, onError: onError, diContainer: this);
 
     onComplete('Инициализация зависимостей завершена!');
   }

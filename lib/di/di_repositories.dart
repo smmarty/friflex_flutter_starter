@@ -68,7 +68,11 @@ final class DiRepositories {
   /// 1. Инициализация репозитория авторизации
   /// 2. Инициализация репозитория главного сервиса
   /// 3. Инициализация репозитория профиля
-  void init({required OnProgress onProgress, required OnError onError, required DiContainer diContainer}) {
+  void init({
+    required OnProgress onProgress,
+    required OnError onError,
+    required DiContainer diContainer,
+  }) {
     onProgress('Начинаем инициализацию репозиториев...');
 
     // Инициализация репозитория обновлений
@@ -138,7 +142,8 @@ final class DiRepositories {
       final repo = switch (environment) {
         .dev => mockFactory(),
         .prod => mainFactory(),
-        .stage => _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
+        .stage =>
+          _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
       };
 
       // throw Exception('Тестовая - ошибка инициализации репозитория $T');
