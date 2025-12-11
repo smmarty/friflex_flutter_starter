@@ -19,23 +19,22 @@ class TimerRunner {
   /// полной инициализации приложения
   void stop() {
     _stopwatch.stop();
-    _debugService.log(
-      'Время инициализации приложения: ${_stopwatch.elapsedMilliseconds} мс',
-    );
+    _debugService.log('Время инициализации приложения: ${_stopwatch.elapsedMilliseconds} мс');
+  }
+
+  /// Метод для сброса секундомера
+  void reset() {
+    _stopwatch.reset();
   }
 
   /// Метод для обработки прогресса инициализации зависимостей
   void logOnProgress(String name) {
-    _debugService.log(
-      '$name успешная инициализация, прогресс: ${_stopwatch.elapsedMilliseconds} мс',
-    );
+    _debugService.log('$name успешная инициализация, прогресс: ${_stopwatch.elapsedMilliseconds} мс');
   }
 
   /// Метод для обработки прогресса инициализации зависимостей
   void logOnComplete(String message) {
-    _debugService.log(
-      '$message, прогресс: ${_stopwatch.elapsedMilliseconds} мс',
-    );
+    _debugService.log('$message, прогресс: ${_stopwatch.elapsedMilliseconds} мс');
   }
 
   /// Метод для обработки прогресса инициализации зависимостей
