@@ -49,7 +49,7 @@ final class DiRepositories {
   late final IProfileRepository profileRepository;
 
   /// Интерфейс для работы с репозиторием обновлений
-  late final IUpdateRepository updatesRepository;
+  late final IUpdateRepository updateRepository;
 
   /// Метод для инициализации репозиториев в приложении.
   ///
@@ -70,7 +70,7 @@ final class DiRepositories {
     onProgress('Начинаем инициализацию репозиториев...');
 
     // Инициализация репозитория обновлений
-    updatesRepository = _lazyInitRepo<IUpdateRepository>(
+    updateRepository = _lazyInitRepo<IUpdateRepository>(
       mockFactory: () => const UpdateMockRepository(),
       mainFactory: () => UpdateRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,

@@ -4,7 +4,6 @@ import 'package:friflex_starter/features/debug/i_debug_service.dart';
 import 'package:friflex_starter/features/main/presentation/main_routes.dart';
 import 'package:friflex_starter/features/profile/presentation/profile_routes.dart';
 import 'package:friflex_starter/features/root/root_screen.dart';
-import 'package:friflex_starter/features/splash/splash_screen.dart';
 import 'package:friflex_starter/features/update/update_routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,10 +38,6 @@ class AppRouter {
           ],
         ),
         DebugRoutes.buildRoutes(),
-        GoRoute(
-          path: '/splash',
-          builder: (context, state) => const SplashScreen(),
-        ),
         UpdateRoutes.buildRoutes(),
       ],
     );

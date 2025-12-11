@@ -24,6 +24,11 @@ class TimerRunner {
     );
   }
 
+  /// Метод для сброса секундомера
+  void reset() {
+    _stopwatch.reset();
+  }
+
   /// Метод для обработки прогресса инициализации зависимостей
   void logOnProgress(String name) {
     _debugService.log(

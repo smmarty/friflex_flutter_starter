@@ -1,3 +1,3 @@
-import 'package:friflex_starter/runner/app_runner.dart';
+import 'package:friflex_starter/targets/prod.dart' as prod;
 
-void main() => AppRunner(.prod).run();
+void main(List<String> arguments) => prod.main(arguments);

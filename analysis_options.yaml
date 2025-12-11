@@ -49,6 +49,7 @@ linter:
     
     # === Обработка ошибок и типобезопасность ===
     - avoid_catching_errors                        # Не перехватывать Error (только Exception) — ошибки системные
+    - avoid_catches_without_on_clauses            # Требует явного указания типа исключения в catch (on Type catch)
     - await_only_futures                           # await только для Future (ловит ошибки типизации)
     - control_flow_in_finally                      # Запрет return/break/continue в finally блоках
     - empty_catches                                # Предупреждение о пустых catch (скрытые баги)
