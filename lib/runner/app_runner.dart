@@ -75,7 +75,13 @@ class AppRunner {
 
       /// Если произошла ошибка при инициализации приложения,
       /// то запускаем экран ошибки
-      runApp(ErrorScreen(error: e, stackTrace: stackTrace, onRetry: () => run(arguments)));
+      runApp(
+        ErrorScreen(
+          error: e,
+          stackTrace: stackTrace,
+          onRetry: () => run(arguments),
+        ),
+      );
     }
   }
 
@@ -115,14 +121,20 @@ class AppRunner {
           },
           onError: (message, error, [stackTrace]) {
             timerRunner.stop();
-            _debugService.logError(message, error: error, stackTrace: stackTrace);
+            _debugService.logError(
+              message,
+              error: error,
+              stackTrace: stackTrace,
+            );
             throw Exception('Ошибка инициализации зависимостей: $message');
           },
         )
         .timeout(
           const Duration(seconds: 7),
           onTimeout: () {
-            throw Exception('Превышено время ожидания инициализации зависимостей');
+            throw Exception(
+              'Превышено время ожидания инициализации зависимостей',
+            );
           },
         );
     return diContainer;

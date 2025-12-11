@@ -38,7 +38,7 @@ class AppInternal extends StatelessWidget {
             builder: (themeContext) => MediaQuery(
               key: const ValueKey('prevent_rebuild'),
               data: MediaQuery.of(
-                context,
+                themeContext,
               ).copyWith(textScaler: TextScaler.noScaling, boldText: false),
               child: MaterialApp.router(
                 darkTheme: AppTheme.dark,
