@@ -1,3 +1,3 @@
 import 'package:friflex_starter/runner/app_runner.dart';
 
-void main() => AppRunner(.dev).run();
+void main(List<String> arguments) => AppRunner(.dev).run(arguments);

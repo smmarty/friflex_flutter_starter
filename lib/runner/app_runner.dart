@@ -16,11 +16,6 @@ import 'package:go_router/go_router.dart';
 
 part 'errors_handlers.dart';
 
-/// Время ожидания инициализации зависимостей
-/// Если время превышено, то будет показан экран ошибки
-/// В дальнейшем нужно убрать в env
-const _initTimeout = Duration(seconds: 7);
-
 /// Класс, реализующий раннер для конфигурирования приложения при запуске
 ///
 /// Порядок инициализации:
@@ -48,7 +43,7 @@ class AppRunner {
   late TimerRunner _timerRunner;
 
   /// Метод для запуска приложения
-  Future<void> run() async {
+  Future<void> run(List<String> arguments) async {
     try {
       WidgetsFlutterBinding.ensureInitialized();
       // Инициализация сервиса отладки
@@ -62,42 +57,31 @@ class AppRunner {
       // Инициализация приложения
       await _initApp();
 
-      // Инициализация метода обработки ошибок
-      _initErrorHandlers(_debugService);
-
       // Инициализация роутера
       router = AppRouter.createRouter(_debugService);
 
-      // throw Exception('Test error');
-
-      runApp(
-        App(
-          router: router,
-          initDependencies: () {
-            return _initDependencies(
-              debugService: _debugService,
-              env: env,
-              timerRunner: _timerRunner,
-            ).timeout(
-              _initTimeout,
-              onTimeout: () {
-                return Future.error(
-                  TimeoutException(
-                    'Превышено время ожидания инициализации зависимостей',
-                  ),
-                );
-              },
-            );
-          },
-        ),
+      final diContainer = await _initDependencies(
+        debugService: _debugService,
+        env: env,
+        timerRunner: _timerRunner,
       );
+
+      runApp(AppInternal(diContainer: diContainer, router: router));
       await _onAppLoaded();
+      // Инициализация метода обработки ошибок
+      _initErrorHandlers(_debugService);
     } on Object catch (e, stackTrace) {
       await _onAppLoaded();
 
       /// Если произошла ошибка при инициализации приложения,
       /// то запускаем экран ошибки
-      runApp(ErrorScreen(error: e, stackTrace: stackTrace, onRetry: run));
+      runApp(
+        ErrorScreen(
+          error: e,
+          stackTrace: stackTrace,
+          onRetry: () => run(arguments),
+        ),
+      );
     }
   }
 
@@ -127,20 +111,32 @@ class AppRunner {
   }) async {
     debugService.log(() => 'Тип сборки: ${env.name}');
     final diContainer = DiContainer(env: env, dService: debugService);
-    await diContainer.init(
-      onProgress: (name) => timerRunner.logOnProgress(name),
-      onComplete: (name) {
-        timerRunner
-          ..logOnComplete(name)
-          ..stop();
-      },
-      onError: (message, error, [stackTrace]) {
-        timerRunner.stop();
-        _debugService.logError(message, error: error, stackTrace: stackTrace);
-        throw Exception('Ошибка инициализации зависимостей: $message');
-      },
-    );
-    //throw Exception('Test error');
+    await diContainer
+        .init(
+          onProgress: (name) => timerRunner.logOnProgress(name),
+          onComplete: (name) {
+            timerRunner
+              ..logOnComplete(name)
+              ..stop();
+          },
+          onError: (message, error, [stackTrace]) {
+            timerRunner.stop();
+            _debugService.logError(
+              message,
+              error: error,
+              stackTrace: stackTrace,
+            );
+            throw Exception('Ошибка инициализации зависимостей: $message');
+          },
+        )
+        .timeout(
+          const Duration(seconds: 7),
+          onTimeout: () {
+            throw Exception(
+              'Превышено время ожидания инициализации зависимостей',
+            );
+          },
+        );
     return diContainer;
   }
 }

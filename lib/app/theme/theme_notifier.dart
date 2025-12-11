@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// Тип функции для построения виджета с учетом темы
-typedef ThemeBuilder = Widget Function();
+typedef ThemeBuilder = Widget Function(BuildContext context);
 
 /// {@template theme_consumer}
 /// Виджет для подписки на изменения темы приложения.
@@ -20,8 +20,8 @@ class ThemeConsumer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeNotifier>(
-      builder: (_, _, _) {
-        return builder();
+      builder: (context, _, _) {
+        return builder(context);
       },
     );
   }

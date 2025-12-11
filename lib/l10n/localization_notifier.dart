@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// Тип функции для построения виджета с учетом локализации
-typedef LocalizationBuilder = Widget Function();
+typedef LocalizationBuilder = Widget Function(BuildContext context);
 
 /// {@template localization_consumer}
 /// Виджет для подписки на изменения локализации приложения.
@@ -20,8 +20,8 @@ class LocalizationConsumer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<LocalizationNotifier>(
-      builder: (_, _, _) {
-        return builder();
+      builder: (context, _, _) {
+        return builder(context);
       },
     );
   }
