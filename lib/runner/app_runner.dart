@@ -65,11 +65,10 @@ class AppRunner {
         env: env,
         timerRunner: _timerRunner,
       );
-
-      runApp(AppInternal(diContainer: diContainer, router: router));
-      await _onAppLoaded();
       // Инициализация метода обработки ошибок
       _initErrorHandlers(_debugService);
+      runApp(AppInternal(diContainer: diContainer, router: router));
+      await _onAppLoaded();
     } on Object catch (e, stackTrace) {
       await _onAppLoaded();
       _timerRunner.stop();
