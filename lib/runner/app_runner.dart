@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friflex_starter/app/app.dart';
 import 'package:friflex_starter/app/app_env.dart';
+import 'package:friflex_starter/app/app_root.dart';
 import 'package:friflex_starter/di/di_container.dart';
 import 'package:friflex_starter/features/debug/debug_service.dart';
 import 'package:friflex_starter/features/debug/i_debug_service.dart';
@@ -67,7 +67,7 @@ class AppRunner {
       );
       // Инициализация метода обработки ошибок
       _initErrorHandlers(_debugService);
-      runApp(AppInternal(diContainer: diContainer, router: router));
+      runApp(AppRoot(diContainer: diContainer, router: router));
       await _onAppLoaded();
     } on Object catch (e, stackTrace) {
       await _onAppLoaded();

@@ -14,13 +14,9 @@ import 'package:go_router/go_router.dart';
 /// Отвечает за:
 /// - Настройку провайдеров для темы и локализации
 /// {@endtemplate}
-class AppInternal extends StatelessWidget {
-  /// {@macro app_internal}
-  const AppInternal({
-    required this.diContainer,
-    required this.router,
-    super.key,
-  });
+class AppRoot extends StatelessWidget {
+  /// {@macro app_root}
+  const AppRoot({required this.diContainer, required this.router, super.key});
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
