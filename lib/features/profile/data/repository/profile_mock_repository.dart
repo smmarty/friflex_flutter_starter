@@ -1,9 +1,12 @@
 import 'package:friflex_starter/features/profile/domain/repository/i_profile_repository.dart';
 
 /// {@template ProfileMockRepository}
-///
+/// Мок реализация репозитория профиля пользователя
 /// {@endtemplate}
 final class ProfileMockRepository implements IProfileRepository {
+  /// {@macro ProfileMockRepository}
+  const ProfileMockRepository();
+
   @override
   String get name => 'ProfileMockRepository';
 

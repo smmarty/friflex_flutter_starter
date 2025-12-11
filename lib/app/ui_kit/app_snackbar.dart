@@ -290,21 +290,9 @@ class _Icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (type) {
-      .success => const Icon(
-        Icons.check_circle,
-        color: Colors.white,
-        size: 32,
-      ),
-      .error => const Icon(
-        Icons.error,
-        color: Colors.white,
-        size: 32,
-      ),
-      .info => const Icon(
-        Icons.info,
-        color: Colors.white,
-        size: 32,
-      ),
+      .success => const Icon(Icons.check_circle, color: Colors.white, size: 32),
+      .error => const Icon(Icons.error, color: Colors.white, size: 32),
+      .info => const Icon(Icons.info, color: Colors.white, size: 32),
     };
   }
 }

@@ -77,8 +77,8 @@ final class DiRepositories {
 
     // Инициализация репозитория обновлений
     updatesRepository = _lazyInitRepo<IUpdateRepository>(
-      mockFactory: UpdateMockRepository.new,
-      mainFactory: UpdateRepository.new,
+      mockFactory: () => const UpdateMockRepository(),
+      mainFactory: () => UpdateRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
@@ -86,13 +86,8 @@ final class DiRepositories {
 
     // Инициализация репозитория авторизации
     authRepository = _lazyInitRepo<IAuthRepository>(
-      mockFactory: AuthMockRepository.new,
-      mainFactory: () => AuthRepository(
-        httpClient: diContainer.httpClientFactory(
-          diContainer.debugService,
-          diContainer.appConfig,
-        ),
-      ),
+      mockFactory: () => const AuthMockRepository(),
+      mainFactory: () => AuthRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
@@ -100,13 +95,8 @@ final class DiRepositories {
 
     // Инициализация репозитория сервиса управления токеном доступа
     mainRepository = _lazyInitRepo<IMainRepository>(
-      mockFactory: MainMockRepository.new,
-      mainFactory: () => MainRepository(
-        httpClient: diContainer.httpClientFactory(
-          diContainer.debugService,
-          diContainer.appConfig,
-        ),
-      ),
+      mockFactory: () => const MainMockRepository(),
+      mainFactory: () => MainRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
@@ -114,13 +104,8 @@ final class DiRepositories {
 
     // Инициализация репозитория профиля
     profileRepository = _lazyInitRepo<IProfileRepository>(
-      mockFactory: ProfileMockRepository.new,
-      mainFactory: () => ProfileRepository(
-        httpClient: diContainer.httpClientFactory(
-          diContainer.debugService,
-          diContainer.appConfig,
-        ),
-      ),
+      mockFactory: () => const ProfileMockRepository(),
+      mainFactory: () => ProfileRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,

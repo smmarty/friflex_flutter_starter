@@ -55,7 +55,7 @@ class AppColors extends ThemeExtension<AppColors> with _$AppColorsTailorMixin {
   );
 
   /// Цвета тёмной темы
-  static const AppColors dark =  AppColors(
+  static const AppColors dark = AppColors(
     testColor: Colors.green,
     errorSnackbarBackground: Color(0xFF638B8B),
     successSnackbarBackground: Color(0xFF93C499),
