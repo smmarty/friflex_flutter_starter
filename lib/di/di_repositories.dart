@@ -68,17 +68,13 @@ final class DiRepositories {
   /// 1. Инициализация репозитория авторизации
   /// 2. Инициализация репозитория главного сервиса
   /// 3. Инициализация репозитория профиля
-  void init({
-    required OnProgress onProgress,
-    required OnError onError,
-    required DiContainer diContainer,
-  }) {
+  void init({required OnProgress onProgress, required OnError onError, required DiContainer diContainer}) {
     onProgress('Начинаем инициализацию репозиториев...');
 
     // Инициализация репозитория обновлений
     updatesRepository = _lazyInitRepo<IUpdateRepository>(
-      mockFactory: UpdateMockRepository.new,
-      mainFactory: UpdateRepository.new,
+      mockFactory: () => const UpdateMockRepository(),
+      mainFactory: () => UpdateRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
@@ -86,13 +82,8 @@ final class DiRepositories {
 
     // Инициализация репозитория авторизации
     authRepository = _lazyInitRepo<IAuthRepository>(
-      mockFactory: AuthMockRepository.new,
-      mainFactory: () => AuthRepository(
-        httpClient: diContainer.httpClientFactory(
-          diContainer.debugService,
-          diContainer.appConfig,
-        ),
-      ),
+      mockFactory: () => const AuthMockRepository(),
+      mainFactory: () => AuthRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
@@ -100,13 +91,8 @@ final class DiRepositories {
 
     // Инициализация репозитория сервиса управления токеном доступа
     mainRepository = _lazyInitRepo<IMainRepository>(
-      mockFactory: MainMockRepository.new,
-      mainFactory: () => MainRepository(
-        httpClient: diContainer.httpClientFactory(
-          diContainer.debugService,
-          diContainer.appConfig,
-        ),
-      ),
+      mockFactory: () => const MainMockRepository(),
+      mainFactory: () => MainRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
@@ -114,13 +100,8 @@ final class DiRepositories {
 
     // Инициализация репозитория профиля
     profileRepository = _lazyInitRepo<IProfileRepository>(
-      mockFactory: ProfileMockRepository.new,
-      mainFactory: () => ProfileRepository(
-        httpClient: diContainer.httpClientFactory(
-          diContainer.debugService,
-          diContainer.appConfig,
-        ),
-      ),
+      mockFactory: () => const ProfileMockRepository(),
+      mainFactory: () => ProfileRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
@@ -157,8 +138,7 @@ final class DiRepositories {
       final repo = switch (environment) {
         .dev => mockFactory(),
         .prod => mainFactory(),
-        .stage =>
-          _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
+        .stage => _mockReposToSwitch.contains(T) ? mockFactory() : mainFactory(),
       };
 
       // throw Exception('Тестовая - ошибка инициализации репозитория $T');
