@@ -2,9 +2,6 @@ import 'package:friflex_starter/app/app_env.dart';
 import 'package:friflex_starter/di/di_base_repo.dart';
 import 'package:friflex_starter/di/di_container.dart';
 import 'package:friflex_starter/di/di_typedefs.dart';
-import 'package:friflex_starter/features/auth/data/repository/auth_mock_repository.dart';
-import 'package:friflex_starter/features/auth/data/repository/auth_repository.dart';
-import 'package:friflex_starter/features/auth/domain/repository/i_auth_repository.dart';
 import 'package:friflex_starter/features/main/data/repository/main_mock_repository.dart';
 import 'package:friflex_starter/features/main/data/repository/main_repository.dart';
 import 'package:friflex_starter/features/main/domain/repository/i_main_repository.dart';
@@ -45,9 +42,6 @@ final class DiRepositories {
   /// {@macro di_repositories}
   DiRepositories();
 
-  /// Интерфейс для работы с репозиторием авторизации
-  late final IAuthRepository authRepository;
-
   /// Интерфейс для работы с репозиторием главного сервиса
   late final IMainRepository mainRepository;
 
@@ -79,15 +73,6 @@ final class DiRepositories {
     updatesRepository = _lazyInitRepo<IUpdateRepository>(
       mockFactory: () => const UpdateMockRepository(),
       mainFactory: () => UpdateRepository(httpClient: diContainer.httpClient),
-      onProgress: onProgress,
-      onError: onError,
-      environment: diContainer.env,
-    );
-
-    // Инициализация репозитория авторизации
-    authRepository = _lazyInitRepo<IAuthRepository>(
-      mockFactory: () => const AuthMockRepository(),
-      mainFactory: () => AuthRepository(httpClient: diContainer.httpClient),
       onProgress: onProgress,
       onError: onError,
       environment: diContainer.env,
