@@ -1,5 +1,3 @@
-<!-- markdownlint-disable MD033 -->
-<!-- markdownlint-disable MD041 -->
 ## Ссылка на задачу или issue (обязательно)
 <!--- https://tracker.yandex.ru/XXX -->
 

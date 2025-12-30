@@ -1,13 +1,15 @@
-import 'package:friflex_starter/app/http/i_http_client.dart';
+import 'package:friflex_starter/app/http/app_http_client.dart';
 
 import 'package:friflex_starter/features/profile/domain/repository/i_profile_repository.dart';
 
 /// {@template ProfileRepository}
-///
+///  Реализация репозитория профиля пользователя
 /// {@endtemplate}
 final class ProfileRepository implements IProfileRepository {
   ProfileRepository({required this.httpClient});
-  final IHttpClient httpClient;
+
+  /// Экземпляр HTTP клиента для взаимодействия с сервером
+  final AppHttpClient httpClient;
 
   @override
   String get name => 'ProfileRepository';

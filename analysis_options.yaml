@@ -43,13 +43,13 @@ linter:
     - always_use_package_imports                   # Единый стиль импортов через package: упрощает refactoring
     - curly_braces_in_flow_control_structures      # Обязательные фигурные скобки в if/for/while для безопасности
     - directives_ordering                          # Упорядочивание импортов (dart → package → relative)
-    - eol_at_end_of_file                           # Пустая строка в конце файла (POSIX standard)
     - prefer_single_quotes                         # Единый стиль кавычек (одинарные быстрее печатать)
     - slash_for_doc_comments                       # Использовать /// вместо /** */ для документации
     - sort_constructors_first                      # Конструкторы в начале класса — быстрый обзор API
     
     # === Обработка ошибок и типобезопасность ===
     - avoid_catching_errors                        # Не перехватывать Error (только Exception) — ошибки системные
+    - avoid_catches_without_on_clauses            # Требует явного указания типа исключения в catch (on Type catch)
     - await_only_futures                           # await только для Future (ловит ошибки типизации)
     - control_flow_in_finally                      # Запрет return/break/continue в finally блоках
     - empty_catches                                # Предупреждение о пустых catch (скрытые баги)
