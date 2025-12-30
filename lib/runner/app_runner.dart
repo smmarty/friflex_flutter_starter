@@ -63,7 +63,7 @@ class AppRunner {
       );
       // Инициализация метода обработки ошибок
       _initErrorHandlers(_debugService);
-      runApp(AppRoot(diContainer: diContainer, router: router));
+      runApp(AppRoot(diContainer: diContainer));
       await _onAppLoaded();
     } on Object catch (e, stackTrace) {
       await _onAppLoaded();

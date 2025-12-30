@@ -6,6 +6,7 @@ import 'package:friflex_starter/app/theme/theme_notifier.dart';
 import 'package:friflex_starter/di/di_container.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
+import 'package:friflex_starter/router/app_router.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template app}
@@ -16,13 +17,10 @@ import 'package:go_router/go_router.dart';
 /// {@endtemplate}
 class AppRoot extends StatelessWidget {
   /// {@macro app_root}
-  const AppRoot({required this.diContainer, required this.router, super.key});
+  const AppRoot({required this.diContainer, super.key});
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
-
-  /// Роутер приложения
-  final GoRouter router;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +34,10 @@ class AppRoot extends StatelessWidget {
               data: MediaQuery.of(
                 themeContext,
               ).copyWith(textScaler: TextScaler.noScaling, boldText: false),
-              child: MaterialApp.router(
-                darkTheme: AppTheme.dark,
-                theme: AppTheme.light,
-                themeMode: themeContext.theme.themeMode,
-                locale: localizationContext.localization.locale,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: AppLocalizations.supportedLocales,
-                routerConfig: router,
+              child: _Internal(
+                diContainer: diContainer,
+                theme: themeContext.theme,
+                localization: localizationContext.localization,
               ),
             ),
           );
@@ -51,4 +45,47 @@ class AppRoot extends StatelessWidget {
       ),
     );
   }
+}
+
+class _Internal extends StatefulWidget {
+  const _Internal({
+    required this.theme,
+    required this.diContainer,
+    required this.localization,
+  });
+  final ThemeNotifier theme;
+
+  final DiContainer diContainer;
+
+  final LocalizationNotifier localization;
+  @override
+  State<_Internal> createState() => _InternalState();
+}
+
+class _InternalState extends State<_Internal> {
+  /// Роутер приложения
+  late final GoRouter router;
+
+  @override
+  void initState() {
+    super.initState();
+    router = AppRouter.createRouter(widget.diContainer.debugService);
+  }
+
+  @override
+  void dispose() {
+    router.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => MaterialApp.router(
+    darkTheme: AppTheme.dark,
+    theme: AppTheme.light,
+    themeMode: widget.theme.themeMode,
+    locale: widget.localization.locale,
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    routerConfig: router,
+  );
 }
