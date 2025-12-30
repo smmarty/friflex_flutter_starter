@@ -14,8 +14,9 @@ import 'package:go_router/go_router.dart';
 ///
 /// Отвечает за:
 /// - Настройку провайдеров для темы и локализации
+/// - Инициализацию роутера приложения
 /// {@endtemplate}
-class AppRoot extends StatelessWidget {
+class AppRoot extends StatefulWidget {
   /// {@macro app_root}
   const AppRoot({required this.diContainer, super.key});
 
@@ -23,46 +24,10 @@ class AppRoot extends StatelessWidget {
   final DiContainer diContainer;
 
   @override
-  Widget build(BuildContext context) {
-    return AppProviders(
-      diContainer: diContainer,
-      child: LocalizationConsumer(
-        builder: (localizationContext) {
-          return ThemeConsumer(
-            builder: (themeContext) => MediaQuery(
-              key: const ValueKey('prevent_rebuild'),
-              data: MediaQuery.of(
-                themeContext,
-              ).copyWith(textScaler: TextScaler.noScaling, boldText: false),
-              child: _Internal(
-                diContainer: diContainer,
-                theme: themeContext.theme,
-                localization: localizationContext.localization,
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  State<AppRoot> createState() => _AppRootState();
 }
 
-class _Internal extends StatefulWidget {
-  const _Internal({
-    required this.theme,
-    required this.diContainer,
-    required this.localization,
-  });
-  final ThemeNotifier theme;
-
-  final DiContainer diContainer;
-
-  final LocalizationNotifier localization;
-  @override
-  State<_Internal> createState() => _InternalState();
-}
-
-class _InternalState extends State<_Internal> {
+class _AppRootState extends State<AppRoot> {
   /// Роутер приложения
   late final GoRouter router;
 
@@ -79,13 +44,30 @@ class _InternalState extends State<_Internal> {
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-    darkTheme: AppTheme.dark,
-    theme: AppTheme.light,
-    themeMode: widget.theme.themeMode,
-    locale: widget.localization.locale,
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-    routerConfig: router,
-  );
+  Widget build(BuildContext context) {
+    return AppProviders(
+      diContainer: widget.diContainer,
+      child: LocalizationConsumer(
+        builder: (localizationContext) {
+          return ThemeConsumer(
+            builder: (themeContext) => MediaQuery(
+              key: const ValueKey('prevent_rebuild'),
+              data: MediaQuery.of(
+                themeContext,
+              ).copyWith(textScaler: TextScaler.noScaling, boldText: false),
+              child: MaterialApp.router(
+                darkTheme: AppTheme.dark,
+                theme: AppTheme.light,
+                themeMode: themeContext.theme.themeMode,
+                locale: localizationContext.localization.locale,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                routerConfig: router,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }

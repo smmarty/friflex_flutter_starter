@@ -23,23 +23,35 @@ class AppRouter {
 
   /// Метод для создания экземпляра GoRouter
   static GoRouter createRouter(IDebugService debugService) {
-    return GoRouter(
-      navigatorKey: rootNavigatorKey,
-      initialLocation: initialLocation,
-      observers: [debugService.routeObserver],
-      routes: [
-        StatefulShellRoute.indexedStack(
-          parentNavigatorKey: rootNavigatorKey,
-          builder: (context, state, navigationShell) =>
-              RootScreen(navigationShell: navigationShell),
-          branches: [
-            MainRoutes.buildShellBranch(),
-            ProfileRoutes.buildShellBranch(),
-          ],
-        ),
-        DebugRoutes.buildRoutes(),
-        UpdateRoutes.buildRoutes(),
-      ],
-    );
+    try {
+      return _init(debugService);
+    } on Object catch (error, stackTrace) {
+      debugService.logError(
+        'Ошибка при создании роутера',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      throw StateError('Не удалось создать роутер: $error');
+    }
   }
+
+  /// Внутренний метод для инициализации роутера
+  static GoRouter _init(IDebugService debugService) => GoRouter(
+    navigatorKey: rootNavigatorKey,
+    initialLocation: initialLocation,
+    observers: [debugService.routeObserver],
+    routes: [
+      StatefulShellRoute.indexedStack(
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state, navigationShell) =>
+            RootScreen(navigationShell: navigationShell),
+        branches: [
+          MainRoutes.buildShellBranch(),
+          ProfileRoutes.buildShellBranch(),
+        ],
+      ),
+      DebugRoutes.buildRoutes(),
+      UpdateRoutes.buildRoutes(),
+    ],
+  );
 }
