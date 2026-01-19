@@ -6,6 +6,7 @@ import 'package:friflex_starter/app/theme/theme_notifier.dart';
 import 'package:friflex_starter/di/di_container.dart';
 import 'package:friflex_starter/l10n/gen/app_localizations.dart';
 import 'package:friflex_starter/l10n/localization_notifier.dart';
+import 'package:friflex_starter/router/app_router.dart';
 import 'package:go_router/go_router.dart';
 
 /// {@template app}
@@ -13,21 +14,39 @@ import 'package:go_router/go_router.dart';
 ///
 /// Отвечает за:
 /// - Настройку провайдеров для темы и локализации
+/// - Инициализацию роутера приложения
 /// {@endtemplate}
-class AppRoot extends StatelessWidget {
+class AppRoot extends StatefulWidget {
   /// {@macro app_root}
-  const AppRoot({required this.diContainer, required this.router, super.key});
+  const AppRoot({required this.diContainer, super.key});
 
   /// Контейнер зависимостей
   final DiContainer diContainer;
 
+  @override
+  State<AppRoot> createState() => _AppRootState();
+}
+
+class _AppRootState extends State<AppRoot> {
   /// Роутер приложения
-  final GoRouter router;
+  late final GoRouter router;
+
+  @override
+  void initState() {
+    super.initState();
+    router = AppRouter.createRouter(widget.diContainer.debugService);
+  }
+
+  @override
+  void dispose() {
+    router.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return AppProviders(
-      diContainer: diContainer,
+      diContainer: widget.diContainer,
       child: LocalizationConsumer(
         builder: (localizationContext) {
           return ThemeConsumer(
