@@ -6,11 +6,11 @@ import 'package:friflex_starter/features/update/domain/entity/update_entity.dart
 /// {@endtemplate}
 abstract interface class IUpdateRepository with DiBaseRepo {
   /// Проверяет наличие обновлений
-  /// [versionCode] - текущий код версии приложения
+  /// [versionApp] - текущий версия приложения
   /// [platform] - платформа (например, 'android' или 'ios')
   /// Возвращает [UpdateEntity] с информацией об обновлении
   Future<UpdateEntity> checkForUpdates({
-    required String versionCode,
+    required String versionApp,
     required String platform,
   });
 }

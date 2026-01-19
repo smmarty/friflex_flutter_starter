@@ -16,17 +16,17 @@ class UpdateCubit extends Cubit<UpdateState> {
   final IUpdateRepository _updatesRepository;
 
   /// Метод для проверки доступности обновлений
-  /// [versionCode] - текущий код версии приложения
+  /// [versionApp] - текущая версия приложения
   /// [platform] - платформа (например, 'android' или 'ios')
   Future<void> checkForUpdates({
-    required String versionCode,
+    required String versionApp,
     required String platform,
   }) async {
     if (state is UpdateLoadingState) return;
     emit(const UpdateLoadingState());
     try {
       final updateInfo = await _updatesRepository.checkForUpdates(
-        versionCode: versionCode,
+        versionApp: versionApp,
         platform: platform,
       );
       emit(UpdateSuccessState(updateInfo));

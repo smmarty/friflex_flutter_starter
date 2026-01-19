@@ -33,7 +33,7 @@ class AppRunner {
   /// Тип окружения сборки приложения¬
   final AppEnv env;
 
-  /// Контейнер зависимостей приложения
+  /// Сервис отладки
   late IDebugService _debugService;
 
   /// Роутер приложения

@@ -14,7 +14,7 @@ final class UpdateRepository implements IUpdateRepository {
 
   @override
   Future<UpdateEntity> checkForUpdates({
-    required String versionCode,
+    required String versionApp,
     required String platform,
   }) {
     // TODO: Реализовать реальную логику проверки обновлений

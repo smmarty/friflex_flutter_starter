@@ -26,7 +26,7 @@ final class UpdateMockRepository implements IUpdateRepository {
 
   @override
   Future<UpdateEntity> checkForUpdates({
-    required String versionCode,
+    required String versionApp,
     required String platform,
   }) async {
     // Имитация задержки для асинхронной операции

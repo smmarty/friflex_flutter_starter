@@ -37,6 +37,7 @@
   - Статический метод `show` безопасно не откроет модалку, если `updateEntity == null`
 
 Пример показа модального окна:
+
 ```dart
 await SoftUpdateModal.show(
   context,
@@ -54,10 +55,9 @@ await SoftUpdateModal.show(
 
 - `UpdateRoutes.buildRoutes()` — регистрирует экран hard-обновления по пути `/update`
 
-
 ## Структура модуля
 
-```
+```md
 features/update/
 ├── data/
 │   └── repository/
