@@ -10,7 +10,6 @@ import 'package:friflex_starter/di/di_container.dart';
 import 'package:friflex_starter/features/debug/debug_service.dart';
 import 'package:friflex_starter/features/debug/i_debug_service.dart';
 import 'package:friflex_starter/features/error/error_screen.dart';
-import 'package:friflex_starter/router/app_router.dart';
 import 'package:friflex_starter/runner/timer_runner.dart';
 import 'package:go_router/go_router.dart';
 
@@ -57,9 +56,6 @@ class AppRunner {
       // Инициализация приложения
       await _initApp();
 
-      // Инициализация роутера
-      router = AppRouter.createRouter(_debugService);
-
       final diContainer = await _initDependencies(
         debugService: _debugService,
         env: env,
@@ -67,7 +63,7 @@ class AppRunner {
       );
       // Инициализация метода обработки ошибок
       _initErrorHandlers(_debugService);
-      runApp(AppRoot(diContainer: diContainer, router: router));
+      runApp(AppRoot(diContainer: diContainer));
       await _onAppLoaded();
     } on Object catch (e, stackTrace) {
       await _onAppLoaded();
