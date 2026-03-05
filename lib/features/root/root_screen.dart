@@ -71,13 +71,17 @@ class _RootScreenState extends State<RootScreen> {
             )
           : null,
       body: widget.navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Профиль'),
-        ],
-        currentIndex: widget.navigationShell.currentIndex,
-        onTap: widget.navigationShell.goBranch,
+      bottomNavigationBar: MediaQuery.removePadding(
+        context: context,
+        removeBottom: true,
+        child: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Профиль'),
+          ],
+          currentIndex: widget.navigationShell.currentIndex,
+          onTap: widget.navigationShell.goBranch,
+        ),
       ),
     );
   }
