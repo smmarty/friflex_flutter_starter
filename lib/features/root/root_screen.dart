@@ -71,9 +71,12 @@ class _RootScreenState extends State<RootScreen> {
             )
           : null,
       body: widget.navigationShell,
-      bottomNavigationBar: MediaQuery.removePadding(
-        context: context,
-        removeBottom: true,
+      bottomNavigationBar: MediaQuery(
+        data: MediaQuery.of(context).copyWith(
+          viewPadding: MediaQuery.of(context).viewPadding.copyWith(
+            bottom: MediaQuery.of(context).viewPadding.bottom / 2,
+          ),
+        ),
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
