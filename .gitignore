@@ -53,3 +53,5 @@ app.*.map.json
 /windows/
 /linux/
 /web/
+
+.metadata
