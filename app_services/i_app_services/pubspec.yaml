@@ -1,0 +1,14 @@
+name: i_app_services
+description: "Хранит в себе все интерфейсы для реализации сервисов"
+version: 0.0.1
+publish_to: "none"
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: 6.0.0

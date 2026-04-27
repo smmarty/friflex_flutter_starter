@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build_runner --delete-conflicting-outputs",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "run",
+                "build_runner",
+                "build",
+                "--delete-conflicting-outputs"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build_runner clean",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "run",
+                "build_runner",
+                "clean"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "switch_to_gms",
+            "type": "shell",
+            "command": "./tools/switch_service.sh gms",
+            "problemMatcher": []
+        },
+        {
+            "label": "switch_to_aurora",
+            "type": "shell",
+            "command": "./tools/switch_service.sh aurora",
+            "problemMatcher": []
+        },
+        {
+            "label": "flutter gen-l10n",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "gen-l10n"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+        }
+    ]
+}

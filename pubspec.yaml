@@ -1,0 +1,69 @@
+name: friflex_starter
+description: "A new Flutter project."
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 0.0.1+1
+
+environment:
+  sdk: ">=3.10.0 <4.0.0"
+  flutter: ">=3.38.1"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: 1.0.8
+  envied: 1.3.1
+  go_router: 17.0.0
+  flutter_bloc: 9.1.1
+  provider: 6.1.5
+  dio: 5.9.0
+  intl: 0.20.2
+  flutter_svg: 2.2.2
+  flutter_localizations:
+    sdk: flutter
+  lottie: 3.3.2
+
+  # Пакеты для отладки
+  talker_flutter: 5.0.2
+  talker_dio_logger: 5.0.2
+  talker_bloc_logger: 5.0.2
+  talker_logger: 5.0.2
+
+  equatable: 2.0.7
+
+  theme_tailor_annotation: 3.1.1
+
+  ### основной сервис с интерфейсами
+  i_app_services:
+    path: ./app_services/i_app_services
+
+  ### реализация сервисов ###
+  ### В зависимости от платформы ###
+  app_services:
+    path: app_services/base/app_services ### Базовая реализация ###
+    # path: app_services/aurora/app_services ### Аврора реализация ###
+    # path: app_services/hms/app_services ### HarmonyOS реализация ###
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  envied_generator: 1.3.1
+  build_runner: 2.10.3
+  flutter_gen_runner: 5.12.0
+  flutter_gen: 5.12.0
+  flutter_lints: 6.0.0
+  theme_tailor: 3.1.1
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/icons/
+    - assets/lottie/
+
+flutter_gen:
+  integrations:
+    flutter_svg: true
+    lottie: true
